@@ -1,0 +1,10 @@
+NO ./utils/sprite/map/floor_map.xpm
+SO ./utils/sprite/map/floor_map.xpm
+WE ./utils/sprite/map/floor_map.xpm
+EA ./utils/sprite/map/floor_map.xpm
+F 220,255,0
+C 225,0,200
+      11111111
+10000011
+10111011
+11111111
