@@ -6,24 +6,24 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/26 11:33:52 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/27 03:25:50 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-void    ft_init_minimap(t_cub *game)
+void ft_init_minimap(t_cub *game)
 {
-    int     w;
-    int     h;
-    
-    game->texture.wall_map =  mlx_xpm_file_to_image(game->mlx, WALL_MM, &w, &h);
+    int w;
+    int h;
+
+    game->texture.wall_map = mlx_xpm_file_to_image(game->mlx, WALL_MM, &w, &h);
     if (game->texture.wall_map == (void *)0)
         ft_error_free("\nError!: [WALL image not found]\n", game);
-    game->texture.floor_map =  mlx_xpm_file_to_image(game->mlx, FLOOR_MM, &w, &h);
+    game->texture.floor_map = mlx_xpm_file_to_image(game->mlx, FLOOR_MM, &w, &h);
     if (game->texture.floor_map == (void *)0)
         ft_error_free("\nError!: [FLOOR image not found]\n", game);
-    game->texture.player_map =  mlx_xpm_file_to_image(game->mlx, PLAYER_MM, &w, &h);
+    game->texture.player_map = mlx_xpm_file_to_image(game->mlx, PLAYER_MM, &w, &h);
     if (game->texture.player_map == (void *)0)
         ft_error_free("\nError!: [PLAYER image not found]\n", game);
 }
@@ -68,21 +68,42 @@ void render_3D(t_cub *game, int column, double distance)
 
 static void ft_draw_minimap(int x, int y, char *img, t_cub *game)
 {
+    int px;
+    int py;
+    int dx;
+    int dy;
+    int size;
+
+    dy = 0;
+    size = 10;
+    px = game->ray.player_x * SPRITE - (size / 2);
+    py = game->ray.player_y * SPRITE - (size / 2);
     x *= SPRITE;
     y *= SPRITE;
     mlx_put_image_to_window(game->mlx, game->window, img, x, y);
+    while (dy < size)
+    {
+        dx = 0;
+        while (dx < size)
+        {
+            mlx_pixel_put(game->mlx, game->window, px + dx,
+                py + dy, GREEN_WALL);
+            dx++;
+        }
+        dy++;
+    }
 }
 
-void    draw_ray(t_cub *game, int ray_x, int ray_y)
+void draw_ray(t_cub *game, int ray_x, int ray_y)
 {
-    int     dx; //longueur du rayon.
-    int     dy;
-    int     steps; // nombre de pixel a allumer;
-    double  Xinc; // sert pour incrementer X. 
-    double   Yinc;
-    double   X;  // pixel a allumer.
-    double   Y;
-    int     i;
+    int dx; // longueur du rayon.
+    int dy;
+    int steps;   // nombre de pixel a allumer;
+    double Xinc; // sert pour incrementer X.
+    double Yinc;
+    double X; // pixel a allumer.
+    double Y;
+    int i;
 
     i = 0;
     dx = ray_x - (game->ray.player_x * SPRITE);
@@ -111,8 +132,7 @@ int is_wall(int x, int y, t_cub *game)
 
     mapx = x / SPRITE;
     mapy = y / SPRITE;
-    if (mapx < 0 || mapx >= game->engine.width
-        || mapy < 0 || mapy >= game->engine.height)
+    if (mapx < 0 || mapx >= game->engine.width || mapy < 0 || mapy >= game->engine.height)
         return (0);
     if (game->engine.map[mapy][mapx] == '1')
         return (1);
@@ -121,8 +141,8 @@ int is_wall(int x, int y, t_cub *game)
 
 void ft_caster(t_cub *game, double ray_angle)
 {
-    int     hit;
-    double  ray;
+    int hit;
+    double ray;
 
     hit = 0;
     ray = ray_angle;
@@ -136,7 +156,7 @@ void ft_caster(t_cub *game, double ray_angle)
     {
         game->ray.ray_x += game->ray.delta_x * 0.1;
         game->ray.ray_y += game->ray.delta_y * 0.1;
-        
+
         if (is_wall((int)game->ray.ray_x, (int)game->ray.ray_y, game) == 1)
         {
             game->ray.distance = sqrt(pow((game->ray.ray_x - game->ray.player_x * SPRITE), 2) + pow((game->ray.ray_y - game->ray.player_y * SPRITE), 2));
@@ -150,11 +170,11 @@ void ft_caster(t_cub *game, double ray_angle)
 
 void cast_ray(t_cub *game)
 {
-    int     i;
-    int     rays;
-    double  ray;
-    double  angle;
-    double  start;
+    int i;
+    int rays;
+    double ray;
+    double angle;
+    double start;
 
     i = 0;
     rays = WIDTH;
@@ -174,9 +194,9 @@ void cast_ray(t_cub *game)
 
 void ft_minimap(t_cub *game)
 {
-    int     x;
-    int     y;
-    char    *img;
+    int x;
+    int y;
+    char *img;
 
     y = 0;
     while (game->engine.map[y])
@@ -186,7 +206,7 @@ void ft_minimap(t_cub *game)
         {
             if (game->engine.map[y][x] == '0')
                 img = game->texture.floor_map;
-            else if(game->engine.map[y][x] == '1') 
+            else if (game->engine.map[y][x] == '1')
                 img = game->texture.wall_map;
             ft_draw_minimap(x, y, img, game);
             x++;
