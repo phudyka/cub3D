@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 14:02:53 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:32:23 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define WALL_MM "./utils/sprite/map/wall_map.xpm"
 # define FLOOR_MM "./utils/sprite/map/floor_map.xpm"
 # define PLAYER_MM "./utils/sprite/map/player_map.xpm"
+# define N_WALL "./utils/sprite/game/north_wall.xpm"
+# define S_WALL "./utils/sprite/game/south_wall.xpm"
+# define E_WALL "./utils/sprite/game/east_wall.xpm"
+# define W_WALL "./utils/sprite/game/west_wall.xpm"
+# define CEILING "./utils/sprite/game/ceiling.xpm"
+# define FLOOR "./utils/sprite/game/floor.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F

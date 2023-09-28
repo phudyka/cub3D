@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:33:15 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 14:12:15 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/28 15:10:17 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ static void	mouse_pos(int x, int y, t_cub *game)
 {
 	int	new_dist;
 
-	new_dist = 1;
-	if (x > game->engine.width - new_dist)
+	new_dist = 20;
+	if (x > WIDTH - new_dist)
 	{
 		x = new_dist;
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 	if (x < new_dist)
 	{
-		x = game->engine.width - new_dist;
+		x = WIDTH - new_dist;
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 }
@@ -53,9 +53,9 @@ static int	ft_mouse(int x, int y, t_cub *game)
 	if (x == old_x)
 		return (0);
 	else if (x < old_x)
-		game->engine.total_moves += ft_rotate(-0.1, game);
+		game->engine.total_moves += ft_rotate(-1, game);
 	else if (x > old_x)
-		game->engine.total_moves += ft_rotate(0.1, game);
+		game->engine.total_moves += ft_rotate(1, game);
 	old_x = x;
 	return (0);	
 }
