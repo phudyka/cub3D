@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 02:57:59 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 03:15:17 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ void ft_destroy_img(t_cub *game)
         mlx_destroy_image(game->mlx, game->texture.floor_map);
     if (game->texture.player_map)
         mlx_destroy_image(game->mlx, game->texture.player_map);
+    if (game->img_map2D)
+        mlx_destroy_image(game->mlx, game->img_map2D);
+    if (game->img_map3D)
+        mlx_destroy_image(game->mlx, game->img_map3D);
     mlx_destroy_window(game->mlx, game->window);
 }
 
