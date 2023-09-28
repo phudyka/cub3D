@@ -3,44 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 10:36:48 by dtassel           #+#    #+#             */
-/*   Updated: 2023/09/28 02:16:08 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 12:04:18 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-void	draw_ray(t_cub *game, int ray_x, int ray_y)
-{
-	int		dxy[2]; /*longueur du rayon.*/
-	int		steps;  /*nombre de pixel à allumer*/
-	int 	dst_i;
-	double	Xinc; /*sert pour incrémenter X*/
-	double	Yinc;
-	double	X; /*pixel à allumer.*/
-	double	Y;
-	int		i;
+// void	draw_ray(t_cub *game, int ray_x, int ray_y)
+// {
+// 	int		dxy[2]; /*longueur du rayon.*/
+// 	int		steps;  /*nombre de pixel à allumer*/
+// 	int 	dst_i;
+// 	double	Xinc; /*sert pour incrémenter X*/
+// 	double	Yinc;
+// 	double	X; /*pixel à allumer.*/
+// 	double	Y;
+// 	int		i;
 
-	i = 0;
-	dxy[1] = ray_x - (game->ray.player_x * SPRITE);
-	dxy[2] = ray_y - (game->ray.player_y * SPRITE);
-	steps = abs(dxy[2]);
-	if (abs(dxy[1]) > abs(dxy[2]))
-		steps = abs(dxy[1]);
-	Xinc = (double)dxy[1] / (double)steps;
-	Yinc = (double)dxy[2] / (double)steps;
-	X = game->ray.player_x * SPRITE;
-	Y = game->ray.player_y * SPRITE;
-	while (i++ <= steps)
-	{
-		dst_i = ((int)Y) * game->img2D.size_line + ((int)X) * game->img2D.bpp / 8;
-		*(unsigned int *)(game->img2D.pixels + dst_i) = RED;
-		X += Xinc;
-		Y += Yinc;
-	}
-}
+// 	i = 0;
+// 	dxy[1] = ray_x - (game->ray.player_x * SPRITE);
+// 	dxy[2] = ray_y - (game->ray.player_y * SPRITE);
+// 	steps = abs(dxy[2]);
+// 	if (abs(dxy[1]) > abs(dxy[2]))
+// 		steps = abs(dxy[1]);
+// 	Xinc = (double)dxy[1] / (double)steps;
+// 	Yinc = (double)dxy[2] / (double)steps;
+// 	X = game->ray.player_x * SPRITE;
+// 	Y = game->ray.player_y * SPRITE;
+// 	printf("\n%f, %f, \n");
+// 	while (i <= steps)
+// 	{
+// 		dst_i = ((int)Y) * game->img2D.size_line + ((int)X) * game->img2D.bpp / 8;
+// 		*(unsigned int *)(game->img2D.pixels + dst_i) = RED;
+// 		X += Xinc;
+// 		Y += Yinc;
+// 		i++;
+// 	}
+// }
 
 static void	ft_draw_player(t_cub *game)
 {

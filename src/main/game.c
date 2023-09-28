@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 03:15:17 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:02:09 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void ft_init_minimap(t_cub *game)
         ft_error_free("\nError!: [PLAYER image not found]\n", game);
 }
 
-static int key_press(int key, t_cub *game)
+int key_press(int key, t_cub *game)
 {
     if(key == ESC)
         game_over(game);
@@ -47,7 +47,7 @@ static int key_press(int key, t_cub *game)
     return (0);
 }
 
-static int key_release(int key, t_cub *game)
+int key_release(int key, t_cub *game)
 {
     if (key == ESC)
         game_over(game);
@@ -64,13 +64,6 @@ static int key_release(int key, t_cub *game)
     else if (key == RIGHT && game->engine.rotate >= -1)
         game->engine.rotate = 0;
     return (0);
-}
-
-static void ft_input(t_cub *game)
-{
-    mlx_hook(game->window, 02, (1L<<0), key_press, game);
-    mlx_hook(game->window, 03, (1L<<1), key_release, game);
-    mlx_hook(game->window, 17, 0, game_over, game);
 }
 
 void ft_destroy_img(t_cub *game)

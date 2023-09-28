@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 04:00:51 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 13:07:23 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	ft_caster(t_cub *game, double ray_angle)
 	game->ray.delta_y = sin(ray);
 	while (hit == 0)
 	{
-		game->ray.ray_x += game->ray.delta_x * 0.1;
-		game->ray.ray_y += game->ray.delta_y * 0.1;
+		game->ray.ray_x += game->ray.delta_x * 0.2;
+		game->ray.ray_y += game->ray.delta_y * 0.2;
 		if (is_wall((int)game->ray.ray_x, (int)game->ray.ray_y, game) == 1)
 		{
 			game->ray.distance = sqrt(pow((game->ray.ray_x - game->ray.player_x * SPRITE), 2) + pow((game->ray.ray_y - game->ray.player_y * SPRITE), 2));
 			game->ray.distance *= cos(ray - game->ray.p_angle);
-			draw_ray(game, (int)game->ray.ray_x, (int)game->ray.ray_y);
+			//draw_ray(game, (int)game->ray.ray_x, (int)game->ray.ray_y);
 			hit = 1;
 		}
 	}

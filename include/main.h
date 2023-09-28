@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 04:34:05 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:02:53 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define HEIGHT 720 // Window Height
 # define SPRITE 15  // Sprite Size
 # define MOVESPEED 0.03 // Player Move Speed
-# define ROTSPEED 0.01
+# define ROTSPEED 0.0175
 # define PI 3.14159265359
 # define FOV (60 * (PI / 180.0))
 
@@ -62,7 +62,7 @@
 # include "get_next_line.h"
 # include "../utils/libft/libft.h"
 # include "../utils/libft/libft.h"
-# include "../minilibx-linux/mlx.h"
+# include "../mlx/mlx.h"
 
 typedef struct s_img3D
 {
@@ -207,5 +207,8 @@ void	render_3D(t_cub *game, int column, double distance);
 void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, void *img_src, t_cub *game);
 void	draw_ray(t_cub *game, int ray_x, int ray_y);
+void	ft_input(t_cub *game);
+int		key_release(int key, t_cub *game);
+int		key_press(int key, t_cub *game);
 
 #endif

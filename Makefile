@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+         #
+#    By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/05 15:51:03 by phudyka           #+#    #+#              #
-#    Updated: 2023/09/28 04:42:32 by dtassel          ###   ########.fr        #
+#    Updated: 2023/09/28 11:46:08 by phudyka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@
 NAME            = cub3D
 
 # Compilateur
-CC              = gcc
+CC              = gcc -g -o
 
 # Flags de compilation
-CFLAGS          = -Wall -Wextra -Werror -I./minilibx-linux
+CFLAGS          = -Wall -Wextra -Werror -I./minilibx-linux 
 
 # Source files et Object files
 SRC             = src/main/main.c src/parse/parser.c src/main/game.c \
