@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 01:08:18 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 02:57:59 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,15 @@ void ft_destroy_img(t_cub *game)
 
 int  ft_cub(t_cub *game)
 {
-    int     w;
-    int     h;
+    //int     w;
+    //int     h;
 
-    w = 25;
-    h = 14;
+    //w = 25;
+    //h = 14;
     game->mlx = mlx_init();
     if (game->mlx == (void *)0)
         ft_error_free("\nError! [mlx_init() has failed]\n", game);
-    game->window = mlx_new_window(game->mlx, w * 64, h * 64, "[cub3D]");
+    game->window = mlx_new_window(game->mlx, WIDTH, HEIGHT, "[cub3D]");
     if (game->window == (void *)0)
         ft_error_free("\nError! [Failed to init Window]", game);
     game->img_map2D = mlx_new_image(game->mlx,

@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 01:48:32 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 03:03:09 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // Y = HEIGHT = ordinate axis
 
 // -- GLOBAL -- //
-# define WIDTH 800  // Window Width
-# define HEIGHT 600 // Window Height
+# define WIDTH 1280  // Window Width
+# define HEIGHT 720 // Window Height
 # define SPRITE 15  // Sprite Size
 # define MOVESPEED 0.03 // Player Move Speed
 # define ROTSPEED 0.01

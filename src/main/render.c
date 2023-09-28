@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 02:22:18 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 03:05:13 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	ft_render(t_cub *game)
 	game->engine.total_moves += ft_move(game);
 	draw(game);
 	mlx_put_image_to_window(game->mlx, game->window,
-		game->img_map3D, game->engine.width * SPRITE, 0);
-	mlx_put_image_to_window(game->mlx, game->window, game->img_map2D, 0, 0);
+		game->img_map3D, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->img_map2D, 0, HEIGHT - (game->engine.height * SPRITE));
 	return (0);
 }
