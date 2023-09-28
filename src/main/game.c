@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 14:02:09 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/28 15:52:37 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,7 @@ void ft_destroy_img(t_cub *game)
 
 int  ft_cub(t_cub *game)
 {
-    //int     w;
-    //int     h;
-
-    //w = 25;
-    //h = 14;
-    game->mlx = mlx_init();
-    if (game->mlx == (void *)0)
-        ft_error_free("\nError! [mlx_init() has failed]\n", game);
-    game->window = mlx_new_window(game->mlx, WIDTH, HEIGHT, "[cub3D]");
-    if (game->window == (void *)0)
-        ft_error_free("\nError! [Failed to init Window]", game);
-    game->img_map2D = mlx_new_image(game->mlx,
-        game->engine.width * SPRITE, game->engine.height * SPRITE);
-    game->img2D.pixels = mlx_get_data_addr(game->img_map2D,
-        &game->img2D.bpp, &game->img2D.size_line, &game->img2D.endian);
-    game->img_map3D = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-    game->img3D.pixels = mlx_get_data_addr(game->img_map3D, &game->img3D.bpp,
-        &game->img3D.size_line, &game->img3D.endian);
+    ft_init_mlx(game);
     ft_input(game);
     ft_init_minimap(game);
     mlx_loop_hook(game->mlx, ft_render, game);

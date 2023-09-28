@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 14:32:23 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:18:48 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@
 # define WALL_MM "./utils/sprite/map/wall_map.xpm"
 # define FLOOR_MM "./utils/sprite/map/floor_map.xpm"
 # define PLAYER_MM "./utils/sprite/map/player_map.xpm"
+# define PLAYER_G "./utils/sprite/game/player_map.xpm"
 # define N_WALL "./utils/sprite/game/north_wall.xpm"
 # define S_WALL "./utils/sprite/game/south_wall.xpm"
 # define E_WALL "./utils/sprite/game/east_wall.xpm"
 # define W_WALL "./utils/sprite/game/west_wall.xpm"
-# define CEILING "./utils/sprite/game/ceiling.xpm"
-# define FLOOR "./utils/sprite/game/floor.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F
@@ -70,7 +69,7 @@
 # include "../utils/libft/libft.h"
 # include "../mlx/mlx.h"
 
-typedef struct s_img3D
+typedef struct s_img
 {
     char    *pixels;
     int     bpp;
@@ -78,17 +77,7 @@ typedef struct s_img3D
     int     endian;
 	int     width;
     int     height;
-}               t_img3D;
-
-typedef struct s_img2D
-{
-    char    *pixels;
-    int     bpp;
-    int     size_line;
-    int     endian;
-	int     width;
-    int     height;
-}               t_img2D;
+}               t_img;
 
 typedef struct s_texture
 {
@@ -174,8 +163,7 @@ typedef struct  s_cub
 	t_color     floor;
 	t_engine    engine;
 	t_ray		ray;
-	t_img2D		img2D;
-	t_img3D		img3D;
+	t_img		img;
 }   t_cub;
 
 int		ft_abs(int nbr);
@@ -216,5 +204,6 @@ void	draw_ray(t_cub *game, int ray_x, int ray_y);
 void	ft_input(t_cub *game);
 int		key_release(int key, t_cub *game);
 int		key_press(int key, t_cub *game);
+void    ft_init_mlx(t_cub *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 11:48:45 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:18:14 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ static void	draw_column(int column, int y_start, int y_end, int color, t_cub *ga
 	y = y_start;
 	while (y < y_end)
 	{
-		//mlx_pixel_put(game->mlx, game->window, column + offsetX, y + offsetY, color);
-		dst_index = (y * game->img3D.size_line) + (column * game->img3D.bpp / 8);
-		*(unsigned int *)(game->img3D.pixels + dst_index) = color;
+		dst_index = (y * game->img.size_line) + (column * game->img.bpp / 8);
+		*(unsigned int *)(game->img.pixels + dst_index) = color;
 		y++;
 	}
-}
+} 
 
 void	render_3D(t_cub *game, int column, double distance)
 {

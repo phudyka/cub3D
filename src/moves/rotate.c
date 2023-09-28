@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:33:15 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 15:10:17 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:06:02 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	mouse_pos(int x, int y, t_cub *game)
 {
 	int	new_dist;
 
-	new_dist = 20;
+	new_dist = 10;
 	if (x > WIDTH - new_dist)
 	{
 		x = new_dist;
