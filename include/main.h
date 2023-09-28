@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/26 11:13:07 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 01:48:32 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define WIDTH 800  // Window Width
 # define HEIGHT 600 // Window Height
 # define SPRITE 15  // Sprite Size
-# define MOVESPEED 0.05 // Player Move Speed
-# define ROTSPEED 0.04
+# define MOVESPEED 0.03 // Player Move Speed
+# define ROTSPEED 0.01
 # define PI 3.14159265359
 # define FOV (60 * (PI / 180.0))
 
@@ -63,6 +63,26 @@
 # include "../utils/libft/libft.h"
 # include "../utils/libft/libft.h"
 # include "mlx.h"
+
+typedef struct s_img3D
+{
+    char    *pixels;
+    int     bpp;
+    int     size_line;
+    int     endian;
+	int     width;
+    int     height;
+}               t_img3D;
+
+typedef struct s_img2D
+{
+    char    *pixels;
+    int     bpp;
+    int     size_line;
+    int     endian;
+	int     width;
+    int     height;
+}               t_img2D;
 
 typedef struct s_texture
 {
@@ -137,6 +157,8 @@ typedef struct  s_cub
 {
 	void        *mlx;
 	void        *window;
+	void		*img_map2D;
+	void		*img_map3D;
 	int         mini;
 	int			count_color_c;
 	int			count_color_f;
@@ -146,6 +168,8 @@ typedef struct  s_cub
 	t_color     floor;
 	t_engine    engine;
 	t_ray		ray;
+	t_img2D		img2D;
+	t_img3D		img3D;
 }   t_cub;
 
 int		ft_abs(int nbr);
@@ -177,5 +201,11 @@ void	game_over_error(char *msg, t_cub *game);
 void	get_map(t_cub *game, char **argv);
 int		is_configuration(char *line);
 int		is_map_line(char *line);
+void	cast_ray(t_cub *game);
+void 	ft_caster(t_cub *game, double ray_angle);
+void	render_3D(t_cub *game, int column, double distance);
+void	draw_3Dview(t_cub *game);
+void	ft_draw_minimap(int x, int y, void *img_src, t_cub *game);
+void	draw_ray(t_cub *game, int ray_x, int ray_y);
 
 #endif

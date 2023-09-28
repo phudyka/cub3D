@@ -6,105 +6,104 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/25 01:17:19 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 02:22:18 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-/*static void ft_draw_frame(int start, int end, t_cub *game)
+int	is_wall(int x, int y, t_cub *game)
 {
-    while (start <= end)
-    {     
-        mlx_pixel_put(game->mlx, game->window, game->ray.mapx, game->ray.mapy, RED);
-        start++;
-    }
+	int	mapx;
+	int	mapy;
+
+	mapx = x / SPRITE;
+	mapy = y / SPRITE;
+	if (mapx < 0 || mapx >= game->engine.width || mapy < 0
+		|| mapy >= game->engine.height)
+		return (0);
+	if (game->engine.map[mapy][mapx] == '1')
+		return (1);
+	return (0);
 }
 
-static void ft_init_dda(int ray, t_cub *game)
+void	ft_caster(t_cub *game, double ray_angle)
 {
-    game->ray.mapx = (int)game->ray.player_x;
-    game->ray.mapy = (int)game->ray.player_y;
-    game->ray.cam_x = 2 * ray / WIDTH - 1;
-    game->ray.ray_x = game->ray.dir_x + game->ray.plane_x * game->ray.cam_x;
-    game->ray.ray_y = game->ray.dir_y + game->ray.plane_y * game->ray.cam_x;
-    if (game->ray.dir_x == 0)
-        game->ray.delta_x = 0;
-    else
-        game->ray.dir_x = ft_abs(1 / game->ray.dir_x);
-    if (game->ray.dir_x == 0)
-        game->ray.delta_y = 0;
-    else
-        game->ray.dir_y = ft_abs(1 / game->ray.dir_y);           
-    if (game->ray.dir_x < 0)
-        game->ray.dist_x = (game->ray.mapx - game->ray.dir_x) * game->ray.delta_x;
-    else
-        game->ray.dist_x = (game->ray.dir_x + 1.0 - game->ray.mapx) * game->ray.delta_x;      
-    if (game->ray.dir_y < 0)
-        game->ray.dist_y = (game->ray.mapy - game->ray.dir_y) * game->ray.delta_y;
-    else
-        game->ray.dist_y = (game->ray.dir_y + 1.0 - game->ray.mapy) * game->ray.delta_y;
+	int		hit;
+	double	ray;
+
+	hit = 0;
+	ray = ray_angle;
+	game->ray.ray_x = game->ray.player_x * SPRITE;
+	game->ray.ray_y = game->ray.player_y * SPRITE;
+	game->ray.delta_x = cos(ray);
+	game->ray.delta_y = sin(ray);
+	while (hit == 0)
+	{
+		game->ray.ray_x += game->ray.delta_x * 0.1;
+		game->ray.ray_y += game->ray.delta_y * 0.1;
+		if (is_wall((int)game->ray.ray_x, (int)game->ray.ray_y, game) == 1)
+		{
+			game->ray.distance = sqrt(pow((game->ray.ray_x - game->ray.player_x * SPRITE), 2) + pow((game->ray.ray_y - game->ray.player_y * SPRITE), 2));
+			game->ray.distance *= cos(ray - game->ray.p_angle);
+			draw_ray(game, (int)game->ray.ray_x, (int)game->ray.ray_y);
+			hit = 1;
+		}
+	}
 }
 
-static void ft_dda(t_cub * game)
+void	cast_ray(t_cub *game)
 {
-    game->ray.hit = 0;
-    while (game->ray.hit == 0)
-    {
-        if (game->ray.dist_x < game->ray.dist_y)
-        {
-            game->ray.dist_x += game->ray.delta_x;
-            game->ray.mapx += game->engine.move_x;
-            game->engine.wall_side = 0;
-        }
-        else
-        {
-            game->ray.dist_y += game->ray.delta_y;
-            game->ray.mapy += game->engine.move_y;
-            game->engine.wall_side = 1;
-        }
-        if (game->ray.mapx < 0.15 || game->ray.mapx < 0.15
-            || game->ray.mapx > game->engine.height - 0.95
-            || game->ray.mapy > game->engine.width - 0.95)
-            break ;
-        if (game->engine.map[game->ray.mapx][game->ray.mapy] > 0)
-            game->ray.hit = 1;
-    }
+	int		i;
+	int		rays;
+	double	ray;
+	double	angle;
+	double	start;
+
+	i = 0;
+	rays = WIDTH;
+	angle = FOV / (double)rays;
+	game->ray.p_angle = atan2(game->ray.dir_y, game->ray.dir_x);
+	start = game->ray.p_angle - (FOV / 2.0);
+	while (i < rays)
+	{
+		ray = start + i * angle;
+		ft_caster(game, ray);
+		render_3D(game, i, game->ray.distance);
+		i++;
+	}
 }
 
-static void ft_getside(t_cub *game)
+void	draw(t_cub *game)
 {
-    int start;          // -- drawStart
-    int end;            // -- drawEnd
-    int line_height;    // -- lineHeight
-    
-    if (game->engine.wall_side == 0)
-        game->ray.wall_dist = (game->ray.dist_x - game->ray.delta_x);
-    else
-        game->ray.wall_dist = (game->ray.dist_y - game->ray.delta_y);
-    line_height = (int)game->engine.height - game->ray.wall_dist;
-    start = -line_height / 2 + game->engine.height / 2;
-    if (start < 0)
-        start = 0;
-    end = line_height / 2 + game->engine.height / 2;
-    if (end >= 0)
-        end = game->engine.height - 1;
-    ft_draw_frame(start, end, game);
-}*/
+	int		x;
+	int		y;
+	char	*img;
 
-int ft_render(t_cub *game)
+	y = 0;
+	while (game->engine.map[y])
+	{
+		x = 0;
+		while (game->engine.map[y][x])
+		{
+			if (game->engine.map[y][x] == '0')
+				img = game->texture.floor_map;
+			else if (game->engine.map[y][x] == '1')
+				img = game->texture.wall_map;
+			ft_draw_minimap(x, y, img, game);
+			x++;
+		}
+		y++;
+	}
+	cast_ray(game);
+}
+
+int	ft_render(t_cub *game)
 {
-    //int ray;
-
-    //ray = -1;
-    game->engine.total_moves += ft_move(game);
-    //ft_init_ray(game);
-    /*while (++ray < WIDTH / 2)
-    {
-       ft_init_dda(ray, game);  
-        ft_dda(game);
-        ft_getside(game);
-    }*/
-    ft_minimap(game);
-    return (0);
+	game->engine.total_moves += ft_move(game);
+	draw(game);
+	mlx_put_image_to_window(game->mlx, game->window,
+		game->img_map3D, game->engine.width * SPRITE, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->img_map2D, 0, 0);
+	return (0);
 }

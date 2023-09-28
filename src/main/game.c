@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/22 16:37:51 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/28 01:08:18 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/main.h"
+
+void ft_init_minimap(t_cub *game)
+{
+    int w;
+    int h;
+
+    game->texture.wall_map = mlx_xpm_file_to_image(game->mlx, WALL_MM, &w, &h);
+    if (game->texture.wall_map == (void *)0)
+        ft_error_free("\nError!: [WALL image not found]\n", game);
+    game->texture.floor_map = mlx_xpm_file_to_image(game->mlx, FLOOR_MM, &w, &h);
+    if (game->texture.floor_map == (void *)0)
+        ft_error_free("\nError!: [FLOOR image not found]\n", game);
+    game->texture.player_map = mlx_xpm_file_to_image(game->mlx, PLAYER_MM, &w, &h);
+    if (game->texture.player_map == (void *)0)
+        ft_error_free("\nError!: [PLAYER image not found]\n", game);
+}
 
 static int key_press(int key, t_cub *game)
 {
@@ -70,8 +86,8 @@ void ft_destroy_img(t_cub *game)
 
 int  ft_cub(t_cub *game)
 {
-    int w;
-    int h;
+    int     w;
+    int     h;
 
     w = 25;
     h = 14;
@@ -81,8 +97,15 @@ int  ft_cub(t_cub *game)
     game->window = mlx_new_window(game->mlx, w * 64, h * 64, "[cub3D]");
     if (game->window == (void *)0)
         ft_error_free("\nError! [Failed to init Window]", game);
-    ft_init_minimap(game);
+    game->img_map2D = mlx_new_image(game->mlx,
+        game->engine.width * SPRITE, game->engine.height * SPRITE);
+    game->img2D.pixels = mlx_get_data_addr(game->img_map2D,
+        &game->img2D.bpp, &game->img2D.size_line, &game->img2D.endian);
+    game->img_map3D = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+    game->img3D.pixels = mlx_get_data_addr(game->img_map3D, &game->img3D.bpp,
+        &game->img3D.size_line, &game->img3D.endian);
     ft_input(game);
+    ft_init_minimap(game);
     mlx_loop_hook(game->mlx, ft_render, game);
     mlx_do_sync(game->mlx);
     mlx_loop(game->mlx);

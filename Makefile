@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+         #
+#    By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/05 15:51:03 by phudyka           #+#    #+#              #
-#    Updated: 2023/09/22 16:57:06 by phudyka          ###   ########.fr        #
+#    Updated: 2023/09/28 01:12:11 by dtassel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,12 @@ CFLAGS 			= -Wall -Wextra -Werror
 
 SRC				= src/main/main.c src/parse/parser.c src/main/game.c 	\
 				  src/main/exit.c src/main/render.c 					\
-				  src/parse/parse_texture.c src/main/minimap.c 			\
+				  src/parse/parse_texture.c src/main/draw3D.c 			\
 				  src/parse/valid_conf.c src/moves/move.c 			    \
 				  src/moves/player_move.c src/moves/directions.c 		\
 				  src/parse/get_map.c  src/parse/check_map.c            \
 				  src/moves/rotate.c src/main/utils.c 					\
+				  src/main/draw.c                                       \
 
 OBJ_DIR 		= obj
 OBJ 			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
