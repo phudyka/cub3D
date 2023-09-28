@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 03:03:09 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/09/28 04:34:05 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 # include "get_next_line.h"
 # include "../utils/libft/libft.h"
 # include "../utils/libft/libft.h"
-# include "mlx.h"
+# include "../minilibx-linux/mlx.h"
 
 typedef struct s_img3D
 {
