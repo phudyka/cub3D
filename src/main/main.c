@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/25 11:26:52 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/29 11:56:58 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int main(int argc, char **argv)
     ft_init_game(game);
     if (master_parser(game, argc, argv))
         ft_error("\nError! [Bad arguments]\n");
+    print_cub();
     ft_cub(game);
     game_over(game);
     return (0);

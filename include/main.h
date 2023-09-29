@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 16:18:48 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/09/29 14:24:12 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define S_WALL "./utils/sprite/game/south_wall.xpm"
 # define E_WALL "./utils/sprite/game/east_wall.xpm"
 # define W_WALL "./utils/sprite/game/west_wall.xpm"
+# define CEILING "./utils/sprite/game/ceiling.xpm"
+# define FLOOR "./utils/sprite/game/floor.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F
@@ -66,7 +68,6 @@
 # include <X11/keysym.h>
 # include "get_next_line.h"
 # include "../utils/libft/libft.h"
-# include "../utils/libft/libft.h"
 # include "../mlx/mlx.h"
 
 typedef struct s_img
@@ -85,6 +86,8 @@ typedef struct s_texture
 	char	*south;
 	char	*east;
 	char	*west;
+	char	*ceiling;
+	char 	*floor;
 	void	*player_map;
 	void	*wall_map;
 	void	*floor_map;
@@ -204,6 +207,9 @@ void	draw_ray(t_cub *game, int ray_x, int ray_y);
 void	ft_input(t_cub *game);
 int		key_release(int key, t_cub *game);
 int		key_press(int key, t_cub *game);
+int		ft_colorpix(int x, int y, void *texture, t_cub *game);
 void    ft_init_mlx(t_cub *game);
+void	print_cub(void);
+void	print_game_over(void);
 
 #endif
