@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/29 11:22:57 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/02 07:29:47 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	ft_caster(t_cub *game, double ray_angle)
 	game->ray.delta_y = sin(ray);
 	while (hit == 0)
 	{
-		game->ray.ray_x += game->ray.delta_x * 0.2;
-		game->ray.ray_y += game->ray.delta_y * 0.2;
+		game->ray.ray_x += game->ray.delta_x * 0.1;
+		game->ray.ray_y += game->ray.delta_y * 0.1;
 		if (is_wall((int)game->ray.ray_x, (int)game->ray.ray_y, game) == 1)
 		{
 			game->ray.distance = sqrt(pow((game->ray.ray_x - game->ray.player_x * SPRITE), 2) + pow((game->ray.ray_y - game->ray.player_y * SPRITE), 2));
@@ -58,12 +58,13 @@ void	cast_ray(t_cub *game)
 	double	ray;
 	double	angle;
 	double	start;
+	int		texture_x;
 
 	i = 0;
 	rays = WIDTH;
 	angle = FOV / (double)rays;
 	game->ray.p_angle = atan2(game->ray.dir_y, game->ray.dir_x);
-	start = game->ray.p_angle - (FOV / 2.0);
+	start = game->ray.p_angle - (FOV / 2);
 	while (i < rays)
 	{
 		ray = start + i * angle;
@@ -72,6 +73,7 @@ void	cast_ray(t_cub *game)
 		i++;
 	}
 }
+
 
 void	draw(t_cub *game)
 {

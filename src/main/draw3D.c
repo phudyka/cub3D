@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/02 05:24:40 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/02 07:32:25 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,54 +31,56 @@ int ft_colorpix(int x, int y, void *texture, t_cub *game)
     int     i;
     int     bpp;
     int     size_line;
+	int		endian;
     char    *pix;
 
-    pix = mlx_get_data_addr(texture, &bpp, &size_line, &game->img3D.endian);
+    pix = mlx_get_data_addr(texture, &bpp, &size_line, &endian);
     i = y * size_line + x * bpp / 8;
     return *(unsigned int *)(pix + i);
 }
 
 static void draw_texture(int column, int drawStart, int drawEnd, void *texture, t_cub *game)
 {
-	int		i;
-    int		y;
-    int		color;
-    int		texture_x;
-    int		texture_y;
-    double	step;
-    double	tex_pos;
+	int	i;
+    int y;
+    int color;
+    int texture_y;
+	int	texture_x;
+    double step;
+    double tex_pos;
 
     y = drawStart;
-    step = 1.0 * 64.0 / (drawEnd - drawStart);
+    step = 1.0 * 64 / game->ray.wallHeight;
     tex_pos = (drawStart - HEIGHT / 2 + game->ray.wallHeight / 2) * step;
+	texture_x = (int)(game->ray.ray_x) % 64;
     while (y < drawEnd)
     {
-        texture_x = (int)tex_pos % 64;
-		texture_y = (int)(y - drawStart) * (double)64 / game->ray.wallHeight;
+        texture_y = (int)tex_pos % 64;
         color = ft_colorpix(texture_x, texture_y, texture, game);
-		i = (y * game->img3D.size_line) + (column * game->img3D.bpp / 8);
-		 *(unsigned int *)(game->img3D.pixels + i) = color;
+        i = (y * game->img3D.size_line) + (column * game->img3D.bpp / 8);
+        *(unsigned int *)(game->img3D.pixels + i) = color;
         tex_pos += step;
         y++;
     }
 }
 
-void	render_3D(t_cub *game, int column, double distance)
+void render_3D(t_cub *game, int column, double distance)
 {
-	int	y;
-	int	drawStart;
-	int	drawEnd;
+    int y;
+    int drawStart;
+    int drawEnd;
 
-	game->ray.wallHeight = (int)(HEIGHT / distance * 10);
-	drawStart = -game->ray.wallHeight / 2 + HEIGHT / 2;
-	drawEnd = game->ray.wallHeight / 2 + HEIGHT / 2;
-	if (drawStart < 0)
-		drawStart = 0;
-	if (drawEnd >= HEIGHT)
-		drawEnd = HEIGHT - 1;
-	y = 0;
-	draw_column(column, y, drawStart, BLUE, game);
-	//draw_column(column, drawStart, drawEnd, GREY, game);
-	draw_texture(column, drawStart, drawEnd, game->texture.south, game);
-	draw_column(column, drawEnd, HEIGHT, BROWN, game);
+    game->ray.wallHeight = (int)(HEIGHT / distance * 15);
+    drawStart = -game->ray.wallHeight / 2 + HEIGHT / 2;
+    drawEnd = game->ray.wallHeight / 2 + HEIGHT / 2;
+
+    if (drawStart < 0)
+        drawStart = 0;
+    if (drawEnd >= HEIGHT)
+        drawEnd = HEIGHT - 1;
+
+    y = 0;
+    draw_column(column, y, drawStart, BLUE, game);
+    draw_texture(column, drawStart, drawEnd, game->texture.east, game);
+    draw_column(column, drawEnd, HEIGHT, BROWN, game);
 }
