@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/29 15:59:35 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/02 11:09:36 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,40 @@ int ft_colorpix(int x, int y, void *texture, t_cub *game)
     return *(unsigned int *)(pix + i);
 }
 
-static void draw_texture_wall(int column, int y_start, int y_end, void *texture, t_cub *game)
+static void draw_texture(int column, int drawStart, int drawEnd, void *texture, t_cub *game)
 {
-    int y;
-    int color;
-    double tex_x;
-    double tex_y;
-    double step;
-    int dst_index;
-	
-	y = y_start;
-    step =  64.0 / (double)(y_end - y_start);
-    while (y < y_end)
+	int		i;
+    int		y;
+    int		color;
+    int		texture_x;
+    int		texture_y;
+    double	step;
+    double	tex_pos;
+
+    y = drawStart;
+    step = 1.0 * 64.0 / (drawEnd - drawStart);
+    tex_pos = (drawStart - HEIGHT / 2 + game->ray.wallHeight / 2) * step;
+    while (y < drawEnd)
     {
-        tex_x = (column * 64.0) / game->img.width;
-        tex_y = (y - y_start) * step;
-        color = ft_colorpix((int)tex_x, (int)tex_y, texture, game);
-        dst_index = (y * game->img.size_line) + (column * game->img.bpp / 8);
-        *(unsigned int *)(game->img.pixels + dst_index) = color;
+        texture_x = (int)tex_pos % 64;
+		texture_y = (int)(y - drawStart) * (double)64 / game->ray.wallHeight;
+        color = ft_colorpix(texture_x, texture_y, texture, game);
+		i = (y * game->img.size_line) + (column * game->img.bpp / 8);
+		 *(unsigned int *)(game->img.pixels + i) = color;
+        tex_pos += step;
         y++;
     }
 }
 
 void	render_3D(t_cub *game, int column, double distance)
 {
-	int	wallHeight;
+	int	y;
 	int	drawStart;
 	int	drawEnd;
-	int	y;
 
-	wallHeight = (int)(HEIGHT / distance * 10);
-	drawStart = -wallHeight / 2 + HEIGHT / 2;
-	drawEnd = wallHeight / 2 + HEIGHT / 2;
+	game->ray.wallHeight = (int)(HEIGHT / distance * 10);
+	drawStart = -game->ray.wallHeight / 2 + HEIGHT / 2;
+	drawEnd = game->ray.wallHeight / 2 + HEIGHT / 2;
 	if (drawStart < 0)
 		drawStart = 0;
 	if (drawEnd >= HEIGHT)
@@ -77,6 +79,6 @@ void	render_3D(t_cub *game, int column, double distance)
 	y = 0;
 	draw_column(column, y, drawStart, BLUE, game);
 	//draw_column(column, drawStart, drawEnd, GREY, game);
-	draw_texture_wall(column, drawStart, drawEnd, game->texture.south, game);
+	draw_texture(column, drawStart, drawEnd, game->texture.south, game);
 	draw_column(column, drawEnd, HEIGHT, BROWN, game);
 }

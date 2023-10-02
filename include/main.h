@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/29 14:24:12 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/02 10:38:31 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ typedef struct s_ray
 	double	angle;
 	double	start;
 	double	distance;
-	
+	int		wallHeight;
 }			t_ray;
 
 typedef struct  s_cub
