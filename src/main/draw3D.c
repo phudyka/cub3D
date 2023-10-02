@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw3D.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/02 11:09:36 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/02 05:24:40 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	draw_column(int column, int y_start, int y_end, int color, t_cub *ga
 	y = y_start;
 	while (y < y_end)
 	{
-		dst_index = (y * game->img.size_line) + (column * game->img.bpp / 8);
-		*(unsigned int *)(game->img.pixels + dst_index) = color;
+		dst_index = (y * game->img3D.size_line) + (column * game->img3D.bpp / 8);
+		*(unsigned int *)(game->img3D.pixels + dst_index) = color;
 		y++;
 	}
 } 
@@ -33,7 +33,7 @@ int ft_colorpix(int x, int y, void *texture, t_cub *game)
     int     size_line;
     char    *pix;
 
-    pix = mlx_get_data_addr(texture, &bpp, &size_line, &game->img.endian);
+    pix = mlx_get_data_addr(texture, &bpp, &size_line, &game->img3D.endian);
     i = y * size_line + x * bpp / 8;
     return *(unsigned int *)(pix + i);
 }
@@ -56,8 +56,8 @@ static void draw_texture(int column, int drawStart, int drawEnd, void *texture, 
         texture_x = (int)tex_pos % 64;
 		texture_y = (int)(y - drawStart) * (double)64 / game->ray.wallHeight;
         color = ft_colorpix(texture_x, texture_y, texture, game);
-		i = (y * game->img.size_line) + (column * game->img.bpp / 8);
-		 *(unsigned int *)(game->img.pixels + i) = color;
+		i = (y * game->img3D.size_line) + (column * game->img3D.bpp / 8);
+		 *(unsigned int *)(game->img3D.pixels + i) = color;
         tex_pos += step;
         y++;
     }

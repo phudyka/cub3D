@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 10:36:48 by dtassel           #+#    #+#             */
-/*   Updated: 2023/09/28 16:19:15 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/02 05:22:44 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	ft_draw_player(t_cub *game)
 		dx = 0;
 		while (dx < 10)
 		{
-			dst_index = (py + dy) * game->img.size_line + (px + dx) * game->img.bpp / 8;
-			*(unsigned int *)(game->img.pixels + dst_index) = GREEN_WALL;
+			dst_index = (py + dy) * game->img2D.size_line + (px + dx) * game->img2D.bpp / 8;
+			*(unsigned int *)(game->img2D.pixels + dst_index) = GREEN_WALL;
 			dx++;
 		}
 		dy++;

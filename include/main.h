@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/02 10:38:31 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/02 05:20:39 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,8 @@ typedef struct  s_cub
 	t_color     floor;
 	t_engine    engine;
 	t_ray		ray;
-	t_img		img;
+	t_img		img2D;
+	t_img		img3D;
 }   t_cub;
 
 int		ft_abs(int nbr);
