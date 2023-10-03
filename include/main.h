@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 03:40:36 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/03 14:02:17 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_img
 
 typedef struct s_texture
 {
+	int		direction;
 	char	*north;
 	char	*south;
 	char	*east;
@@ -128,11 +129,11 @@ typedef struct s_engine
 typedef struct s_ray
 {
 	int		hit;
-	int		mapx;
+	int		mapx; // -- mapX
 	int		mapy;
     double  dir_x;		//player direction
     double  dir_y;
-    double  player_x;   // player pose in map --mapX
+    double  player_x;   // player pose in map --posX
     double  player_y;   
 	double	plane_x;	//
 	double	plane_y;
@@ -148,9 +149,14 @@ typedef struct s_ray
 	double	p_angle;	// camera angle FOV
 	double	angle;
 	double	start;
-	double	distance;
-	int		wallHeight;
+	double	distance;  // --perpWallDist
+	int		wallHeight; // -- lineHeight
 	double	tex_X;
+	int		stepX;
+	int		stepY;
+	int		side;
+	int		drawStart;
+    int		drawEnd;
 }			t_ray;
 
 typedef struct  s_cub
@@ -202,8 +208,8 @@ void	get_map(t_cub *game, char **argv);
 int		is_configuration(char *line);
 int		is_map_line(char *line);
 void	cast_ray(t_cub *game);
-void 	ft_caster(t_cub *game, double ray_angle);
-void	render_3D(t_cub *game, int column, double distance);
+void 	ft_caster(t_cub *game);
+void	render_3D(int x, t_cub *game);
 void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, void *img_src, t_cub *game);
 void	draw_ray(t_cub *game, int ray_x, int ray_y);
@@ -214,5 +220,6 @@ int		ft_colorpix(int x, int y, void *texture, t_cub *game);
 void    ft_init_mlx(t_cub *game);
 void	print_cub(void);
 void	print_game_over(void);
+void	count_fps(void);
 
 #endif

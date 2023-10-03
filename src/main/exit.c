@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/29 14:24:22 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/03 12:37:34 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int game_over(t_cub *game)
     ft_destroy_img(game);
 	free(game);
 	game = NULL;
-	print_game_over();
+	// print_game_over();
 	exit(EXIT_SUCCESS);
 }
 

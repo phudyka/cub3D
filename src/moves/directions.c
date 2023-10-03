@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:59:32 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/22 17:12:40 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:10:57 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void    ft_init_cardinals(t_cub *game)
 {
     if (game->engine.coord == 'E')
     {
-        game->ray.dir_x =-1;
+        game->ray.dir_x = 1;
         game->ray.dir_y = 0;
         game->ray.plane_x = 0;
         game->ray.plane_y = 0.66;
