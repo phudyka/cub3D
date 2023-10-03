@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 14:14:29 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/03 14:27:18 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static void draw_texture(int x, void *texture, t_cub *game)
 
     ft_texture_index(game);
     texture_x = (int)(game->ray.wallHeight * HD);
-    if ((game->ray.side == 0 && game->ray.dir_x < 0) || (game->ray.side == 1 && game->ray.dir_y > 0))
+    if ((game->ray.side == 0 && game->ray.dir_x < 0)
+        || (game->ray.side == 1 && game->ray.dir_y > 0))
          texture_x = HD - texture_x - 1;
     step = 1.0 * HD / HEIGHT;
     pos = (game->ray.drawStart - HEIGHT / 2 + game->ray.wallHeight / 2) * step;
@@ -80,7 +81,6 @@ static void draw_texture(int x, void *texture, t_cub *game)
         color = ft_colorpix(texture_x, texture_y, texture, game);
         if (game->texture.direction == 'N' || game->texture.direction == 'E')
             color = (color >> 1) & 8355711;
-
         y++;
     }
 }
@@ -103,7 +103,7 @@ void render_3D(int x, t_cub *game)
     else
         game->ray.wallX = game->ray.player_x + game->ray.distance *game->ray.dir_x;
     game->ray.wallX -= floor(game->ray.wallX);
-    draw_column(x, 0, game->ray.drawStart, BLUE, game);
+    //draw_column(x, 0, game->ray.drawStart, BLUE, game);
     draw_texture(x, game->texture.north, game);
-    draw_column(x, game->ray.drawEnd, HEIGHT, BROWN, game);
+    //draw_column(x, game->ray.drawEnd, HEIGHT, BROWN, game);
 }

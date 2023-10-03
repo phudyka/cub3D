@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 14:02:17 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/03 14:25:56 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_ray
     double  player_y;   
 	double	plane_x;	//
 	double	plane_y;
-	double	ray_x;		// ray
+	double	ray_x;		// rayDirX
 	double	ray_y;
 	double	cam_x;		// camera
 	double	cam_y;	

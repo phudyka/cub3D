@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 14:15:20 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/03 14:26:17 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void init_dda(int x, t_cub *game)
 {
 	game->ray.cam_x = 2 * x / (double)WIDTH - 1;
-	game->ray.dir_x += game->ray.plane_x * game->ray.cam_x;
-	game->ray.dir_y += game->ray.plane_y * game->ray.cam_x;
+	game->ray.ray_x = game->ray.dir_x + game->ray.plane_x * game->ray.cam_x;
+	game->ray.ray_y = game->ray.dir_y + game->ray.plane_y * game->ray.cam_x;
 	game->ray.mapx = (int)game->ray.player_x;
 	game->ray.mapy = (int)game->ray.player_y;
 	game->ray.delta_x = fabs(1 / game->ray.dir_x);
@@ -40,7 +40,7 @@ int	is_wall(int x, int y, t_cub *game)
 
 static void	ft_getstep(t_cub *game)
 {
-	if (game->ray.dir_x < 0)
+	if (game->ray.ray_x < 0)
 	{
 		game->ray.stepX = -1;
 		game->ray.dist_x = (game->ray.player_x - game->ray.mapx) * game->ray.delta_x;
@@ -50,7 +50,7 @@ static void	ft_getstep(t_cub *game)
 		game->ray.stepX = 1;
 		game->ray.dist_x = (game->ray.mapx + 1.0 - game->ray.player_x) * game->ray.delta_x;
 	}
-	if (game->ray.dir_y < 0)
+	if (game->ray.ray_y < 0)
 	{
 		game->ray.stepY = -1;
 		game->ray.dist_y = (game->ray.player_y - game->ray.mapy) * game->ray.delta_y;
@@ -93,10 +93,8 @@ void	ft_caster(t_cub *game)
 void	cast_ray(t_cub *game)
 {
 	int		x;
-	double	ray;
 	
 	x = 0;
-	game->ray.p_angle = atan2(game->ray.dir_y, game->ray.dir_x);
 	while (x < WIDTH)
 	{
 		init_dda(x, game);
