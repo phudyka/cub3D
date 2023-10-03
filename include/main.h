@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/02 07:23:23 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/03 03:40:36 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define ROTSPEED 0.0175
 # define PI 3.14159265359
 # define FOV (60 * (PI / 180.0))
-
+# define HD 1024
+# define LOW 64
 // -- TEXTURES -- //
 # define WALL_MM "./utils/sprite/map/wall_map.xpm"
 # define FLOOR_MM "./utils/sprite/map/floor_map.xpm"
@@ -143,12 +144,13 @@ typedef struct s_ray
 	double	dist_y;
 	double	delta_x; // Distance from player to next Wall impact  -- deltaSideX
 	double	delta_y;
-	double	wall_dist;
+	double	wallX;
 	double	p_angle;	// camera angle FOV
 	double	angle;
 	double	start;
 	double	distance;
 	int		wallHeight;
+	double	tex_X;
 }			t_ray;
 
 typedef struct  s_cub

@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/02 07:32:25 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/03 03:41:43 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,12 @@ static void draw_texture(int column, int drawStart, int drawEnd, void *texture, 
     double tex_pos;
 
     y = drawStart;
-    step = 1.0 * 64 / game->ray.wallHeight;
+    step = 1.0 * HD / game->ray.wallHeight;
     tex_pos = (drawStart - HEIGHT / 2 + game->ray.wallHeight / 2) * step;
-	texture_x = (int)(game->ray.ray_x) % 64;
     while (y < drawEnd)
     {
-        texture_y = (int)tex_pos % 64;
-        color = ft_colorpix(texture_x, texture_y, texture, game);
+        texture_y = (int)tex_pos & (HD - 1);
+        color = ft_colorpix(game->ray.tex_X, texture_y, texture, game);
         i = (y * game->img3D.size_line) + (column * game->img3D.bpp / 8);
         *(unsigned int *)(game->img3D.pixels + i) = color;
         tex_pos += step;
@@ -81,6 +80,6 @@ void render_3D(t_cub *game, int column, double distance)
 
     y = 0;
     draw_column(column, y, drawStart, BLUE, game);
-    draw_texture(column, drawStart, drawEnd, game->texture.east, game);
+    draw_texture(column, drawStart, drawEnd, game->texture.north, game);
     draw_column(column, drawEnd, HEIGHT, BROWN, game);
 }

@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/02 07:29:47 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/03 03:55:50 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	ft_caster(t_cub *game, double ray_angle)
 		{
 			game->ray.distance = sqrt(pow((game->ray.ray_x - game->ray.player_x * SPRITE), 2) + pow((game->ray.ray_y - game->ray.player_y * SPRITE), 2));
 			game->ray.distance *= cos(ray - game->ray.p_angle);
+			game->ray.wallX = game->ray.player_x + (game->ray.distance * game->ray.dir_x);
+			game->ray.wallX -= floor(game->ray.wallX);
+			game->ray.tex_X = (int)(game->ray.wallX * (double)HD);
+			game->ray.tex_X = HD - (game->ray.tex_X - 1);
 			hit = 1;
 		}
 	}
