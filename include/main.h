@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 14:25:56 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:28:39 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_texture
 	void	*player_map;
 	void	*wall_map;
 	void	*floor_map;
+	char	**buffer;
 }				t_texture;
 
 typedef struct s_color
@@ -218,8 +219,7 @@ int		key_release(int key, t_cub *game);
 int		key_press(int key, t_cub *game);
 int		ft_colorpix(int x, int y, void *texture, t_cub *game);
 void    ft_init_mlx(t_cub *game);
+void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);
-void	print_game_over(void);
-void	count_fps(void);
 
 #endif

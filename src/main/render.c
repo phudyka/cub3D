@@ -6,37 +6,11 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 14:26:17 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:18:44 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
-
-static void init_dda(int x, t_cub *game)
-{
-	game->ray.cam_x = 2 * x / (double)WIDTH - 1;
-	game->ray.ray_x = game->ray.dir_x + game->ray.plane_x * game->ray.cam_x;
-	game->ray.ray_y = game->ray.dir_y + game->ray.plane_y * game->ray.cam_x;
-	game->ray.mapx = (int)game->ray.player_x;
-	game->ray.mapy = (int)game->ray.player_y;
-	game->ray.delta_x = fabs(1 / game->ray.dir_x);
-	game->ray.delta_x = fabs(1 / game->ray.dir_y);
-
-}
-int	is_wall(int x, int y, t_cub *game)
-{
-	int	mapx;
-	int	mapy;
-
-	mapx = x / SPRITE;
-	mapy = y / SPRITE;
-	if (mapx < 0 || mapx >= game->engine.width || mapy < 0
-		|| mapy >= game->engine.height)
-		return (0);
-	if (game->engine.map[mapy][mapx] == '1')
-		return (1);
-	return (0);
-}
 
 static void	ft_getstep(t_cub *game)
 {
@@ -97,7 +71,7 @@ void	cast_ray(t_cub *game)
 	x = 0;
 	while (x < WIDTH)
 	{
-		init_dda(x, game);
+		ft_init_dda(x, game);
 		ft_getstep(game);
 		ft_caster(game);
 		render_3D(x, game);
@@ -133,8 +107,7 @@ int	ft_render(t_cub *game)
 {
 	game->engine.total_moves += ft_move(game);
 	draw(game);
-	mlx_put_image_to_window(game->mlx, game->window,
-		game->img_map3D, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->img_map3D, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map2D, 0, HEIGHT - (game->engine.height * SPRITE));
 	return (0);
 }
