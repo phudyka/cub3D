@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:33:15 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 16:06:02 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 13:58:52 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,22 @@ static int  ft_rotation(double speed, t_cub *game)
 
 static void	mouse_pos(int x, int y, t_cub *game)
 {
-	int	new_dist;
-
-	new_dist = 10;
-	if (x > WIDTH - new_dist)
+	if (x > WIDTH - WRAP)
 	{
-		x = new_dist;
+		x = WRAP;
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
-	if (x < new_dist)
+	if (x < WRAP)
 	{
-		x = WIDTH - new_dist;
+		x = WIDTH - WRAP;
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
 }
 
 static int	ft_mouse(int x, int y, t_cub *game)
 {
-	int			deltax;
-	static int	old_x;
-	
-	old_x = WIDTH / 2;
+	static int	old_x = WIDTH / 2;
+
 	mouse_pos(x, y, game);
 	if (x == old_x)
 		return (0);

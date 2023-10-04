@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 11:52:27 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 13:54:04 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,8 @@ void render_3D(int x, t_cub *game)
     else
         game->ray.wallX = game->ray.player_x + game->ray.distance * game->ray.ray_x;
     game->ray.wallX -= floor(game->ray.wallX);
-    // draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.ceiling, game);
-    // draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.floor, game);
     draw_column(x, 0, game->ray.drawStart, BLUE, game);
-    //draw_column(x, game->ray.drawStart, game->ray.drawEnd, RED, game);
     choose_texture(x, game->ray.drawStart, game->ray.drawEnd, game);
+    //draw_texture(x, 0, game->ray.drawStart, CEILING, game);
     draw_column(x, game->ray.drawEnd, HEIGHT, BROWN, game);
 }

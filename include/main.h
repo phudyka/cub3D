@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 11:19:28 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 13:57:59 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define PI 3.14159265359
 # define FOV (60 * (PI / 180.0))
 # define HD 1024
+# define WRAP 20
 
 // -- TEXTURES -- //
 # define WALL_MM "./utils/sprite/map/wall_map.xpm"
