@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 15:18:44 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 10:28:40 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_caster(t_cub *game)
 
 void	cast_ray(t_cub *game)
 {
-	int		x;
+	int x;
 	
 	x = 0;
 	while (x < WIDTH)
