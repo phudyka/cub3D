@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 11:49:45 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:52:27 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,19 @@ static void draw_texture(int column, int drawStart, int drawEnd, void *texture, 
     }
 }
 
+static void    choose_texture(int column, int drawStart, int drawEnd, t_cub *game)
+{
+    ft_texture_index(game);
+    if (game->texture.direction == 'N')
+        draw_texture(column, game->ray.drawStart, game->ray.drawEnd, game->texture.north, game);
+    else if (game->texture.direction == 'S')
+        draw_texture(column, game->ray.drawStart, game->ray.drawEnd, game->texture.south, game);
+    else if (game->texture.direction == 'W')
+        draw_texture(column, game->ray.drawStart, game->ray.drawEnd, game->texture.west, game);
+    else if (game->texture.direction == 'E')
+        draw_texture(column, game->ray.drawStart, game->ray.drawEnd, game->texture.east, game);
+}
+
 void render_3D(int x, t_cub *game)
 {
     if (game->ray.side == 0)
@@ -106,6 +119,6 @@ void render_3D(int x, t_cub *game)
     // draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.floor, game);
     draw_column(x, 0, game->ray.drawStart, BLUE, game);
     //draw_column(x, game->ray.drawStart, game->ray.drawEnd, RED, game);
-    draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.south, game);
+    choose_texture(x, game->ray.drawStart, game->ray.drawEnd, game);
     draw_column(x, game->ray.drawEnd, HEIGHT, BROWN, game);
 }
