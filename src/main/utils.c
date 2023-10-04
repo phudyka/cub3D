@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:52:30 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 10:28:56 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:36:01 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,29 @@ void    init_texture_tab(t_cub *game)
             game_over_error("Error! [Failed to init texture tab]\n", game);
         i++;
     }
+}
+
+void	ft_fraps(t_cub *game)
+{
+	static int		count = 0;
+	clock_t			cur;
+	static clock_t	last = 0;
+	double			delta;
+	char			*display;
+
+	cur = clock();
+	delta = ((double)(cur - last)) / CLOCKS_PER_SEC;
+	if (delta >= 0.1)
+	{
+		int fps = count / delta;
+		display = ft_itoa(fps);
+		mlx_string_put(game->mlx, game->window, 10, 10, YELLOW, ft_itoa(fps));
+		free(display);
+		count = 0;
+		last = cur;
+	}
+	else
+		count++;
 }
 
 int	ft_abs(int nbr)

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 10:51:09 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:49:45 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static void draw_texture(int column, int drawStart, int drawEnd, void *texture, 
     }
 }
 
-
 void render_3D(int x, t_cub *game)
 {
     if (game->ray.side == 0)
@@ -107,6 +106,6 @@ void render_3D(int x, t_cub *game)
     // draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.floor, game);
     draw_column(x, 0, game->ray.drawStart, BLUE, game);
     //draw_column(x, game->ray.drawStart, game->ray.drawEnd, RED, game);
-    draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.north, game);
+    draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.south, game);
     draw_column(x, game->ray.drawEnd, HEIGHT, BROWN, game);
 }

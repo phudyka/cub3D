@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 16:28:39 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:19:28 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define PI 3.14159265359
 # define FOV (60 * (PI / 180.0))
 # define HD 1024
-# define LOW 64
+
 // -- TEXTURES -- //
 # define WALL_MM "./utils/sprite/map/wall_map.xpm"
 # define FLOOR_MM "./utils/sprite/map/floor_map.xpm"
@@ -59,6 +59,7 @@
 # define Q      113   // Quit game
 
 # include <math.h>
+# include <time.h>
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -221,5 +222,6 @@ int		ft_colorpix(int x, int y, void *texture, t_cub *game);
 void    ft_init_mlx(t_cub *game);
 void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);
+void	ft_fraps(t_cub *game);
 
 #endif

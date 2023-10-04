@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 04:47:36 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:34:18 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,7 @@ void	ft_caster(t_cub *game)
 			game->ray.mapy += game->ray.stepY;
 			game->ray.side = 1;	
 		}
-		if (game->ray.mapy < 0.25 || game->ray.mapx < 0.25
-			|| game->ray.mapy > game->engine.height - 0.25
-			|| game->ray.mapx > game->engine.width - 1.25)
-			break ;
-		else if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
+		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
 			hit = 1;
 	}
 }
@@ -109,5 +105,6 @@ int	ft_render(t_cub *game)
 	draw(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map3D, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map2D, 0, HEIGHT - (game->engine.height * SPRITE));
+	//ft_fraps(game);
 	return (0);
 }
