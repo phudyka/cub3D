@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 14:26:58 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:17:06 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define WIDTH 1280  // Window Width
 # define HEIGHT 720 // Window Height
 # define SPRITE 15  // Sprite Size
-# define MOVESPEED 0.03 // Player Move Speed
-# define ROTSPEED 0.0175
+# define MOVESPEED 0.036 // Player Move Speed
+# define ROTSPEED 0.02
 # define PI 3.14159265359
 # define HD 1024
 # define WRAP 20
@@ -92,9 +92,8 @@ typedef struct s_texture
 	char	*ceiling;
 	char	*floor;
 	void	*player_map;
-	void	*wall_map;
-	void	*floor_map;
-	char	**buffer;
+	int		wall_map;
+	int		floor_map;
 }			t_texture;
 
 typedef struct s_color
@@ -213,7 +212,7 @@ void	cast_ray(t_cub *game);
 void	ft_caster(t_cub *game);
 void	render_3D(int x, t_cub *game);
 void	draw_3Dview(t_cub *game);
-void	ft_draw_minimap(int x, int y, void *img_src, t_cub *game);
+void	ft_draw_minimap(int x, int y, int *color, t_cub *game);
 void	draw_ray(t_cub *game, int ray_x, int ray_y);
 void	ft_input(t_cub *game);
 int		key_release(int key, t_cub *game);

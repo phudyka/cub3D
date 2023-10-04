@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 14:23:22 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:15:03 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ void ft_init_minimap(t_cub *game)
     int w;
     int h;
 
-    game->texture.wall_map = mlx_xpm_file_to_image(game->mlx, WALL_MM, &w, &h);
-    if (game->texture.wall_map == (void *)0)
-        ft_error_free("\nError!: [WALL image not found]\n", game);
-    game->texture.floor_map = mlx_xpm_file_to_image(game->mlx, FLOOR_MM, &w, &h);
-    if (game->texture.floor_map == (void *)0)
-        ft_error_free("\nError!: [FLOOR image not found]\n", game);
+    game->texture.wall_map = GREY;
+    game->texture.floor_map = BROWN;
     game->texture.player_map = mlx_xpm_file_to_image(game->mlx, PLAYER_MM, &w, &h);
     if (game->texture.player_map == (void *)0)
         ft_error_free("\nError!: [PLAYER image not found]\n", game);
@@ -68,10 +64,6 @@ int key_release(int key, t_cub *game)
 
 void ft_destroy_img(t_cub *game)
 {
-    if (game->texture.wall_map)
-        mlx_destroy_image(game->mlx, game->texture.wall_map);
-    if (game->texture.floor_map)
-        mlx_destroy_image(game->mlx, game->texture.floor_map);
     if (game->texture.player_map)
         mlx_destroy_image(game->mlx, game->texture.player_map);
     if (game->img_map2d)

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 16:17:27 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:38:24 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ static void ft_init_texture(t_cub *game)
     game->texture.south = NULL;
     game->texture.east = NULL;
     game->texture.west = NULL;
-    game->texture.buffer = ft_calloc(5, sizeof * game->texture.buffer);
-    if(!game->texture.buffer)
-        game_over_error("Error! [Failed to init texture tab]\n", game); 
 }
 
 static void ft_init_engine(t_cub *game)

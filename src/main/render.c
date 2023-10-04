@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 14:23:03 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:18:15 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	draw(t_cub *game)
 {
 	int		x;
 	int		y;
-	char	*img;
+	int		color;
 
 	y = 0;
 	while (game->engine.map[y])
@@ -88,10 +88,10 @@ void	draw(t_cub *game)
 		while (game->engine.map[y][x])
 		{
 			if (game->engine.map[y][x] == '0')
-				img = game->texture.floor_map;
-			else if (game->engine.map[y][x] == '1')
-				img = game->texture.wall_map;
-			ft_draw_minimap(x, y, img, game);
+				color = game->texture.floor_map;
+			if (game->engine.map[y][x] == '1')
+				color = game->texture.wall_map;
+			ft_draw_minimap(x, y, &color, game);
 			x++;
 		}
 		y++;
@@ -104,7 +104,8 @@ int	ft_render(t_cub *game)
 	game->engine.total_moves += ft_move(game);
 	draw(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map3d, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->window, game->img_map2d, 0, HEIGHT - (game->engine.height * SPRITE));
+	mlx_put_image_to_window(game->mlx, game->window, game->img_map2d, 0,
+		HEIGHT - (game->engine.height * SPRITE));
 	//ft_fraps(game);
 	return (0);
 }
