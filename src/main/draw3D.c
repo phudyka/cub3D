@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw3D.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 04:47:09 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/04 10:51:09 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,11 @@ int ft_colorpix(int x, int y, void *texture, t_cub *game)
     int     i;
     int     bpp;
     int     size_line;
-    int     endian;
     char    *pix;
 
-    pix = mlx_get_data_addr(texture, &bpp, &size_line, &endian);
-    if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-    {
-        i = y * size_line + x * bpp / 8;
-        return (*(unsigned int *)(pix + i));
-    }
-    return (0);
+    pix = mlx_get_data_addr(texture, &bpp, &size_line, &game->img3D.endian);
+    i = y * size_line + x * bpp / 8;
+    return *(unsigned int *)(pix + i);
 }
 
 static void ft_texture_index(t_cub *game)
