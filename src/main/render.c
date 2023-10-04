@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 10:28:40 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 04:47:36 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_caster(t_cub *game)
 			|| game->ray.mapy > game->engine.height - 0.25
 			|| game->ray.mapx > game->engine.width - 1.25)
 			break ;
-		else if (game->engine.map[game->ray.mapy][game->ray.mapx] == 1)
+		else if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
 			hit = 1;
 	}
 }
