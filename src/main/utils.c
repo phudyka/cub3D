@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:52:30 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 16:31:29 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 10:12:32 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void ft_init_dda(int x, t_cub *game)
 	game->ray.ray_y = game->ray.dir_y + game->ray.plane_y * game->ray.cam_x;
 	game->ray.mapx = (int)game->ray.player_x;
 	game->ray.mapy = (int)game->ray.player_y;
-	game->ray.delta_x = fabs(1 / game->ray.dir_x);
-	game->ray.delta_y = fabs(1 / game->ray.dir_y);
+	game->ray.delta_x = sqrt(1 + (game->ray.ray_y * game->ray.ray_y) * (game->ray.ray_x * game->ray.ray_x));
+	game->ray.delta_y = sqrt(1 + (game->ray.ray_x * game->ray.ray_x) * (game->ray.ray_x * game->ray.ray_x));
 }
 
 void	print_cub(void)

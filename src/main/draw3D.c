@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/03 16:50:55 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 10:16:57 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ static void ft_texture_index(t_cub *game)
 {
     if (game->ray.side == 1)
     {
-        if (game->ray.dir_y < 0)
+        if (game->ray.ray_y < 0)
             game->texture.direction = 'N';
         else 
             game->texture.direction = 'S';
     }
     else
     {
-        if (game->ray.dir_x < 0)
+        if (game->ray.ray_x < 0)
             game->texture.direction = 'W';
         else 
             game->texture.direction = 'E';
@@ -73,8 +73,8 @@ static void draw_texture(int x, int start, int end, void *texture, t_cub *game)
 
     ft_texture_index(game);
     texture_x = (int)(game->ray.wallHeight * HD);
-    if ((game->ray.side == 0 && game->ray.dir_x < 0)
-        || (game->ray.side == 1 && game->ray.dir_y > 0))
+    if ((game->ray.side == 0 && game->ray.ray_x < 0)
+        || (game->ray.side == 1 && game->ray.ray_y > 0))
         texture_x = HD - texture_x - 1;
     step = 1.0 * HD / HEIGHT;
     pos = (start - HEIGHT / 2 + game->ray.wallHeight / 2) * step;
@@ -106,9 +106,9 @@ void render_3D(int x, t_cub *game)
     if (game->ray.drawEnd >= HEIGHT)
         game->ray.drawEnd = HEIGHT - 1;
     if (game->ray.side == 0)
-        game->ray.wallX = game->ray.player_y + game->ray.distance * game->ray.dir_y;
+        game->ray.wallX = game->ray.player_y + game->ray.distance * game->ray.ray_y;
     else
-        game->ray.wallX = game->ray.player_x + game->ray.distance * game->ray.dir_x;
+        game->ray.wallX = game->ray.player_x + game->ray.distance * game->ray.ray_x;
     game->ray.wallX -= floor(game->ray.wallX);
     // draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.ceiling, game);
     // draw_texture(x, game->ray.drawStart, game->ray.drawEnd, game->texture.floor, game);
