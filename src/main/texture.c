@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 11:48:22 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:25:06 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void    ft_init_mlx(t_cub *game)
     game->window = mlx_new_window(game->mlx, WIDTH, HEIGHT, "[cub3D]");
     if (game->window == (void *)0)
         ft_error_free("\nError! [Failed to init Window]", game);
-    game->img_map2D = mlx_new_image(game->mlx,
+    game->img_map2d = mlx_new_image(game->mlx,
         game->engine.width * SPRITE, game->engine.height * SPRITE);
-    game->img2D.pixels = mlx_get_data_addr(game->img_map2D,
-        &game->img2D.bpp, &game->img2D.size_line, &game->img2D.endian);
-    game->img_map3D = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-    game->img3D.pixels = mlx_get_data_addr(game->img_map3D, &game->img3D.bpp,
-        &game->img3D.size_line, &game->img3D.endian);
+    game->img2d.pixels = mlx_get_data_addr(game->img_map2d,
+        &game->img2d.bpp, &game->img2d.size_line, &game->img2d.endian);
+    game->img_map3d = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+    game->img3d.pixels = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
+        &game->img3d.size_line, &game->img3d.endian);
     ft_texture_pack(game);
 }

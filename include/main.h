@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 13:57:59 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:26:58 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define MOVESPEED 0.03 // Player Move Speed
 # define ROTSPEED 0.0175
 # define PI 3.14159265359
-# define FOV (60 * (PI / 180.0))
 # define HD 1024
 # define WRAP 20
 
@@ -75,13 +74,13 @@
 
 typedef struct s_img
 {
-    char    *pixels;
-    int     bpp;
-    int     size_line;
-    int     endian;
-	int     width;
-    int     height;
-}               t_img;
+	char	*pixels;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		width;
+	int		height;
+}			t_img;
 
 typedef struct s_texture
 {
@@ -91,12 +90,12 @@ typedef struct s_texture
 	char	*east;
 	char	*west;
 	char	*ceiling;
-	char 	*floor;
+	char	*floor;
 	void	*player_map;
 	void	*wall_map;
 	void	*floor_map;
 	char	**buffer;
-}				t_texture;
+}			t_texture;
 
 typedef struct s_color
 {
@@ -107,102 +106,102 @@ typedef struct s_color
 
 typedef struct s_keys
 {
-    int w;
-    int a;
-    int s;
-    int d;
+	int	w;
+	int	a;
+	int	s;
+	int	d;
 	int	left;
 	int	right;
-}               t_keys;
+}				t_keys;
 
 typedef struct s_engine
 {
 	int		total_moves;
 	int		rotate;
-    int		move_x;
-    int		move_y;
+	int		move_x;
+	int		move_y;
 	char	coord;
-    char    **map;      // 2D map
-    char    **cub;
-    int     width;
-    int     height;
+	char	**map;
+	char	**cub;
+	int		width;
+	int		height;
 	int		wall_side;
-}           t_engine;
+}				t_engine;
 
 typedef struct s_ray
 {
 	int		hit;
-	int		mapx; // -- mapX
+	int		mapx;
 	int		mapy;
-    double  dir_x;		//player direction
-    double  dir_y;
-    double  player_x;   // player pose in map --posX
-    double  player_y;   
-	double	plane_x;	//
+	double	dir_x;
+	double	dir_y;
+	double	player_x;
+	double	player_y;
+	double	plane_x;
 	double	plane_y;
-	double	ray_x;		// rayDirX
+	double	ray_x;
 	double	ray_y;
-	double	cam_x;		// camera
+	double	cam_x;
 	double	cam_y;	
-	double	dist_x; // Lenght Of The Ray from Player pos to Next Pos -- sideDistX
+	double	dist_x;
 	double	dist_y;
-	double	delta_x; // Distance from player to next Wall impact  -- deltaSideX
+	double	delta_x;
 	double	delta_y;
-	double	wallX;
-	double	p_angle;	// camera angle FOV
+	double	wall_x;
+	double	p_angle;
 	double	angle;
 	double	start;
-	double	distance;  // --perpWallDist
-	int		wallHeight; // -- lineHeight
-	double	tex_X;
-	int		stepX;
-	int		stepY;
+	double	distance;
+	int		wall_height;
+	double	tex_x;
+	int		step_x;
+	int		step_y;
 	int		side;
-	int		drawStart;
-    int		drawEnd;
-}			t_ray;
+	int		draw_start;
+	int		draw_end;
+}				t_ray;
 
-typedef struct  s_cub
+typedef struct s_cub
 {
-	void        *mlx;
-	void        *window;
-	void		*img_map2D;
-	void		*img_map3D;
-	int         mini;
+	void		*mlx;
+	void		*window;
+	void		*img_map2d;
+	void		*img_map3d;
+	int			mini;
 	int			count_color_c;
 	int			count_color_f;
-    t_keys      keys;
-	t_texture   texture;
-	t_color     ceiling;
-	t_color     floor;
-	t_engine    engine;
+	t_keys		keys;
+	t_texture	texture;
+	t_color		ceiling;
+	t_color		floor;
+	t_engine	engine;
 	t_ray		ray;
-	t_img		img2D;
-	t_img		img3D;
-}   t_cub;
+	t_img		img2d;
+	t_img		img3d;
+}				t_cub;
 
 int		ft_abs(int nbr);
 void	ft_init_ray(t_cub *game);
-void    ft_init_direction(t_cub *game);
-void    ft_init_minimap(t_cub *game);
-void    check_map(t_cub *game);
-int     master_parser(t_cub *cub, int argc, char **argv);
-void    ft_minimap(t_cub *game);
-void    ft_free_map(t_cub *game);
-void    ft_error(char *msg);
-void    ft_error_free(char *msg, t_cub *game);
-int     ft_move(t_cub *game);
+void	ft_init_direction(t_cub *game);
+void	ft_init_minimap(t_cub *game);
+void	check_map(t_cub *game);
+int		master_parser(t_cub *cub, int argc, char **argv);
+void	ft_minimap(t_cub *game);
+void	ft_free_map(t_cub *game);
+void	ft_error(char *msg);
+void	ft_error_free(char *msg, t_cub *game);
+int		ft_move(t_cub *game);
 int		ft_rotate(double rotation, t_cub *game);
-int     check_move(double x, double y, t_cub *game);
+int		check_move(double x, double y, t_cub *game);
 int		ft_render(t_cub *game);
-int     ft_cub(t_cub *game);
-int     game_over(t_cub *game);
-int     parse_east_texture(char *line, t_cub *game);
-int     parse_west_texture(char *line, t_cub *game);
-int     parse_south_texture(char *line, t_cub *game);
-int     parse_north_texture(char *line, t_cub *game);
+int		ft_cub(t_cub *game);
+int		game_over(t_cub *game);
+int		parse_east_texture(char *line, t_cub *game);
+int		parse_west_texture(char *line, t_cub *game);
+int		parse_south_texture(char *line, t_cub *game);
+int		parse_north_texture(char *line, t_cub *game);
 void	floor_ceiling_color(char *line, t_cub *game);
-void    free_array(char **array);
+void	free_array(char **array);
 int		check_valid_path(t_cub *game);
 void	check_valid_conf(t_cub *game);
 void	ft_destroy_img(t_cub *game);
@@ -211,7 +210,7 @@ void	get_map(t_cub *game, char **argv);
 int		is_configuration(char *line);
 int		is_map_line(char *line);
 void	cast_ray(t_cub *game);
-void 	ft_caster(t_cub *game);
+void	ft_caster(t_cub *game);
 void	render_3D(int x, t_cub *game);
 void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, void *img_src, t_cub *game);
@@ -220,7 +219,7 @@ void	ft_input(t_cub *game);
 int		key_release(int key, t_cub *game);
 int		key_press(int key, t_cub *game);
 int		ft_colorpix(int x, int y, void *texture, t_cub *game);
-void    ft_init_mlx(t_cub *game);
+void	ft_init_mlx(t_cub *game);
 void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);
 void	ft_fraps(t_cub *game);

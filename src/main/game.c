@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/28 15:52:37 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:23:22 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void ft_destroy_img(t_cub *game)
         mlx_destroy_image(game->mlx, game->texture.floor_map);
     if (game->texture.player_map)
         mlx_destroy_image(game->mlx, game->texture.player_map);
-    if (game->img_map2D)
-        mlx_destroy_image(game->mlx, game->img_map2D);
-    if (game->img_map3D)
-        mlx_destroy_image(game->mlx, game->img_map3D);
+    if (game->img_map2d)
+        mlx_destroy_image(game->mlx, game->img_map2d);
+    if (game->img_map3d)
+        mlx_destroy_image(game->mlx, game->img_map3d);
     mlx_destroy_window(game->mlx, game->window);
 }
 

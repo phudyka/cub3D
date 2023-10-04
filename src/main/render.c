@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 11:34:18 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:23:03 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ static void	ft_getstep(t_cub *game)
 {
 	if (game->ray.ray_x < 0)
 	{
-		game->ray.stepX = -1;
+		game->ray.step_x = -1;
 		game->ray.dist_x = (game->ray.player_x - game->ray.mapx) * game->ray.delta_x;
 	}
 	else
 	{
-		game->ray.stepX = 1;
+		game->ray.step_x = 1;
 		game->ray.dist_x = (game->ray.mapx + 1.0 - game->ray.player_x) * game->ray.delta_x;
 	}
 	if (game->ray.ray_y < 0)
 	{
-		game->ray.stepY = -1;
+		game->ray.step_y = -1;
 		game->ray.dist_y = (game->ray.player_y - game->ray.mapy) * game->ray.delta_y;
 	}
 	else
 	{
-		game->ray.stepY = 1;
+		game->ray.step_y = 1;
 		game->ray.dist_y = (game->ray.mapy + 1.0 - game->ray.player_y) * game->ray.delta_y;
 	}
 }
@@ -46,13 +46,13 @@ void	ft_caster(t_cub *game)
 		if (game->ray.dist_x < game->ray.dist_y)
 		{
 			game->ray.dist_x += game->ray.delta_x;
-			game->ray.mapx += game->ray.stepX;
+			game->ray.mapx += game->ray.step_x;
 			game->ray.side = 0;
 		}
 		else
 		{
 			game->ray.dist_y += game->ray.delta_y;
-			game->ray.mapy += game->ray.stepY;
+			game->ray.mapy += game->ray.step_y;
 			game->ray.side = 1;	
 		}
 		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
@@ -103,8 +103,8 @@ int	ft_render(t_cub *game)
 {
 	game->engine.total_moves += ft_move(game);
 	draw(game);
-	mlx_put_image_to_window(game->mlx, game->window, game->img_map3D, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->window, game->img_map2D, 0, HEIGHT - (game->engine.height * SPRITE));
+	mlx_put_image_to_window(game->mlx, game->window, game->img_map3d, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->img_map2d, 0, HEIGHT - (game->engine.height * SPRITE));
 	//ft_fraps(game);
 	return (0);
 }
