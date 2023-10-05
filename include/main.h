@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 15:17:06 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/05 15:29:32 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MOVESPEED 0.036 // Player Move Speed
 # define ROTSPEED 0.02
 # define PI 3.14159265359
-# define HD 1024
+# define HD 256
 # define WRAP 20
 
 // -- TEXTURES -- //
@@ -40,11 +40,11 @@
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F
-# define BLUE 0x87CEEB
+# define BLUE 0x282828
 # define YELLOW 0xFFFF00
 # define WHITE 0xFFFFFF
 # define GREY 0x505050
-# define BROWN 0x7B6D51
+# define BROWN 0x353535
 
 // -- BINDING KEYS -- //
 # define W      119   //  _______________________
