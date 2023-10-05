@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 14:34:30 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/05 15:32:43 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ static void	draw_column(int x, int y_start, int y_end, int color, t_cub *game)
 		y++;
 	}
 } 
-
-int ft_colorpix(int x, int y, void *texture, t_cub *game)
-{
-    int     i;
-    int     bpp;
-    int     size_line;
-    char    *pix;
-
-    pix = mlx_get_data_addr(texture, &bpp, &size_line, &game->img3d.endian);
-    i = y * size_line + x * bpp / 8;
-    return *(unsigned int *)(pix + i);
-}
 
 static void ft_texture_index(t_cub *game)
 {

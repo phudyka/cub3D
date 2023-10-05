@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 15:18:15 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/05 15:33:09 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	cast_ray(t_cub *game)
 		ft_getstep(game);
 		ft_caster(game);
 		render_3D(x, game);
-		x++;
+		render_3D(x + 1, game);
+		x += 2;
 	}
 }
 
