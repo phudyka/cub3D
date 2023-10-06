@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_conf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 02:14:11 by kali              #+#    #+#             */
-/*   Updated: 2023/09/21 03:13:45 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/06 11:02:10 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ int	check_valid_path(t_cub *game)
 	else if (validate_path(game->texture.east) == 1)
 		return (1);
 	else if (validate_path(game->texture.west) == 1)
+		return (1);
+	else if (validate_path(game->texture.ceiling) == 1)
+		return (1);
+	else if (validate_path(game->texture.floor) == 1)
 		return (1);
 	return (0);
 }

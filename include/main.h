@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 10:06:11 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 10:58:23 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define WHITE 0xFFFFFF
 # define GREY 0x505050
 # define BROWN 0x353535
+# define BLACK 0x000000
 
 // -- BINDING KEYS -- //
 # define W      119   //  _______________________

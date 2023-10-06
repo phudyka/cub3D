@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 03:26:00 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/06 10:57:52 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	draw(t_cub *game)
 				color = BROWN;
 			if (game->engine.map[y][x] == '1')
 				color = GREY;
+			if (game->engine.map[y][x] == 'D')
+				color = BLACK;
 			ft_draw_minimap(x, y, &color, game);
 			x++;
 		}
