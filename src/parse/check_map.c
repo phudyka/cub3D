@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 05:04:57 by dtassel           #+#    #+#             */
-/*   Updated: 2023/09/22 03:54:15 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/06 11:19:24 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ void    ft_check_close(int i, t_cub *game)
 void    ft_check(int i, int j, t_cub *game)
 {
 		if (game->engine.map[i][j] != '1' && game->engine.map[i][j] != 'N'
-						&& game->engine.map[i][j] != 'E' && game->engine.map[i][j] != '0'
-								&& game->engine.map[i][j] != 'W'
-									&& game->engine.map[i][j] != 'S')
+			&& game->engine.map[i][j] != 'E' && game->engine.map[i][j] != '0'
+			&& game->engine.map[i][j] != 'W' && game->engine.map[i][j] != 'S'
+			&& game->engine.map[i][j] != 'D')
 			game_over_error("Map not valid\n", game);
 }
 
