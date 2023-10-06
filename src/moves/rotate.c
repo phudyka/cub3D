@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:33:15 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 14:41:40 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 08:12:29 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int  ft_rotation(double speed, t_cub *game)
 	old_planex = game->ray.plane_x;
 	game->ray.plane_x = game->ray.plane_x * cos(speed) - game->ray.plane_y * sin(speed);
     game->ray.plane_y = old_planex * sin(speed) + game->ray.plane_y * cos(speed);
+	game->engine.angle += speed;
 	return (1);
 }
 
@@ -38,6 +39,7 @@ static void	mouse_pos(int x, int y, t_cub *game)
 		x = WIDTH - WRAP;
 		mlx_mouse_move(game->mlx, game->window, x, y);
 	}
+	mlx_mouse_hide(game->mlx, game->window);
 }
 
 static int	ft_mouse(int x, int y, t_cub *game)
