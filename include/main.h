@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 08:12:04 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 08:36:30 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define W_WALL "./utils/sprite/game/west_wall.xpm"
 # define CEILING "./utils/sprite/game/ceiling.xpm"
 # define FLOOR "./utils/sprite/game/floor.xpm"
+# define WEAPON1 "./utils/sprite/game/weapon1.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F
@@ -91,9 +92,8 @@ typedef struct s_texture
 	char	*west;
 	char	*ceiling;
 	char	*floor;
+	char	*weapon1;
 	void	*player_map;
-	int		wall_map;
-	int		floor_map;
 }			t_texture;
 
 typedef struct s_color

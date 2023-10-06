@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/04 14:34:58 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 08:34:36 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void    free_texture(t_cub *game)
     free(game->texture.east);
     free(game->texture.west);
     free(game->texture.south);
+    free(game->texture.ceiling);
+    free(game->texture.floor);
+    free(game->texture.weapon1);
 }
 
 int game_over(t_cub *game)

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/05 15:33:09 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 08:36:09 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ void	draw(t_cub *game)
 		while (game->engine.map[y][x])
 		{
 			if (game->engine.map[y][x] == '0')
-				color = game->texture.floor_map;
+				color = BROWN;
 			if (game->engine.map[y][x] == '1')
-				color = game->texture.wall_map;
+				color = GREY;
 			ft_draw_minimap(x, y, &color, game);
 			x++;
 		}

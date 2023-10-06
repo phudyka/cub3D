@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 08:07:18 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 08:36:26 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void ft_init_minimap(t_cub *game)
     int w;
     int h;
 
-    game->texture.wall_map = GREY;
-    game->texture.floor_map = BROWN;
     game->texture.player_map = mlx_xpm_file_to_image(game->mlx, PLAYER_MM, &w, &h);
     if (game->texture.player_map == (void *)0)
         ft_error_free("\nError!: [PLAYER image not found]\n", game);

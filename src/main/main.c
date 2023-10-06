@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 07:55:15 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 08:35:10 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ static void ft_init_texture(t_cub *game)
     game->texture.south = NULL;
     game->texture.east = NULL;
     game->texture.west = NULL;
+    game->texture.ceiling = NULL;
+    game->texture.floor = NULL;
+    game->texture.weapon1 = NULL;
 }
 
 static void ft_init_engine(t_cub *game)
