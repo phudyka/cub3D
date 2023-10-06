@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/05 15:29:32 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/05 23:47:30 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # define WIDTH 1280  // Window Width
 # define HEIGHT 720 // Window Height
 # define SPRITE 15  // Sprite Size
-# define MOVESPEED 0.036 // Player Move Speed
-# define ROTSPEED 0.02
+# define MOVESPEED 0.06 // Player Move Speed
+# define ROTSPEED 0.03
 # define PI 3.14159265359
 # define HD 256
 # define WRAP 20
@@ -222,5 +222,6 @@ void	ft_init_mlx(t_cub *game);
 void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);
 void	ft_fraps(t_cub *game);
+int     ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
 
 #endif
