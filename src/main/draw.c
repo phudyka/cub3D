@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 10:36:48 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/06 03:36:42 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/06 10:07:14 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ static void     ft_draw_player(t_cub *game)
         int     dy;
         int     dst_index;
 
-        px = game->ray.player_x * SPRITE - (10 / 2);
-        py = game->ray.player_y * SPRITE - (10 / 2);
+        px = game->ray.player_x * SPRITE - (7 / 2);
+        py = game->ray.player_y * SPRITE - (7 / 2);
         dy = 0;
-        while (dy < 10)
+        while (dy < 7)
         {
                 dx = 0;
-                while (dx < 10)
+                while (dx < 7)
                 {
                         dst_index = (py + dy) * game->img2d.size_line + (px + dx) * game->img2d.bpp / 8;
                         *(unsigned int *)(game->img2d.pixels + dst_index) = RED;
@@ -87,7 +87,6 @@ static void     ft_draw_player(t_cub *game)
                 dy++;
         }
 }
-
 
 void	ft_draw_minimap(int x, int y, int *color, t_cub *game)
 {
