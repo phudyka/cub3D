@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 08:36:30 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 10:03:39 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // Y = HEIGHT = ordinate axis
 
 // -- GLOBAL -- //
-# define WIDTH 1280  // Window Width
-# define HEIGHT 720 // Window Height
+# define WIDTH 1024  // Window Width
+# define HEIGHT 576 // Window Height
 # define SPRITE 15  // Sprite Size
 # define MOVESPEED 0.06 // Player Move Speed
 # define ROTSPEED 0.03
