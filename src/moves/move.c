@@ -15,16 +15,18 @@
 
 static int  move_ok(double x, double y, t_cub *game)
 {
-	int	player_size;
+	double	player_size;
 
-	player_size = 0.05;
-	if (game->engine.map[(int)y][(int)x] == '1')
+	player_size = 0.15;
+	if (game->engine.map[(int)(y)][(int)(x)] == '1')
 			return (1);
 	if (game->engine.map[(int)(y + player_size)][(int)(x + player_size)] == '1')
 			return (1);
-	if (game->engine.map[(int)y][(int)(x + player_size)] == '1')
+	if (game->engine.map[(int)(y - player_size)][(int)(x - player_size)] == '1')
 			return (1);
-	if (game->engine.map[(int)(y + player_size)][(int)x] == '1')
+	if (game->engine.map[(int)(y + player_size)][(int)(x - player_size)] == '1')
+			return (1);
+	if (game->engine.map[(int)(y - player_size)][(int)(x + player_size)] == '1')
 			return (1);
 	if (x < player_size || x >= game->engine.width - 1.0 - player_size)
 			return (1);
@@ -32,6 +34,7 @@ static int  move_ok(double x, double y, t_cub *game)
 			return (1);
 	return (0);
 }
+
 
 int check_move(double x, double y, t_cub *game)
 {

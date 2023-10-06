@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 10:36:48 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/06 08:14:21 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 03:36:42 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,34 +64,28 @@ int ft_colorpix(int x, int y, void *texture, t_cub *game)
 	return (color);
 }
 
-static void ft_draw_player(t_cub *game)
+static void     ft_draw_player(t_cub *game)
 {
-    int		px;
-    int		py;
-    int		dx;
-    int		dy;
-	int		rx;
-	int		ry;
-    int		dst_index;
-	double	angle;
+        int     px;
+        int     py;
+        int     dx;
+        int     dy;
+        int     dst_index;
 
-    dy = 0;
-    angle = game->engine.angle;
-    px = game->ray.player_x * SPRITE - (SPRITE / 2);
-    py = game->ray.player_y * SPRITE - (SPRITE / 2);
-    while (dy < SPRITE)
-    {
-        dx = 0;
-        while (dx < SPRITE)
+        px = game->ray.player_x * SPRITE - (10 / 2);
+        py = game->ray.player_y * SPRITE - (10 / 2);
+        dy = 0;
+        while (dy < 10)
         {
-            rx = (int)(dx * cos(angle) - dy * sin(angle));
-            ry = (int)(dx * sin(angle) + dy * cos(angle));
-            dst_index = (py + ry) * game->img2d.size_line + (px + rx) * game->img2d.bpp / 8;
-            *(unsigned int *)(game->img2d.pixels + dst_index) = ft_colorpix(dx, dy, game->texture.player_map, game);
-            dx++;
+                dx = 0;
+                while (dx < 10)
+                {
+                        dst_index = (py + dy) * game->img2d.size_line + (px + dx) * game->img2d.bpp / 8;
+                        *(unsigned int *)(game->img2d.pixels + dst_index) = RED;
+                        dx++;
+                }
+                dy++;
         }
-        dy++;
-    }
 }
 
 

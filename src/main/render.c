@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 08:36:09 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/06 03:26:00 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int	ft_render(t_cub *game)
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map3d, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map2d, 0,
 		HEIGHT - (game->engine.height * SPRITE));
-	//ft_fraps(game);
+	ft_fraps(game);
 	return (0);
 }
