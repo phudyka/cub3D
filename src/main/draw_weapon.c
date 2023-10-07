@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/07 01:54:58 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/07 02:37:25 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,35 @@ void		ft_draw_weapon(t_cub *game)
 		y++;
 	}
 }
+
+void	ft_crosshair(t_cub *game)
+{
+	int	xy[2];
+	int	start[2];
+	int	dst_index;
+
+	start[0] = WIDTH / 2;
+	start[1] = HEIGHT / 2;
+	xy[1] = start[1] - 12 / 2;
+	while (xy[1] <= start[1] + 12 / 2)
+	{
+		xy[0] = start[0] - 12 / 2; // x
+		while (xy[0] <= start[0] + 12 / 2)
+		{
+			if (!((xy[0] >= start[0] - 2 && xy[0] <= start[0] + 2) && 
+				  (xy[1] >= start[1] - 2 && xy[1] <= start[1] + 2)))
+			{
+				if ((xy[0] >= start[0] - 1 && xy[0] <= start[0] + 1) ||
+					(xy[1] >= start[1] - 1 && xy[1] <= start[1] + 1))
+				{
+					dst_index = xy[1] * game->img3d.size_line + xy[0] * game->img3d.bpp / 8;
+					*(unsigned int *)(game->img3d.pixels + dst_index) = GREEN;
+				}
+			}
+			xy[0]++;
+		}
+		xy[1]++;
+	}
+}
+
+

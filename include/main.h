@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/07 01:56:04 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/07 02:16:13 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,5 +228,6 @@ void	print_cub(void);
 void	ft_fraps(t_cub *game);
 int     ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
 void	ft_draw_weapon(t_cub *game);
+void	ft_crosshair(t_cub *game);
 
 #endif
