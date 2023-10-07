@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/07 02:37:25 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/07 03:00:19 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ void	ft_crosshair(t_cub *game)
 
 	start[0] = WIDTH / 2;
 	start[1] = HEIGHT / 2;
-	xy[1] = start[1] - 12 / 2;
-	while (xy[1] <= start[1] + 12 / 2)
+	xy[1] = start[1] - 15 / 2;
+	while (xy[1] <= start[1] + 15 / 2)
 	{
-		xy[0] = start[0] - 12 / 2; // x
-		while (xy[0] <= start[0] + 12 / 2)
+		xy[0] = start[0] - 15 / 2; // x
+		while (xy[0] <= start[0] + 15 / 2)
 		{
 			if (!((xy[0] >= start[0] - 2 && xy[0] <= start[0] + 2) && 
 				  (xy[1] >= start[1] - 2 && xy[1] <= start[1] + 2)))
@@ -99,7 +99,7 @@ void	ft_crosshair(t_cub *game)
 					(xy[1] >= start[1] - 1 && xy[1] <= start[1] + 1))
 				{
 					dst_index = xy[1] * game->img3d.size_line + xy[0] * game->img3d.bpp / 8;
-					*(unsigned int *)(game->img3d.pixels + dst_index) = GREEN;
+					*(unsigned int *)(game->img3d.pixels + dst_index) = RED;
 				}
 			}
 			xy[0]++;

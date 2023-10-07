@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 08:36:26 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/07 02:44:37 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void ft_destroy_img(t_cub *game)
         mlx_destroy_image(game->mlx, game->img_map2d);
     if (game->img_map3d)
         mlx_destroy_image(game->mlx, game->img_map3d);
+    if (game->weapon_3d)
+        mlx_destroy_image(game->mlx, game->weapon_3d);
     mlx_destroy_window(game->mlx, game->window);
 }
 
