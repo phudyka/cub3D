@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 08:26:03 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/07 01:56:46 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,8 @@ void    ft_init_mlx(t_cub *game)
     game->img_map3d = mlx_new_image(game->mlx, WIDTH, HEIGHT);
     game->img3d.pixels = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
         &game->img3d.size_line, &game->img3d.endian);
+    game->weapon_3d = mlx_new_image(game->mlx, 456, 500);
+    game->weapon.pixels = mlx_get_data_addr(game->weapon_3d, &game->weapon.bpp,
+        &game->weapon.size_line, &game->weapon.endian);
     ft_texture_pack(game);
 }

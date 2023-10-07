@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 10:58:23 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/07 01:56:04 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct s_cub
 	void		*window;
 	void		*img_map2d;
 	void		*img_map3d;
+	void		*weapon_3d;
 	int			mini;
 	int			count_color_c;
 	int			count_color_f;
@@ -179,6 +180,7 @@ typedef struct s_cub
 	t_ray		ray;
 	t_img		img2d;
 	t_img		img3d;
+	t_img		weapon;
 }				t_cub;
 
 int		ft_abs(int nbr);
@@ -225,5 +227,6 @@ void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);
 void	ft_fraps(t_cub *game);
 int     ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
+void	ft_draw_weapon(t_cub *game);
 
 #endif
