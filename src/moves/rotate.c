@@ -6,23 +6,26 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:33:15 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 10:53:34 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/09 15:52:08 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../include/main.h"
+#include "../../include/main.h"
 
-static int  ft_rotation(double speed, t_cub *game)
+static int	ft_rotation(double speed, t_cub *game)
 {
 	double	old_dirx;
 	double	old_planex;
 
 	old_dirx = game->ray.dir_x;
-	game->ray.dir_x = game->ray.dir_x * cos(speed) - game->ray.dir_y * sin(speed);
+	game->ray.dir_x = game->ray.dir_x * cos(speed)
+		- game->ray.dir_y * sin(speed);
 	game->ray.dir_y = old_dirx * sin(speed) + game->ray.dir_y * cos(speed);
 	old_planex = game->ray.plane_x;
-	game->ray.plane_x = game->ray.plane_x * cos(speed) - game->ray.plane_y * sin(speed);
-    game->ray.plane_y = old_planex * sin(speed) + game->ray.plane_y * cos(speed);
+	game->ray.plane_x = game->ray.plane_x * cos(speed)
+		- game->ray.plane_y * sin(speed);
+	game->ray.plane_y = old_planex * sin(speed)
+		+ game->ray.plane_y * cos(speed);
 	game->engine.angle += speed;
 	return (1);
 }
@@ -54,24 +57,24 @@ static int	ft_mouse(int x, int y, t_cub *game)
 	else if (x > old_x)
 		game->engine.total_moves += ft_rotate(1, game);
 	old_x = x;
-	return (0);	
+	return (0);
 }
 
 int	ft_rotate(double direction, t_cub *game)
 {
-    int		move;
+	int		move;
 	double	speed;
 
-    move = 0;
+	move = 0;
 	speed = ROTSPEED * direction;
 	move += ft_rotation(speed, game);
 	return (move);
 }
 
-void ft_input(t_cub *game)
+void	ft_input(t_cub *game)
 {
-    mlx_hook(game->window, 02, (1L<<0), key_press, game);
-    mlx_hook(game->window, 03, (1L<<1), key_release, game);
-    mlx_hook(game->window, 06, (1L<<6), ft_mouse, game);
-    mlx_hook(game->window, 17, 0, game_over, game);
+	mlx_hook(game->window, 02, (1L << 0), key_press, game);
+	mlx_hook(game->window, 03, (1L << 1), key_release, game);
+	mlx_hook(game->window, 06, (1L << 6), ft_mouse, game);
+	mlx_hook(game->window, 17, 0, game_over, game);
 }

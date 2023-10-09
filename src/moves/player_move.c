@@ -6,17 +6,17 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:47:53 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 10:55:22 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/09 15:40:42 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../include/main.h"
+#include "../../include/main.h"
 
-static int  ft_forward(t_cub *game)
+static int	ft_forward(t_cub *game)
 {
-	int     move;
-	double  new_x;
-	double  new_y;
+	int		move;
+	double	new_x;
+	double	new_y;
 
 	move = 0;
 	new_x = game->ray.player_x + game->ray.dir_x * MOVESPEED;
@@ -25,11 +25,11 @@ static int  ft_forward(t_cub *game)
 	return (move);
 }
 
-static int  ft_backward(t_cub *game)
+static int	ft_backward(t_cub *game)
 {
-	int     move;
-	double  new_x;
-	double  new_y;
+	int		move;
+	double	new_x;
+	double	new_y;
 
 	move = 0;
 	new_x = game->ray.player_x - game->ray.dir_x * MOVESPEED;
@@ -38,11 +38,11 @@ static int  ft_backward(t_cub *game)
 	return (move);
 }
 
-static int  ft_left(t_cub *game)
+static int	ft_left(t_cub *game)
 {
-	int     move;
-	double  new_x;
-	double  new_y;
+	int		move;
+	double	new_x;
+	double	new_y;
 
 	move = 0;
 	new_x = game->ray.player_x + game->ray.dir_y * MOVESPEED;
@@ -51,11 +51,11 @@ static int  ft_left(t_cub *game)
 	return (move);
 }
 
-static int  ft_right(t_cub *game)
+static int	ft_right(t_cub *game)
 {
-	int     move;
-	double  new_x;
-	double  new_y;
+	int		move;
+	double	new_x;
+	double	new_y;
 
 	move = 0;
 	new_x = game->ray.player_x - game->ray.dir_y * MOVESPEED;
@@ -64,9 +64,9 @@ static int  ft_right(t_cub *game)
 	return (move);
 }
 
-int ft_move(t_cub *game)
+int	ft_move(t_cub *game)
 {
-	int move;
+	int	move;
 
 	move = 0;
 	if (game->engine.move_y == 1)

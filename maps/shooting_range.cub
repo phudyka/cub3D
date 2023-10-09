@@ -1,7 +1,7 @@
-NO ./utils/sprite/game/floor.xpm
-SO ./utils/sprite/game/floor.xpm
-WE ./utils/sprite/game/floor.xpm
-EA ./utils/sprite/game/floor.xpm
+NO ./sprite/textures/floor.xpm
+SO ./sprite/textures/floor.xpm
+WE ./sprite/textures/floor.xpm
+EA ./sprite/textures/floor.xpm
 F 220,255,0
 C 225,0,200
 111111111111111111111111

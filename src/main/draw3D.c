@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/06 08:42:31 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/09 15:49:38 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ void draw_ceiling(int x, int draw_end, t_cub *game)
 		double floorY = game->ray.player_y + rowDistance * game->ray.dir_y;
 		floorX += floorStepX * (x - (WIDTH / 2));
 		floorY += floorStepY * (x - (WIDTH / 2));
-		int textureX = (int)(floorX * 256) % 256;
-		int textureY = (int)(floorY * 256) % 256;
+		int textureX = (int)(floorX * HD) % HD;
+		int textureY = (int)(floorY * HD) % HD;
 		int color = ft_colorpix_ceifloo(textureX, textureY, game->texture.ceiling, game);
 		int index_ceiling = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
 		*(unsigned int *)(game->img3d.pixels + index_ceiling) = color;
-
 		y++;
 	}
 }
@@ -52,12 +51,11 @@ void draw_floor(int x, int draw_end, t_cub *game)
 		double floorY = game->ray.player_y + rowDistance * game->ray.dir_y;
 		floorX += floorStepX * (x - (WIDTH / 2));
 		floorY += floorStepY * (x - (WIDTH / 2));
-		int textureX = (int)(floorX * 256) % 256;
-		int textureY = (int)(floorY * 256) % 256;
+		int textureX = (int)(floorX * HD) % HD;
+		int textureY = (int)(floorY * HD) % HD;
 		int color = ft_colorpix_ceifloo(textureX, textureY, game->texture.floor, game);
 		int index_floor = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
 		*(unsigned int *)(game->img3d.pixels + index_floor) = color;
-
 		y++;
 	}
 }
