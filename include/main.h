@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 15:55:57 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/09 16:32:14 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define W_WALL "./sprite/textures/west_wall.xpm"
 # define CEILING "./sprite/textures/ceiling.xpm"
 # define FLOOR "./sprite/textures/floor.xpm"
+# define DOOR "./sprite/textures/door.xpm"
 # define WEAPON1 "./sprite/weapons/weapon1.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
@@ -91,7 +92,7 @@ typedef struct s_texture
 	char	*ceiling;
 	char	*floor;
 	char	*weapon1;
-	void	*player_map;
+	char	*door;	
 }			t_texture;
 
 typedef struct s_color
@@ -169,6 +170,7 @@ typedef struct s_cub
 	int			mini;
 	int			count_color_c;
 	int			count_color_f;
+	clock_t		cur;
 	t_keys		keys;
 	t_texture	texture;
 	t_color		ceiling;
@@ -180,7 +182,6 @@ typedef struct s_cub
 	t_img		weapon;
 }				t_cub;
 
-int		ft_abs(int nbr);
 void	ft_init_ray(t_cub *game);
 void	ft_init_direction(t_cub *game);
 void	check_map(t_cub *game);
@@ -225,5 +226,7 @@ void	ft_fraps(t_cub *game);
 int		ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
 void	ft_draw_weapon(t_cub *game);
 void	ft_crosshair(t_cub *game);
+void    choose_texture(int x, t_cub *game);
+void	draw_texture(int x, void *texture, t_cub *game);
 
 #endif

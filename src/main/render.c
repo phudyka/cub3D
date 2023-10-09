@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/07 02:15:56 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/09 16:13:27 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,26 @@ static void	ft_getstep(t_cub *game)
 	if (game->ray.ray_x < 0)
 	{
 		game->ray.step_x = -1;
-		game->ray.dist_x = (game->ray.player_x - game->ray.mapx) * game->ray.delta_x;
+		game->ray.dist_x = (game->ray.player_x - game->ray.mapx)
+			* game->ray.delta_x;
 	}
 	else
 	{
 		game->ray.step_x = 1;
-		game->ray.dist_x = (game->ray.mapx + 1.0 - game->ray.player_x) * game->ray.delta_x;
+		game->ray.dist_x = (game->ray.mapx + 1.0 - game->ray.player_x)
+			* game->ray.delta_x;
 	}
 	if (game->ray.ray_y < 0)
 	{
 		game->ray.step_y = -1;
-		game->ray.dist_y = (game->ray.player_y - game->ray.mapy) * game->ray.delta_y;
+		game->ray.dist_y = (game->ray.player_y - game->ray.mapy)
+			* game->ray.delta_y;
 	}
 	else
 	{
 		game->ray.step_y = 1;
-		game->ray.dist_y = (game->ray.mapy + 1.0 - game->ray.player_y) * game->ray.delta_y;
+		game->ray.dist_y = (game->ray.mapy + 1.0 - game->ray.player_y)
+			* game->ray.delta_y;
 	}
 }
 
@@ -53,17 +57,18 @@ void	ft_caster(t_cub *game)
 		{
 			game->ray.dist_y += game->ray.delta_y;
 			game->ray.mapy += game->ray.step_y;
-			game->ray.side = 1;	
+			game->ray.side = 1;
 		}
-		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
+		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1'
+			|| game->engine.map[game->ray.mapy][game->ray.mapx] == 'D')
 			hit = 1;
 	}
 }
 
 void	cast_ray(t_cub *game)
 {
-	int x;
-	
+	int	x;
+
 	x = 0;
 	while (x < WIDTH)
 	{

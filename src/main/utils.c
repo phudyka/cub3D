@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:52:30 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/07 02:42:02 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/09 16:05:20 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-void ft_init_dda(int x, t_cub *game)
+void	ft_init_dda(int x, t_cub *game)
 {
 	ft_init_ray(game);
 	game->ray.cam_x = 2 * x / (double)WIDTH - 1;
@@ -40,29 +40,51 @@ void	print_cub(void)
 void	ft_fraps(t_cub *game)
 {
 	static int		count = 0;
-	clock_t			cur;
 	static clock_t	last = 0;
 	double			delta;
+	int				fps;
 	char			*display;
 
-	cur = clock();
-	delta = ((double)(cur - last)) / CLOCKS_PER_SEC;
+	game->cur = clock();
+	delta = ((double)(game->cur - last)) / CLOCKS_PER_SEC;
 	if (delta >= 0.1)
 	{
-		int fps = count / delta;
+		fps = count / delta;
 		display = ft_itoa(fps);
 		mlx_string_put(game->mlx, game->window, 10, 10, YELLOW, ft_itoa(fps));
 		free(display);
 		count = 0;
-		last = cur;
+		last = game->cur;
 	}
 	else
 		count++;
 }
 
-int	ft_abs(int nbr)
+void	ft_free_map(t_cub *game)
 {
-	if (nbr < 0)
-		return (nbr * -1);
-	return (nbr);
+	int	i;
+
+	i = 0;
+	if (!game->engine.map)
+		return ;
+	while (game->engine.map[i])
+	{
+		free(game->engine.map[i]);
+		i++;
+	}
+	free(game->engine.map);
+	game->engine.map = NULL;
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+	array = NULL;
 }

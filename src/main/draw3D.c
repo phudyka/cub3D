@@ -6,18 +6,18 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 15:49:38 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/09 16:58:15 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-void draw_ceiling(int x, int draw_end, t_cub *game)
+void draw_ceiling(int x, t_cub *game)
 {
 	double posZ = 0.5 * HEIGHT; 
 	int y = 0;
 
-	while (y < draw_end)
+	while (y < game->ray.draw_start)
 	{
 		double p = HEIGHT / 2 - y; 
 		double rowDistance = posZ / p;
@@ -36,10 +36,10 @@ void draw_ceiling(int x, int draw_end, t_cub *game)
 	}
 }
 
-void draw_floor(int x, int draw_end, t_cub *game)
+void draw_floor(int x, t_cub *game)
 {
 	double posZ = 0.5 * HEIGHT; 
-	int y = draw_end + 1;
+	int y = game->ray.draw_end + 1;
 
 	while (y < HEIGHT)
 	{
@@ -60,63 +60,58 @@ void draw_floor(int x, int draw_end, t_cub *game)
 	}
 }
 
-static void ft_texture_index(t_cub *game)
+void	draw_texture(int x, void *texture, t_cub *game)
 {
-	if (game->ray.side == 1)
-	{
-		if (game->ray.ray_y < 0)
-			game->texture.direction = 'N';
-		else 
-			game->texture.direction = 'S';
-	}
-	else
-	{
-		if (game->ray.ray_x < 0)
-			game->texture.direction = 'W';
-		else 
-			game->texture.direction = 'E';
-	}
-}
+	int		i;
+	int		y;
+	int		color;
+	int		texture_y;
+	double	step;
+	double	tex_pos;
 
-static void draw_texture(int column, int draw_start, int draw_end, void *texture, t_cub *game)
-{
-	int i;
-	int y;
-	int color;
-	int texture_y;
-	double step;
-	double tex_pos;
-
-	y = draw_start;
+	y = game->ray.draw_start;
 	step = (double)HD / game->ray.wall_height;
 	tex_pos = (y - HEIGHT / 2 + game->ray.wall_height / 2) * step;
 	if (game->ray.side == 0)
 		game->ray.tex_x = (int)(game->ray.wall_x * (double)HD);
 	else
 		game->ray.tex_x = HD - (int)(game->ray.wall_x * (double)HD) - 1;
-
-	while (y < draw_end)
+	while (y < game->ray.draw_end)
 	{
 		texture_y = (int)tex_pos & (HD - 1);
 		color = ft_colorpix(game->ray.tex_x, texture_y, texture, game);
-		i = (y * game->img3d.size_line) + (column * game->img3d.bpp / 8);
+		i = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
 		*(unsigned int *)(game->img3d.pixels + i) = color;
 		tex_pos += step;
 		y++;
 	}
 }
 
-static void    choose_texture(int column, int drawStart, int drawEnd, t_cub *game)
+void	draw_texture_weapon(int x, int wx, int wy, void *texture, t_cub *game)
 {
-	ft_texture_index(game);
-	if (game->texture.direction == 'N')
-		draw_texture(column, game->ray.draw_start, game->ray.draw_end, game->texture.north, game);
-	else if (game->texture.direction == 'S')
-		draw_texture(column, game->ray.draw_start, game->ray.draw_end, game->texture.south, game);
-	else if (game->texture.direction == 'W')
-		draw_texture(column, game->ray.draw_start, game->ray.draw_end, game->texture.west, game);
-	else if (game->texture.direction == 'E')
-		draw_texture(column, game->ray.draw_start, game->ray.draw_end, game->texture.east, game);
+	int		i;
+	int		y;
+	int		color;
+	int		texture_y;
+	double	step;
+	double	tex_pos;
+
+	y = wx;
+	step = (double)HD / game->ray.wall_height;
+	tex_pos = (y - HEIGHT / 2 + game->ray.wall_height / 2) * step;
+	if (game->ray.side == 0)
+		game->ray.tex_x = (int)(game->ray.wall_x * (double)HD);
+	else
+		game->ray.tex_x = HD - (int)(game->ray.wall_x * (double)HD) - 1;
+	while (y < wy)
+	{
+		texture_y = (int)tex_pos & (HD - 1);
+		color = ft_colorpix(game->ray.tex_x, texture_y, texture, game);
+		i = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
+		*(unsigned int *)(game->img3d.pixels + i) = color;
+		tex_pos += step;
+		y++;
+	}
 }
 
 static void	draw_weapon(int x, t_cub *game)
@@ -126,7 +121,7 @@ static void	draw_weapon(int x, t_cub *game)
 
 	wx = WIDTH - 456 / 2.0;
 	wy = HEIGHT - 500;
-    draw_texture(x, wx, wy, game->texture.weapon1, game);
+    draw_texture_weapon(x, wx, wy, game->texture.weapon1, game);
 }
 
 void render_3D(int x, t_cub *game)
@@ -147,8 +142,8 @@ void render_3D(int x, t_cub *game)
 	else
 		game->ray.wall_x = game->ray.player_x + game->ray.distance * game->ray.ray_x;
 	game->ray.wall_x -= floor(game->ray.wall_x);
-	choose_texture(x, game->ray.draw_start, game->ray.draw_end, game);
-	draw_ceiling(x, game->ray.draw_start, game);
-	draw_floor(x, game->ray.draw_end, game);
+	choose_texture(x, game);
+	draw_ceiling(x, game);
+	draw_floor(x, game);
 	draw_weapon(x, game); 
 }
