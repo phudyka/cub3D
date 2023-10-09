@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/07 02:16:13 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/09 11:09:47 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,14 @@
 # define WRAP 20
 
 // -- TEXTURES -- //
-# define WALL_MM "./utils/sprite/map/wall_map.xpm"
-# define FLOOR_MM "./utils/sprite/map/floor_map.xpm"
-# define PLAYER_MM "./utils/sprite/map/player_map.xpm"
-# define PLAYER_G "./utils/sprite/game/player_map.xpm"
-# define N_WALL "./utils/sprite/game/north_wall.xpm"
-# define S_WALL "./utils/sprite/game/south_wall.xpm"
-# define E_WALL "./utils/sprite/game/east_wall.xpm"
-# define W_WALL "./utils/sprite/game/west_wall.xpm"
-# define CEILING "./utils/sprite/game/ceiling.xpm"
-# define FLOOR "./utils/sprite/game/floor.xpm"
-# define WEAPON1 "./utils/sprite/game/weapon1.xpm"
+
+# define N_WALL "./sprite/textures/north_wall.xpm"
+# define S_WALL "./sprite/textures/south_wall.xpm"
+# define E_WALL "./sprite/textures/east_wall.xpm"
+# define W_WALL "./sprite/textures/west_wall.xpm"
+# define CEILING "./sprite/textures/ceiling.xpm"
+# define FLOOR "./sprite/textures/floor.xpm"
+# define WEAPON1 "./sprite/weapons/weapon1.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F
@@ -186,7 +183,6 @@ typedef struct s_cub
 int		ft_abs(int nbr);
 void	ft_init_ray(t_cub *game);
 void	ft_init_direction(t_cub *game);
-void	ft_init_minimap(t_cub *game);
 void	check_map(t_cub *game);
 int		master_parser(t_cub *cub, int argc, char **argv);
 void	ft_minimap(t_cub *game);

@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/07 02:44:37 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/09 11:10:33 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../include/main.h"
-
-void ft_init_minimap(t_cub *game)
-{
-    int w;
-    int h;
-
-    game->texture.player_map = mlx_xpm_file_to_image(game->mlx, PLAYER_MM, &w, &h);
-    if (game->texture.player_map == (void *)0)
-        ft_error_free("\nError!: [PLAYER image not found]\n", game);
-}
 
 int key_press(int key, t_cub *game)
 {
@@ -62,8 +52,6 @@ int key_release(int key, t_cub *game)
 
 void ft_destroy_img(t_cub *game)
 {
-    if (game->texture.player_map)
-        mlx_destroy_image(game->mlx, game->texture.player_map);
     if (game->img_map2d)
         mlx_destroy_image(game->mlx, game->img_map2d);
     if (game->img_map3d)
@@ -77,7 +65,6 @@ int  ft_cub(t_cub *game)
 {
     ft_init_mlx(game);
     ft_input(game);
-    ft_init_minimap(game);
     mlx_loop_hook(game->mlx, ft_render, game);
     mlx_do_sync(game->mlx);
     mlx_loop(game->mlx);
