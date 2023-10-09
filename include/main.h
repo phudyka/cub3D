@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 15:23:43 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/09 15:55:57 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,7 @@ void	ft_init_mlx(t_cub *game);
 void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);
 void	ft_fraps(t_cub *game);
-int     ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
+int		ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
 void	ft_draw_weapon(t_cub *game);
 void	ft_crosshair(t_cub *game);
 
