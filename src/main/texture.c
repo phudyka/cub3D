@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 12:58:49 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 13:25:34 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,20 @@ static void	ft_init_assets(t_cub *game)
 		ft_error_free("\nError ! [utils/sprite/game/reload.xpm]]\n", game);
 }
 
+static void	ft_init_sound(t_cub *game)
+{
+	if (access(AMBIENCE_WAV, F_OK) == -1)
+		ft_error_free("\nError ! [audio/ambience.wav]\n", game);
+	if (access(DOOR_OPEN_WAV, F_OK) == -1)
+		ft_error_free("\nError ! [audio/door_open.wav]\n", game);
+	if (access(DOOR_CLOSE_WAV, F_OK) == -1)
+		ft_error_free("\nError ! [audio/door_close.wav]\n", game);
+	if (access(RELOAD_WAV, F_OK) == -1)
+		ft_error_free("\nError ! [audio/reload0.wav]\n", game);
+	if (access(SHOOT_WAV, F_OK) == -1)
+		ft_error_free("\nError ! [audio/shoot0.wav]\n", game);
+}
+
 static void ft_texture_sprite(t_cub *game)
 {
     int w;
@@ -104,6 +118,7 @@ void	ft_init_mlx(t_cub *game)
 	ft_init_walls(game);
 	ft_init_assets(game);
 	ft_texture_sprite(game);
+	ft_init_sound(game);
 }
 
 static void ft_texture_index(t_cub *game)

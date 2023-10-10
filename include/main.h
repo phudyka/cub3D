@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 13:01:00 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 13:21:43 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@
 # define WEAPON1 "./sprite/weapons/weapon0.xpm"
 # define RELOAD "./sprite/weapons/reload0.xpm"
 # define SHOOT "./sprite/weapons/shoot0.xpm"
-# define AMBIENCE "./audio/ambience.wav"
+# define AMBIENCE_WAV "./audio/ambience.wav"
+# define DOOR_OPEN_WAV "./audio/door_open.wav"
+# define DOOR_CLOSE_WAV "./audio/door_close.wav"
+# define RELOAD_WAV "./audio/reload0.wav"
+# define SHOOT_WAV "./audio/shoot0.wav"
 # define TARGET "./sprite/textures/cible.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
