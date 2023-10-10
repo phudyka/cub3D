@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 01:27:00 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 03:59:15 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,9 @@ static void ft_texture_index(t_cub *game)
 void    choose_texture(int x, t_cub *game)
 {
 	ft_texture_index(game);
-	if (game->texture.direction == 'N')
+	if (game->ray.hit == 2)
+    	draw_texture(x, game->texture.door, game);
+	else if (game->texture.direction == 'N')
 		draw_texture(x, game->texture.north, game);
 	else if (game->texture.direction == 'S')
 		draw_texture(x, game->texture.south, game);
@@ -126,6 +128,4 @@ void    choose_texture(int x, t_cub *game)
 		draw_texture(x, game->texture.west, game);
 	else if (game->texture.direction == 'E')
 		draw_texture(x, game->texture.east, game);
-	else if (game->texture.direction == 'D')
-		draw_texture(x, game->texture.door, game);
 }

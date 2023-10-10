@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 01:27:43 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 03:57:23 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ static void	ft_getstep(t_cub *game)
 
 void	ft_caster(t_cub *game)
 {
-	int		hit;
-
-	hit = 0;
-	while (hit == 0)
+	game->ray.hit = 0;
+	while (game->ray.hit == 0)
 	{
 		if (game->ray.dist_x < game->ray.dist_y)
 		{
@@ -59,9 +57,10 @@ void	ft_caster(t_cub *game)
 			game->ray.mapy += game->ray.step_y;
 			game->ray.side = 1;
 		}
-		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1'
-			|| game->engine.map[game->ray.mapy][game->ray.mapx] == 'D')
-			hit = 1;
+		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
+			game->ray.hit = 1;
+		else if (game->engine.map[game->ray.mapy][game->ray.mapx] == 'D')
+			game->ray.hit = 2;
 	}
 }
 
