@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 16:32:14 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 01:21:36 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # define CEILING "./sprite/textures/ceiling.xpm"
 # define FLOOR "./sprite/textures/floor.xpm"
 # define DOOR "./sprite/textures/door.xpm"
-# define WEAPON1 "./sprite/weapons/weapon1.xpm"
+# define WEAPON1 "./sprite/weapons/weapon0.xpm"
+# define TARGET "./sprite/textures/cible.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F
@@ -72,6 +73,36 @@
 # include "../utils/libft/libft.h"
 # include "../mlx/mlx.h"
 
+typedef struct	s_sprite_params
+{
+	int		x;
+	int		y;
+	int		sprite_width;
+	int		sprite_height;
+	int		sprite_screen_x;
+}				t_sprite_params;
+
+typedef struct  s_params
+{
+    double  sprite_x;
+    double  sprite_y;
+    double  *transform_x;
+    double  *transform_y;
+    double  inv_det;
+}               t_params;
+
+typedef struct s_sprite
+{
+	double	x;
+	double	y;
+	double	distance;
+	double	relative_x;
+	double	relative_y;
+	int		is_visible;
+	int		width;
+	int		height;
+}			t_sprite;
+
 typedef struct s_img
 {
 	char	*pixels;
@@ -92,7 +123,8 @@ typedef struct s_texture
 	char	*ceiling;
 	char	*floor;
 	char	*weapon1;
-	char	*door;	
+	char	*door;
+	char	*target;
 }			t_texture;
 
 typedef struct s_color
@@ -158,6 +190,7 @@ typedef struct s_ray
 	int		side;
 	int		draw_start;
 	int		draw_end;
+	double	*z_buffer;
 }				t_ray;
 
 typedef struct s_cub
@@ -170,6 +203,7 @@ typedef struct s_cub
 	int			mini;
 	int			count_color_c;
 	int			count_color_f;
+	int			num_sprites;
 	clock_t		cur;
 	t_keys		keys;
 	t_texture	texture;
@@ -180,6 +214,8 @@ typedef struct s_cub
 	t_img		img2d;
 	t_img		img3d;
 	t_img		weapon;
+	t_sprite	*sprite;
+	t_params	params;
 }				t_cub;
 
 void	ft_init_ray(t_cub *game);
@@ -228,5 +264,7 @@ void	ft_draw_weapon(t_cub *game);
 void	ft_crosshair(t_cub *game);
 void    choose_texture(int x, t_cub *game);
 void	draw_texture(int x, void *texture, t_cub *game);
+void	init_sprite(t_cub *game);
+void	render_sprite(t_cub *game);
 
 #endif

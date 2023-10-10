@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 16:15:49 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 00:38:26 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	free_texture(t_cub *game)
 	free(game->texture.floor);
 	free(game->texture.door);
 	free(game->texture.weapon1);
+	free(game->texture.target);
 }
 
 int	game_over(t_cub *game)
@@ -42,6 +43,8 @@ int	game_over(t_cub *game)
 	ft_free_map(game);
 	free_texture(game);
 	ft_destroy_img(game);
+	free(game->ray.z_buffer);
+	free(game->sprite);
 	free(game);
 	game = NULL;
 	exit(EXIT_SUCCESS);

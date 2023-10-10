@@ -6,7 +6,7 @@
 #    By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/05 15:51:03 by phudyka           #+#    #+#              #
-#    Updated: 2023/10/07 01:54:03 by dtassel          ###   ########.fr        #
+#    Updated: 2023/10/10 00:22:52 by dtassel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC             = src/main/main.c src/parse/parser.c src/main/game.c \
                   src/parse/get_map.c  src/parse/check_map.c        \
                   src/moves/rotate.c src/main/utils.c               \
                   src/main/draw.c src/main/texture.c 				\
-				  src/main/draw_weapon.c                            \
+				  src/main/draw_weapon.c src/main/draw_sprite.c     \
 
 OBJ_DIR         = obj
 OBJ             = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/09 16:41:49 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 01:25:58 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static void	draw_or_replace_pixel(t_cub *game, int x, int y, int color, char *re
 	int	mx;
 	int	my;
 
-	mx = WIDTH - 456;
-	my = HEIGHT - 500;
+	mx = WIDTH - 500;
+	my = HEIGHT - 456;
 	if (color)
 		draw_pixel(game, x, y, color);
 	else
@@ -66,10 +66,10 @@ void		ft_draw_weapon(t_cub *game)
 	y = 0;
 	replace = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
 			&game->img3d.size_line, &game->img3d.endian);
-	while (y < 500)
+	while (y < 456)
 	{
 		x = 0;
-		while (x < 456)
+		while (x < 500)
 		{
 			color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
 			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)

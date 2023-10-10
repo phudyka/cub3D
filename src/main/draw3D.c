@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw3D.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 16:58:15 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 00:26:27 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,6 @@ void	draw_texture_weapon(int x, int wx, int wy, void *texture, t_cub *game)
 	}
 }
 
-static void	draw_weapon(int x, t_cub *game)
-{
-    double wx;
-    double wy;
-
-	wx = WIDTH - 456 / 2.0;
-	wy = HEIGHT - 500;
-    draw_texture_weapon(x, wx, wy, game->texture.weapon1, game);
-}
-
 void render_3D(int x, t_cub *game)
 {
 	if (game->ray.side == 0)
@@ -142,8 +132,8 @@ void render_3D(int x, t_cub *game)
 	else
 		game->ray.wall_x = game->ray.player_x + game->ray.distance * game->ray.ray_x;
 	game->ray.wall_x -= floor(game->ray.wall_x);
+	game->ray.z_buffer[x] = game->ray.distance;
 	choose_texture(x, game);
 	draw_ceiling(x, game);
 	draw_floor(x, game);
-	draw_weapon(x, game); 
 }

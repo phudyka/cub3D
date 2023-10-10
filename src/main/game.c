@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 16:11:23 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 00:25:39 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int	ft_cub(t_cub *game)
 {
 	ft_init_mlx(game);
 	ft_input(game);
+	game->ray.z_buffer = malloc(sizeof(double) * WIDTH);
+	init_sprite(game);
 	mlx_loop_hook(game->mlx, ft_render, game);
 	mlx_do_sync(game->mlx);
 	mlx_loop(game->mlx);

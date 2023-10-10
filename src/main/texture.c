@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 16:56:02 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 01:27:00 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
+
+void	init_sprite(t_cub *game)
+{
+	game->num_sprites = 2;
+	game->sprite = malloc(sizeof(t_sprite) * game->num_sprites);
+	game->sprite[0].x = 10.0;
+	game->sprite[0].y = 10.0;
+	game->sprite[0].width = 1260;
+	game->sprite[0].height = 1656;
+	game->sprite[1].x = 4.0;
+	game->sprite[1].y = 4.0;
+	game->sprite[1].width = 1260;
+	game->sprite[1].height = 1656;
+}
 
 static void	ft_init_walls(t_cub *game)
 {
@@ -50,6 +64,16 @@ static void	ft_init_assets(t_cub *game)
 		ft_error_free("\nError ! [utils/sprite/game/weapon1.xpm]]\n", game);
 }
 
+static void ft_texture_sprite(t_cub *game)
+{
+    int w;
+    int h;
+
+    game->texture.target = mlx_xpm_file_to_image(game->mlx, TARGET, &w, &h);
+    if (game->texture.target == (void *)0)
+        ft_error_free("\nError ! [utils/sprite/map/cible.xpm]]\n", game);
+}
+
 void	ft_init_mlx(t_cub *game)
 {
 	game->mlx = mlx_init();
@@ -65,11 +89,12 @@ void	ft_init_mlx(t_cub *game)
 	game->img_map3d = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->img3d.pixels = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
 			&game->img3d.size_line, &game->img3d.endian);
-	game->weapon_3d = mlx_new_image(game->mlx, 456, 500);
+	game->weapon_3d = mlx_new_image(game->mlx, 500, 456);
 	game->weapon.pixels = mlx_get_data_addr(game->weapon_3d, &game->weapon.bpp,
 			&game->weapon.size_line, &game->weapon.endian);
 	ft_init_walls(game);
 	ft_init_assets(game);
+	ft_texture_sprite(game);
 }
 
 static void ft_texture_index(t_cub *game)
