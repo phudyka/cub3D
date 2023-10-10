@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 06:54:05 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 13:02:01 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	ft_cub(t_cub *game)
 	initialize_door(game);
 	mlx_loop_hook(game->mlx, ft_render, game);
 	mlx_do_sync(game->mlx);
+	system("aplay -q ./audio/ambience.wav &");
 	mlx_loop(game->mlx);
 	return (0);
 }

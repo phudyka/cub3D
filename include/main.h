@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 06:51:48 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 13:01:00 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 # define DOOR "./sprite/textures/door.xpm"
 # define OPEN_DOOR "./sprite/textures/door_open.xpm"
 # define WEAPON1 "./sprite/weapons/weapon0.xpm"
+# define RELOAD "./sprite/weapons/reload0.xpm"
+# define SHOOT "./sprite/weapons/shoot0.xpm"
+# define AMBIENCE "./audio/ambience.wav"
 # define TARGET "./sprite/textures/cible.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
@@ -125,6 +128,8 @@ typedef struct s_texture
 	char	*ceiling;
 	char	*floor;
 	char	*weapon1;
+	char	*reload;
+	char	*shoot;
 	char	*door;
 	char	*open_door;
 	char	*target;

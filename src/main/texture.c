@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 06:08:25 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 12:58:49 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ static void	ft_init_assets(t_cub *game)
 	game->texture.weapon1 = mlx_xpm_file_to_image(game->mlx, WEAPON1, &w, &h);
 	if (game->texture.weapon1 == (void *)0)
 		ft_error_free("\nError ! [utils/sprite/game/weapon1.xpm]]\n", game);
+	game->texture.shoot = mlx_xpm_file_to_image(game->mlx, SHOOT, &w, &h);
+	if (game->texture.shoot == (void *)0)
+		ft_error_free("\nError ! [utils/sprite/game/weapon1.xpm]]\n", game);
+	game->texture.reload = mlx_xpm_file_to_image(game->mlx, RELOAD, &w, &h);
+	if (game->texture.reload == (void *)0)
+		ft_error_free("\nError ! [utils/sprite/game/reload.xpm]]\n", game);
 }
 
 static void ft_texture_sprite(t_cub *game)

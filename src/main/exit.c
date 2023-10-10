@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 00:38:26 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 13:04:00 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ void	free_texture(t_cub *game)
 	free(game->texture.floor);
 	free(game->texture.door);
 	free(game->texture.weapon1);
+	free(game->texture.reload);
+	free(game->texture.shoot);
 	free(game->texture.target);
 }
 
 int	game_over(t_cub *game)
 {
+	system("pkill aplay");
 	ft_free_map(game);
 	free_texture(game);
 	ft_destroy_img(game);
