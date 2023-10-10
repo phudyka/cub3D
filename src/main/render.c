@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 03:57:23 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 06:13:21 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ void	ft_caster(t_cub *game)
 		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
 			game->ray.hit = 1;
 		else if (game->engine.map[game->ray.mapy][game->ray.mapx] == 'D')
-			game->ray.hit = 2;
+		{
+			if (game->engine.door[game->ray.mapy][game->ray.mapx] == '1')
+				continue;
+			else
+				game->ray.hit = 2;
+		}
 	}
 }
 

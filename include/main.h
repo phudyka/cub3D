@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 01:21:36 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 06:51:48 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define CEILING "./sprite/textures/ceiling.xpm"
 # define FLOOR "./sprite/textures/floor.xpm"
 # define DOOR "./sprite/textures/door.xpm"
+# define OPEN_DOOR "./sprite/textures/door_open.xpm"
 # define WEAPON1 "./sprite/weapons/weapon0.xpm"
 # define TARGET "./sprite/textures/cible.xpm"
 # define RED 0xFF0000
@@ -58,6 +59,7 @@
 # define DOWN   65364 //
 # define ESC    65307 // Quit game
 # define Q      113   // Quit game
+# define E      101   // Open Door
 
 # include <math.h>
 # include <time.h>
@@ -124,6 +126,7 @@ typedef struct s_texture
 	char	*floor;
 	char	*weapon1;
 	char	*door;
+	char	*open_door;
 	char	*target;
 }			t_texture;
 
@@ -153,6 +156,7 @@ typedef struct s_engine
 	char	coord;
 	char	**map;
 	char	**cub;
+	char	**door;
 	int		width;
 	int		height;
 	int		wall_side;
@@ -266,5 +270,7 @@ void    choose_texture(int x, t_cub *game);
 void	draw_texture(int x, void *texture, t_cub *game);
 void	init_sprite(t_cub *game);
 void	render_sprite(t_cub *game);
+void	door_state(int x, int y, t_cub *game);
+bool	should_draw_pixel(int pixel_color, int color_to_ignore);
 
 #endif

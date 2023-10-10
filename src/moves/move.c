@@ -3,22 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:47:41 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 15:39:15 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 06:51:41 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
+void door_state(int x, int y, t_cub *game)
+{
+    if (game->engine.map[y][x] == 'D')
+    {
+        if (game->engine.door[y][x] == '0')
+            game->engine.door[y][x] = '1';
+        else
+            game->engine.door[y][x] = '0';
+    }
+}
+
 static int	move_ok(double x, double y, t_cub *game)
 {
 	double	player_size;
+	int		x_int;
+	int		y_int;
 
 	player_size = 0.15;
-	if (game->engine.map[(int)(y)][(int)(x)] == '1')
+	x_int = (int)x;
+	y_int = (int)y;
+	if (game->engine.map[y_int][x_int] == '1')
 		return (1);
+	if (game->engine.map[y_int][x_int] == 'D')
+		if (game->engine.door[y_int][x_int] == '0')
+			return (1);
 	if (game->engine.map[(int)(y + player_size)][(int)(x + player_size)] == '1')
 		return (1);
 	if (game->engine.map[(int)(y - player_size)][(int)(x - player_size)] == '1')
@@ -27,9 +45,9 @@ static int	move_ok(double x, double y, t_cub *game)
 		return (1);
 	if (game->engine.map[(int)(y - player_size)][(int)(x + player_size)] == '1')
 		return (1);
-	if (x < player_size || x >= game->engine.width - 1.0 - player_size)
+	if (x < player_size || x >= game->engine.width - 1 - player_size)
 		return (1);
-	if (y < player_size || y >= game->engine.height - 1.0 - player_size)
+	if (y < player_size || y >= game->engine.height - 1 - player_size)
 		return (1);
 	return (0);
 }

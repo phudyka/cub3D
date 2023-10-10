@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 03:59:15 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/10 06:08:25 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ static void	ft_init_assets(t_cub *game)
 	game->texture.door = mlx_xpm_file_to_image(game->mlx, DOOR, &w, &h);
 	if (game->texture.door == (void *)0)
 		ft_error_free("\nError ! [utils/sprite/game/door.xpm]]\n", game);
+	game->texture.open_door = mlx_xpm_file_to_image(game->mlx, OPEN_DOOR, &w, &h);
+	if (game->texture.door == (void *)0)
+		ft_error_free("\nError ! [utils/sprite/game/door_open.xpm]]\n", game);
 	game->texture.weapon1 = mlx_xpm_file_to_image(game->mlx, WEAPON1, &w, &h);
 	if (game->texture.weapon1 == (void *)0)
 		ft_error_free("\nError ! [utils/sprite/game/weapon1.xpm]]\n", game);
@@ -118,8 +121,11 @@ static void ft_texture_index(t_cub *game)
 void    choose_texture(int x, t_cub *game)
 {
 	ft_texture_index(game);
-	if (game->ray.hit == 2)
-    	draw_texture(x, game->texture.door, game);
+    if (game->ray.hit == 2)
+    {
+        if (game->engine.door[game->ray.mapy][game->ray.mapx] == '0')
+            draw_texture(x, game->texture.door, game);
+    }
 	else if (game->texture.direction == 'N')
 		draw_texture(x, game->texture.north, game);
 	else if (game->texture.direction == 'S')
