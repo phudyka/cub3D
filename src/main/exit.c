@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 14:20:04 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:20:58 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	game_over(t_cub *game)
 	ft_free_map(game);
 	free_texture(game);
 	ft_destroy_img(game);
+	free_array(game->engine.door);
 	free(game->ray.z_buffer);
 	free(game->sprite);
 	free(game);

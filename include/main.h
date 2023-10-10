@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 14:07:50 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:47:05 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define CEILING "./sprite/textures/ceiling.xpm"
 # define FLOOR "./sprite/textures/floor.xpm"
 # define DOOR "./sprite/textures/door.xpm"
-# define OPEN_DOOR "./sprite/textures/door_open.xpm"
 # define WEAPON1 "./sprite/weapons/weapon0.xpm"
 # define RELOAD "./sprite/weapons/reload0.xpm"
 # define SHOOT "./sprite/weapons/shoot0.xpm"
@@ -44,6 +43,7 @@
 # define DOOR_CLOSE_WAV "./audio/door_close.wav"
 # define RELOAD_WAV "./audio/reload0.wav"
 # define SHOOT_WAV "./audio/shoot0.wav"
+# define EMPTY_WAV "./audio/shoot1.wav"
 # define TARGET "./sprite/textures/cible.xpm"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
@@ -56,17 +56,19 @@
 # define BLACK 0x000000
 
 // -- BINDING KEYS -- //
-# define W      119   //  _______________________
-# define A      97    // [Basic WASD Deplacements]
-# define S      115   //
-# define D      100   //
-# define UP     65362 //  ________________________________
-# define LEFT   65361 // [Can use Directionnals Arrows too]
-# define RIGHT  65363 //
-# define DOWN   65364 //
-# define ESC    65307 // Quit game
-# define Q      113   // Quit game
-# define E      101   // Open Door
+# define W			119   //  _______________________
+# define A			97    // [Basic WASD Deplacements]
+# define S			115   //
+# define D			100   //
+# define UP			65362 //  ________________________________
+# define LEFT		65361 // [Can use Directionnals Arrows too]
+# define RIGHT		65363 //
+# define DOWN		65364 //
+# define ESC		65307 // Quit game
+# define Q			113   // Quit game
+# define E			101   // Open Door
+# define R			114		// Reload Weapon
+# define MOUSE_R	3
 
 # include <math.h>
 # include <time.h>
@@ -77,6 +79,8 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <stdbool.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <X11/keysym.h>
 # include "get_next_line.h"
 # include "../utils/libft/libft.h"
@@ -170,6 +174,10 @@ typedef struct s_engine
 	int		height;
 	int		wall_side;
 	double	angle;
+	int		ammo;
+	bool	shooting;
+	bool	reloading;
+	pid_t	audio_pid;
 }				t_engine;
 
 typedef struct s_ray
@@ -265,8 +273,6 @@ void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, int *color, t_cub *game);
 void	draw_ray(t_cub *game, int ray_x, int ray_y);
 void	ft_input(t_cub *game);
-int		key_release(int key, t_cub *game);
-int		key_press(int key, t_cub *game);
 int		ft_colorpix(int x, int y, void *texture, t_cub *game);
 void	ft_init_mlx(t_cub *game);
 void	ft_init_dda(int x, t_cub *game);
@@ -281,5 +287,10 @@ void	init_sprite(t_cub *game);
 void	render_sprite(t_cub *game);
 void	door_state(int x, int y, t_cub *game);
 bool	should_draw_pixel(int pixel_color, int color_to_ignore);
+int		ft_mouse(int x, int y, t_cub *game);
+void	mouse_pos(int x, int y, t_cub *game);
+void	ft_shoot(t_cub *game);
+void	ft_reload(t_cub *game);
+void	ft_doors(t_cub *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:33:15 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 15:52:08 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 14:57:26 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,36 +30,6 @@ static int	ft_rotation(double speed, t_cub *game)
 	return (1);
 }
 
-static void	mouse_pos(int x, int y, t_cub *game)
-{
-	if (x > WIDTH - WRAP)
-	{
-		x = WRAP;
-		mlx_mouse_move(game->mlx, game->window, x, y);
-	}
-	if (x < WRAP)
-	{
-		x = WIDTH - WRAP;
-		mlx_mouse_move(game->mlx, game->window, x, y);
-	}
-	mlx_mouse_hide(game->mlx, game->window);
-}
-
-static int	ft_mouse(int x, int y, t_cub *game)
-{
-	static int	old_x = WIDTH / 2;
-
-	mouse_pos(x, y, game);
-	if (x == old_x)
-		return (0);
-	else if (x < old_x)
-		game->engine.total_moves += ft_rotate(-1, game);
-	else if (x > old_x)
-		game->engine.total_moves += ft_rotate(1, game);
-	old_x = x;
-	return (0);
-}
-
 int	ft_rotate(double direction, t_cub *game)
 {
 	int		move;
@@ -69,12 +39,4 @@ int	ft_rotate(double direction, t_cub *game)
 	speed = ROTSPEED * direction;
 	move += ft_rotation(speed, game);
 	return (move);
-}
-
-void	ft_input(t_cub *game)
-{
-	mlx_hook(game->window, 02, (1L << 0), key_press, game);
-	mlx_hook(game->window, 03, (1L << 1), key_release, game);
-	mlx_hook(game->window, 06, (1L << 6), ft_mouse, game);
-	mlx_hook(game->window, 17, 0, game_over, game);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+         #
+#    By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/05 15:51:03 by phudyka           #+#    #+#              #
-#    Updated: 2023/10/10 00:22:52 by dtassel          ###   ########.fr        #
+#    Updated: 2023/10/10 15:27:32 by phudyka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRC             = src/main/main.c src/parse/parser.c src/main/game.c \
                   src/moves/rotate.c src/main/utils.c               \
                   src/main/draw.c src/main/texture.c 				\
 				  src/main/draw_weapon.c src/main/draw_sprite.c     \
+				  src/moves/mouse.c src/main/input.c 				\
+				  src/main/weapon.c									\
 
 OBJ_DIR         = obj
 OBJ             = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

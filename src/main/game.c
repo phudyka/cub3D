@@ -6,13 +6,12 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 14:22:18 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 17:21:44 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-// PENSER A FREE // // PENSER A FREE //
 void	initialize_door(t_cub *game)
 {
 	int	i;
@@ -35,51 +34,13 @@ void	initialize_door(t_cub *game)
 		i++;
 	}
 }
-// PENSER A FREE // // PENSER A FREE //
 
-int	key_press(int key, t_cub *game)
+void ft_doors(t_cub *game)
 {
-	if (key == E)
-    {
-        door_state(game->ray.player_x + 1, game->ray.player_y, game);
-        door_state(game->ray.player_x - 1, game->ray.player_y, game);
-        door_state(game->ray.player_x, game->ray.player_y + 1, game);
-        door_state(game->ray.player_x, game->ray.player_y - 1, game);
-    }
-	if (key == ESC)
-		game_over(game);
-	if (key == W)
-		game->engine.move_y = 1;
-	else if (key == A)
-		game->engine.move_x = -1;
-	else if (key == S)
-		game->engine.move_y = -1;
-	else if (key == D)
-		game->engine.move_x = 1;
-	else if (key == LEFT)
-		game->engine.rotate -= 1;
-	else if (key == RIGHT)
-		game->engine.rotate += 1;
-	return (0);
-}
-
-int	key_release(int key, t_cub *game)
-{
-	if (key == ESC)
-		game_over(game);
-	else if (key == W && game->engine.move_y == 1)
-		game->engine.move_y = 0;
-	else if (key == A && game->engine.move_x == -1)
-		game->engine.move_x += 1;
-	else if (key == S && game->engine.move_y == -1)
-		game->engine.move_y = 0;
-	else if (key == D && game->engine.move_x == 1)
-		game->engine.move_x -= 1;
-	else if (key == LEFT && game->engine.rotate <= 1)
-		game->engine.rotate = 0;
-	else if (key == RIGHT && game->engine.rotate >= -1)
-		game->engine.rotate = 0;
-	return (0);
+	door_state(game->ray.player_x + 1, game->ray.player_y, game);
+	door_state(game->ray.player_x - 1, game->ray.player_y, game);
+	door_state(game->ray.player_x, game->ray.player_y + 1, game);
+	door_state(game->ray.player_x, game->ray.player_y - 1, game);
 }
 
 void	ft_destroy_img(t_cub *game)
@@ -97,7 +58,7 @@ int	ft_cub(t_cub *game)
 {
 	ft_init_mlx(game);
 	ft_input(game);
-	game->ray.z_buffer = malloc(sizeof(double) * WIDTH); // PENSER A FREE
+	game->ray.z_buffer = malloc(sizeof(double) * WIDTH);
 	init_sprite(game);
 	initialize_door(game);
 	mlx_loop_hook(game->mlx, ft_render, game);

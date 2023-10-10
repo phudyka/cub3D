@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 16:16:20 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/10 15:35:27 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ static void	ft_init_engine(t_cub *game)
 	game->engine.coord = 'N';
 	game->engine.width = 0;
 	game->engine.height = 0;
+	game->engine.ammo = 31;
+	game->engine.shooting = false;
+	game->engine.reloading = false;
 }
 
 static void	ft_init_game(t_cub *game)
