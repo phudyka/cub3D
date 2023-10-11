@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:07:23 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 11:22:43 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:57:07 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ static int	ft_action(int key, t_cub *game)
 		game_over(game);
 	if (key == E)
 		ft_doors(game);
-	if (key == R)
+	if (key == R && game->engine.shoot != 1)
 	{
 		game->engine.shoot = 0;
 		game->engine.reload = 1;
 		system("aplay -q ./audio/reload0.wav &");
 		game->engine.time_reload = game->engine.current_time;
 	}
-	if (key == SPACE)
+	if (key == SPACE && game->engine.reload != 1)
 	{
 		game->engine.shoot = 1;
 		game->engine.reload = 0;
 		if (game->engine.ammo > 0)
 			system("aplay -q ./audio/shoot0.wav &");
-		else
+		else if (game->engine.ammo == 0)
 			system("aplay -q ./audio/shoot1.wav &");
 		game->engine.time_shoot = game->engine.current_time;
    }

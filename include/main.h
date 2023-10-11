@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 11:11:57 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:31:38 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,5 +299,6 @@ void	ft_reload(t_cub *game);
 void	ft_doors(t_cub *game);
 void	ft_error_parse(char *msg, t_cub *game);
 void	free_door(t_cub *game);
+void	free_texture(t_cub *game);
 
 #endif
