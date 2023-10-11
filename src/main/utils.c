@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:52:30 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/09 16:05:20 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 04:34:07 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,31 @@ void	ft_fraps(t_cub *game)
 	{
 		fps = count / delta;
 		display = ft_itoa(fps);
-		mlx_string_put(game->mlx, game->window, 10, 10, YELLOW, ft_itoa(fps));
+		mlx_string_put(game->mlx, game->window, 10, 10, YELLOW, display);
 		free(display);
 		count = 0;
 		last = game->cur;
 	}
 	else
 		count++;
+}
+
+void	free_door(t_cub *game)
+{
+	int	i;
+
+	if (game->engine.door)
+	{
+		i = 0;
+		while (i < game->engine.height)
+		{
+			if (game->engine.door[i])
+				free(game->engine.door[i]);
+			i++;
+		}
+		free(game->engine.door);
+		game->engine.door = NULL;
+	}
 }
 
 void	ft_free_map(t_cub *game)

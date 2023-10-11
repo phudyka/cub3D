@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 02:24:27 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 04:35:36 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,5 +295,7 @@ void	mouse_pos(int x, int y, t_cub *game);
 void	ft_shoot(t_cub *game);
 void	ft_reload(t_cub *game);
 void	ft_doors(t_cub *game);
+void	ft_error_parse(char *msg, t_cub *game);
+void	free_door(t_cub *game);
 
 #endif

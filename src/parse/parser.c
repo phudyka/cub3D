@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:13:22 by phudyka           #+#    #+#             */
-/*   Updated: 2023/09/21 05:21:25 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 04:18:34 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ int	process_map_lines(char *line, t_cub *game)
 		if (!check_all_configurations(game))
 		{
 			free_array(game->engine.cub);
-			game_over_error("Error: Missing configurations before map starts.\n",
-				game);
+			ft_error_parse("Error: Missing configurations before map starts.\n", game);
 		}
 		is_map_started = 1;
 	}
 	else if (is_map_started)
 	{
 		free_array(game->engine.cub);
-		ft_putstr_fd("Error: Invalid configs ", 2);
-		game_over_error("or lines found after map started.\n", game);
+		ft_error_parse("Error: Invalid configs or lines found after map started.\n", game);
 	}
 	return (0);
 }
@@ -88,9 +86,8 @@ void	initialize_game_settings(t_cub *game)
 	check_valid_conf(game);
 	if (check_valid_path(game) == 1)
 	{
-		ft_putstr_fd("Error: Invalid path for the texture file.\n", 2);
 		free_array(game->engine.cub);
-		game_over(game);
+		ft_error_parse("Error: Invalid path for the texture file.\n", game);
 	}
 }
 
@@ -136,13 +133,17 @@ int	master_parser(t_cub *game, int argc, char **argv)
 	//i = 0;
 	if (argc != 2 || !argv[1])
 		return (1);
-	if (ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
+	if (ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) // A CHANGER
 		get_cub(game, argv);
 	if (!game->engine.cub)
 		return (1);
 	parse_all_lines(game, argv);
 	check_valid_path(game);
 	check_map(game);
+	free(game->texture.north);
+	free(game->texture.east);
+	free(game->texture.west);
+	free(game->texture.south);
 	/*while (game->engine.map[i])
 		printf("%s\n", game->engine.map[i++]);
 	printf("%s\n", game->texture.east);

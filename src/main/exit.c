@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 17:20:58 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 04:35:06 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,39 @@ void	ft_error_free(char *msg, t_cub *game)
 	exit(EXIT_FAILURE);
 }
 
-void	free_texture(t_cub *game)
+void free_texture(t_cub *game)
 {
-	free(game->texture.north);
-	free(game->texture.east);
-	free(game->texture.west);
-	free(game->texture.south);
-	free(game->texture.ceiling);
-	free(game->texture.floor);
-	free(game->texture.door);
-	free(game->texture.weapon1);
-	free(game->texture.reload);
-	free(game->texture.shoot);
-	free(game->texture.target);
+    if (game->texture.north)
+        mlx_destroy_image(game->mlx, game->texture.north);
+    if (game->texture.south)
+        mlx_destroy_image(game->mlx, game->texture.south);
+    if (game->texture.east)
+        mlx_destroy_image(game->mlx, game->texture.east);
+    if (game->texture.west)
+        mlx_destroy_image(game->mlx, game->texture.west);
+    if (game->texture.floor)
+        mlx_destroy_image(game->mlx, game->texture.floor);
+    if (game->texture.ceiling)
+        mlx_destroy_image(game->mlx, game->texture.ceiling);
+	if (game->texture.door)
+        mlx_destroy_image(game->mlx, game->texture.door);
+    if (game->texture.weapon1)
+        mlx_destroy_image(game->mlx, game->texture.weapon1);
+    if (game->texture.shoot)
+        mlx_destroy_image(game->mlx, game->texture.shoot);
+    if (game->texture.reload)
+        mlx_destroy_image(game->mlx, game->texture.reload);
+    if (game->texture.target)
+        mlx_destroy_image(game->mlx, game->texture.target);
 }
 
 int	game_over(t_cub *game)
 {
 	system("pkill aplay");
 	ft_free_map(game);
+	free_door(game);
 	free_texture(game);
 	ft_destroy_img(game);
-	free_array(game->engine.door);
 	free(game->ray.z_buffer);
 	free(game->sprite);
 	free(game);
@@ -58,4 +69,17 @@ void	game_over_error(char *msg, t_cub *game)
 {
 	ft_putstr_fd(msg, 2);
 	game_over(game);
+}
+
+void	ft_error_parse(char *msg, t_cub *game)
+{
+	ft_putstr_fd(msg, 2);
+	ft_free_map(game);
+	free(game->texture.north);
+	free(game->texture.east);
+	free(game->texture.west);
+	free(game->texture.south);
+	free(game);
+	game = NULL;
+	exit(EXIT_SUCCESS);
 }

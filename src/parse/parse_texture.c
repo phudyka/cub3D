@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 07:11:54 by kali              #+#    #+#             */
-/*   Updated: 2023/09/20 03:06:27 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 03:51:26 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	floor_ceiling_color(char *line, t_cub *game)
 	{
 		free(line);
 		free_array(game->engine.cub);
-		game_over_error("Error RGB\n", game);
+		ft_error_parse("Error RGB\n", game);
 	}
 }
 
