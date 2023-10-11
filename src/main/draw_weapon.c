@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/11 14:40:20 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 17:07:19 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	draw_pixel(t_cub *game, int x, int y, int color)
 	*(unsigned int *)(game->weapon.pixels + i) = color;
 }
 
-static void	draw_or_replace_pixel(t_cub *game, int x, int y, int color, char *replace)
+static void	draw_or_replace_pixel(t_cub *game, int x, int y,
+	int color, char *replace)
 {
 	int	i;
 	int	mx;
@@ -50,43 +51,55 @@ static void	draw_or_replace_pixel(t_cub *game, int x, int y, int color, char *re
 		draw_pixel(game, x, y, color);
 	else
 	{
-		i = (my + y) * game->img3d.size_line +
-			(mx + x) * game->img3d.bpp / 8;
+		i = (my + y) * game->img3d.size_line 
+			+ (mx + x) * game->img3d.bpp / 8;
 		draw_pixel(game, x, y, *(unsigned int *)(replace + i));
 	}
 }
 
-void     ft_draw_weapon(t_cub *game)
+static int	ft_sprite_select(int x, int y, t_cub *game)
 {
-   int      x;
-   int      y;
-   int      color;
-   char  *replace;
+	int color;
 
-   y = 0;
-   replace = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
-         &game->img3d.size_line, &game->img3d.endian);
-   while (y < 456)
-   {
-      x = 0;
-      while (x < 500)
-      {
-         if (game->engine.shoot == 0 && game->engine.reload != 1)
-            color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
-         else if (game->engine.shoot == 1 && game->engine.reload != 1 && game->engine.ammo != 0)
-            color = ft_colorpix_ceifloo(x, y, game->texture.shoot0, game);
-         else if (game->engine.shoot == 1 && game->engine.reload != 1 && game->engine.ammo == 0)
-            color = ft_colorpix_ceifloo(x, y, game->texture.shoot1, game);
-         else if (game->engine.shoot != 1 && game->engine.reload == 1 && game->engine.half == 1)
-            color = ft_colorpix_ceifloo(x, y, game->texture.reload0, game);
-		 else if (game->engine.shoot != 1 && game->engine.reload == 1 && game->engine.half == 0)
-            color = ft_colorpix_ceifloo(x, y, game->texture.reload1, game);
-         if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-            draw_or_replace_pixel(game, x, y, color, replace);
-         x++;
-      }
-      y++;
-   }
+	if (game->engine.shoot == 0 && game->engine.reload != 1)
+		color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
+	else if (game->engine.shoot == 1
+		&& game->engine.reload != 1 && game->engine.ammo != 0)
+		color = ft_colorpix_ceifloo(x, y, game->texture.shoot0, game);
+	else if (game->engine.shoot == 1
+		&& game->engine.reload != 1 && game->engine.ammo == 0)
+		color = ft_colorpix_ceifloo(x, y, game->texture.shoot1, game);
+	else if (game->engine.shoot != 1
+		&& game->engine.reload == 1 && game->engine.half == 1)
+		color = ft_colorpix_ceifloo(x, y, game->texture.reload0, game);
+	else if (game->engine.shoot != 1
+		&& game->engine.reload == 1 && game->engine.half == 0)
+		color = ft_colorpix_ceifloo(x, y, game->texture.reload1, game);
+	return (color);
+}
+
+void	ft_draw_weapon(t_cub *game)
+{
+	int		x;
+	int		y;
+	int		color;
+	char	*replace;
+
+	y = 0;
+	replace = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
+			&game->img3d.size_line, &game->img3d.endian);
+	while (y < 456)
+	{
+		x = 0;
+		while (x < 500)
+		{
+			color = ft_sprite_select(x, y, game);
+			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+				draw_or_replace_pixel(game, x, y, color, replace);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	ft_crosshair(t_cub *game)
@@ -103,13 +116,14 @@ void	ft_crosshair(t_cub *game)
 		xy[0] = start[0] - 15 / 2; 
 		while (xy[0] <= start[0] + 15 / 2)
 		{
-			if (!((xy[0] >= start[0] - 2 && xy[0] <= start[0] + 2) && 
-				  (xy[1] >= start[1] - 2 && xy[1] <= start[1] + 2)))
+			if (!((xy[0] >= start[0] - 2 && xy[0] <= start[0] + 2)
+					&& (xy[1] >= start[1] - 2 && xy[1] <= start[1] + 2)))
 			{
-				if ((xy[0] >= start[0] - 1 && xy[0] <= start[0] + 1) ||
-					(xy[1] >= start[1] - 1 && xy[1] <= start[1] + 1))
+				if ((xy[0] >= start[0] - 1 && xy[0] <= start[0] + 1)
+					|| (xy[1] >= start[1] - 1 && xy[1] <= start[1] + 1))
 				{
-					dst_index = xy[1] * game->img3d.size_line + xy[0] * game->img3d.bpp / 8;
+					dst_index = xy[1] * game->img3d.size_line + xy[0]
+						* game->img3d.bpp / 8;
 					*(unsigned int *)(game->img3d.pixels + dst_index) = RED;
 				}
 			}
