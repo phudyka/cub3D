@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 17:47:05 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 02:24:27 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,9 @@ typedef struct s_engine
 	int		height;
 	int		wall_side;
 	double	angle;
+	int		shoot;
+	double	time_shoot;
+	double	current_time;
 	int		ammo;
 	bool	shooting;
 	bool	reloading;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/10 17:53:57 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 02:32:06 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@ void		ft_draw_weapon(t_cub *game)
 		x = 0;
 		while (x < 500)
 		{
-			if (game->engine.shooting == true)
-				color = ft_colorpix_ceifloo(x, y, game->texture.shoot, game);
-			else if (game->engine.reloading == true)
-				color = ft_colorpix_ceifloo(x, y, game->texture.reload, game);
-			else
+			if (game->engine.shoot == 0)
 				color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
+			else
+				color = ft_colorpix_ceifloo(x, y, game->texture.shoot, game);
 			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 				draw_or_replace_pixel(game, x, y, color, replace);
 			x++;
