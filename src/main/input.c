@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:07:23 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 11:57:07 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:51:10 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	ft_action(int key, t_cub *game)
 {
+	time_t	cd;
 	if (key == ESC)
 		game_over(game);
 	if (key == E)

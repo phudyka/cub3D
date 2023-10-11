@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 10:52:18 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:38:30 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ static void	ft_init_texture(t_cub *game)
 	game->texture.floor = NULL;
 	game->texture.door = NULL;
 	game->texture.weapon1 = NULL;
+	game->texture.reload0 = NULL;
+	game->texture.reload1 = NULL;
+	game->texture.shoot0 = NULL;
+	game->texture.shoot1 = NULL;
 }
 
 static void	ft_init_engine(t_cub *game)
@@ -55,6 +59,7 @@ static void	ft_init_engine(t_cub *game)
 	game->engine.ammo = 31;
 	game->engine.shoot = 0;
 	game->engine.reload = 0;
+	game->engine.half = 0;
 	game->engine.time_shoot = 0.0;
 	game->engine.time_reload = 0.0;
 	game->engine.door = NULL;

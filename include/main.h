@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 11:31:38 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:37:35 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@
 # define FLOOR "./sprite/textures/floor.xpm"
 # define DOOR "./sprite/textures/door.xpm"
 # define WEAPON1 "./sprite/weapons/weapon0.xpm"
-# define RELOAD "./sprite/weapons/reload0.xpm"
+# define RELOAD0 "./sprite/weapons/reload0.xpm"
+# define RELOAD1 "./sprite/weapons/reload1.xpm"
 # define SHOOT "./sprite/weapons/shoot0.xpm"
 # define EMPTY "./sprite/weapons/shoot1.xpm"
 # define AMBIENCE_WAV "./audio/ambience.wav"
@@ -137,7 +138,8 @@ typedef struct s_texture
 	char	*ceiling;
 	char	*floor;
 	char	*weapon1;
-	char	*reload;
+	char	*reload0;
+	char	*reload1;
 	char	*shoot0;
 	char	*shoot1;
 	char	*door;
@@ -178,6 +180,7 @@ typedef struct s_engine
 	double	angle;
 	int		shoot;
 	int		reload;
+	int		half;
 	double	time_shoot;
 	double	time_reload;
 	double	current_time;

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/11 11:15:50 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:40:20 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ void     ft_draw_weapon(t_cub *game)
             color = ft_colorpix_ceifloo(x, y, game->texture.shoot0, game);
          else if (game->engine.shoot == 1 && game->engine.reload != 1 && game->engine.ammo == 0)
             color = ft_colorpix_ceifloo(x, y, game->texture.shoot1, game);
-         else if (game->engine.shoot != 1 && game->engine.reload == 1)
-            color = ft_colorpix_ceifloo(x, y, game->texture.reload, game);
+         else if (game->engine.shoot != 1 && game->engine.reload == 1 && game->engine.half == 1)
+            color = ft_colorpix_ceifloo(x, y, game->texture.reload0, game);
+		 else if (game->engine.shoot != 1 && game->engine.reload == 1 && game->engine.half == 0)
+            color = ft_colorpix_ceifloo(x, y, game->texture.reload1, game);
          if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
             draw_or_replace_pixel(game, x, y, color, replace);
          x++;

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 11:11:46 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:01:39 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	draw(t_cub *game)
 
 int	ft_render(t_cub *game)
 {
+	char *ammo;
+
 	game->engine.total_moves += ft_move(game);
 	draw(game);
 	render_sprite(game);
@@ -127,5 +129,7 @@ int	ft_render(t_cub *game)
 	ft_shoot(game);
 	ft_empty(game);
 	ft_reload(game);
+	ammo = ft_strjoin(ft_itoa(game->engine.ammo), "/31");
+	mlx_string_put(game->mlx, game->window, 980, 425, RED, ammo);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 10:57:56 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 14:35:43 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,12 @@ static void	ft_init_assets(t_cub *game)
 	game->texture.shoot1 = mlx_xpm_file_to_image(game->mlx, EMPTY, &w, &h);
 	if (game->texture.shoot1 == (void *)0)
 		ft_error_free("\nError ! [utils/sprite/game/shoot1.xpm]]\n", game);		
-	game->texture.reload = mlx_xpm_file_to_image(game->mlx, RELOAD, &w, &h);
-	if (game->texture.reload == (void *)0)
-		ft_error_free("\nError ! [utils/sprite/game/reload.xpm]]\n", game);
+	game->texture.reload0 = mlx_xpm_file_to_image(game->mlx, RELOAD0, &w, &h);
+	if (game->texture.reload0 == (void *)0)
+		ft_error_free("\nError ! [utils/sprite/game/reload0.xpm]]\n", game);
+	game->texture.reload1 = mlx_xpm_file_to_image(game->mlx, RELOAD1, &w, &h);
+	if (game->texture.reload1 == (void *)0)
+		ft_error_free("\nError ! [utils/sprite/game/reload1.xpm]]\n", game);
 }
 
 static void	ft_init_sound(t_cub *game)
