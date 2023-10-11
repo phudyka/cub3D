@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 14:35:43 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 10:50:57 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	init_sprite(t_cub *game)
 	game->sprite = malloc(sizeof(t_sprite) * game->num_sprites);
 	game->sprite[0].x = 10.0;
 	game->sprite[0].y = 10.0;
+	game->sprite[0].is_alive = 1;
 	game->sprite[0].width = 1260;
 	game->sprite[0].height = 1656;
 	game->sprite[1].x = 4.0;
 	game->sprite[1].y = 4.0;
+	game->sprite[1].is_alive = 1;
 	game->sprite[1].width = 1260;
 	game->sprite[1].height = 1656;
 }

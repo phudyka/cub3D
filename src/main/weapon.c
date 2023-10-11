@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   weapon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:25:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 14:41:24 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 10:52:11 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
+
+void check_hit(t_cub *game, int crosshair_x, int crosshair_y)
+{
+    int i;
+    double inv_det;
+    double transform_x;
+    double transform_y;
+    double sprite_screen_x;
+    double sprite_height;
+    double hit_box_x;
+    double hit_box_y;
+
+    i = -1;
+    while (++i < game->num_sprites)
+    {
+        inv_det = 1.0 / (game->ray.plane_x * game->ray.dir_y - game->ray.dir_x * game->ray.plane_y);
+        game->params.sprite_x = game->sprite[i].relative_x;
+        game->params.sprite_y = game->sprite[i].relative_y;
+        game->params.transform_x = &transform_x;
+        game->params.transform_y = &transform_y;
+        game->params.inv_det = inv_det;
+        calculate_transform(game);
+        sprite_screen_x = (int)((WIDTH / 2) * (1 + transform_x / transform_y));
+        sprite_height = abs((int)(HEIGHT / transform_y));
+        hit_box_x = sprite_height * 0.3;
+        hit_box_y = sprite_height * 1;
+        if (abs((int)sprite_screen_x - crosshair_x) < hit_box_x && 
+            abs((HEIGHT / 2) - (int)sprite_height / 2 - crosshair_y) < hit_box_y)
+        {
+            game->sprite[i].is_alive = 0;
+            break;
+        }
+    }
+}
 
 void	ft_shoot(t_cub *game)
 {
@@ -19,6 +53,7 @@ void	ft_shoot(t_cub *game)
 	game->engine.current_time = clock();
 	if (game->engine.shoot == 1 && game->engine.ammo != 0)
 	{
+		check_hit(game, WIDTH / 2, HEIGHT / 2);
 		tmp = (game->engine.current_time - game->engine.time_shoot)
 			/ CLOCKS_PER_SEC;
 		if (tmp > 0.08)

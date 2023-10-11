@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sprite.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 03:28:52 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/11 16:42:30 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 10:53:43 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,19 @@ void	project_sprite(t_cub *game, int spriteIndex)
 	draw_sprite(game, sprite_screen_x, sprite_height);
 }
 
-void	render_sprite(t_cub *game)
+void    render_sprite(t_cub *game)
 {
-	int	i;
+    int    i;
 
-	i = 0;
-	sort_sprites(game);
-	calculate_sprite_position(game);
-	while (i < game->num_sprites)
-	{
-		project_sprite(game, i);
-		i++;
-	}
+    i = 0;
+    sort_sprites(game);
+    calculate_sprite_position(game);
+    while (i < game->num_sprites)
+    {
+        if (game->sprite[i].is_alive)
+        {
+            project_sprite(game, i);
+        }
+        i++;
+    }
 }
