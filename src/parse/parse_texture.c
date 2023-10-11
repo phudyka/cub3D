@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 07:11:54 by kali              #+#    #+#             */
-/*   Updated: 2023/10/11 03:51:26 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:16:04 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void	floor_ceiling_color(char *line, t_cub *game)
 	ptr = line + 1;
 	if (*line == 'F')
 	{
-		game->floor.r = get_next_number(&ptr, &rgb_count);
-		game->floor.g = get_next_number(&ptr, &rgb_count);
-		game->floor.b = get_next_number(&ptr, &rgb_count);
+		game->floor_col.r = get_next_number(&ptr, &rgb_count);
+		game->floor_col.g = get_next_number(&ptr, &rgb_count);
+		game->floor_col.b = get_next_number(&ptr, &rgb_count);
 	}
 	else if (*line == 'C')
 	{
-		game->ceiling.r = get_next_number(&ptr, &rgb_count);
-		game->ceiling.g = get_next_number(&ptr, &rgb_count);
-		game->ceiling.b = get_next_number(&ptr, &rgb_count);
+		game->ceiling_col.r = get_next_number(&ptr, &rgb_count);
+		game->ceiling_col.g = get_next_number(&ptr, &rgb_count);
+		game->ceiling_col.b = get_next_number(&ptr, &rgb_count);
 	}
 	while (*ptr && !ft_isdigit(*ptr))
 		ptr++;

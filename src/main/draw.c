@@ -6,13 +6,13 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 10:36:48 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/09 15:26:11 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:45:09 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-static void    mix_colors(unsigned int *color, float fog_factor,
+static void	mix_colors(unsigned int *color, float fog_factor,
 						  unsigned int fog_color)
 {
 	unsigned char original_r = (*color >> 16) & 0xFF;

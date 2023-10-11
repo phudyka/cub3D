@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 14:38:30 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:15:24 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static void	ft_init_keys(t_cub *game)
 
 static void	ft_init_texture(t_cub *game)
 {
-	game->floor.r = 0;
-	game->floor.g = 0;
-	game->floor.b = 0;
-	game->ceiling.r = 0;
-	game->ceiling.g = 0;
-	game->ceiling.b = 0;
+	game->floor_col.r = 0;
+	game->floor_col.g = 0;
+	game->floor_col.b = 0;
+	game->ceiling_col.r = 0;
+	game->ceiling_col.g = 0;
+	game->ceiling_col.b = 0;
 	game->texture.north = NULL;
 	game->texture.south = NULL;
 	game->texture.east = NULL;

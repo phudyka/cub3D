@@ -6,7 +6,7 @@
 #    By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/05 15:51:03 by phudyka           #+#    #+#              #
-#    Updated: 2023/10/11 11:28:46 by phudyka          ###   ########.fr        #
+#    Updated: 2023/10/11 16:43:25 by phudyka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRC             = src/main/main.c src/parse/parser.c src/main/game.c \
 				  src/main/draw_weapon.c src/main/draw_sprite.c     \
 				  src/moves/mouse.c src/main/input.c 				\
 				  src/main/weapon.c	src/main/free.c					\
+				  src/main/draw3D_utils.c 							\
+				  src/main/draw_sprite_utils.c						\
 
 OBJ_DIR         = obj
 OBJ             = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

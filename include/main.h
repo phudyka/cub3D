@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 14:37:35 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 16:44:24 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,23 +88,23 @@
 # include "../utils/libft/libft.h"
 # include "../mlx/mlx.h"
 
-typedef struct	s_sprite_params
+typedef struct s_sprite_params
 {
-	int		x;
-	int		y;
-	int		sprite_width;
-	int		sprite_height;
-	int		sprite_screen_x;
-}				t_sprite_params;
+	int	x;
+	int	y;
+	int	sprite_width;
+	int	sprite_height;
+	int	sprite_screen_x;
+}		t_sprite_params;
 
-typedef struct  s_params
+typedef struct s_params
 {
-    double  sprite_x;
-    double  sprite_y;
-    double  *transform_x;
-    double  *transform_y;
-    double  inv_det;
-}               t_params;
+	double	sprite_x;
+	double	sprite_y;
+	double	*transform_x;
+	double	*transform_y;
+	double	inv_det;
+}		t_params;
 
 typedef struct s_sprite
 {
@@ -116,7 +116,7 @@ typedef struct s_sprite
 	int		is_visible;
 	int		width;
 	int		height;
-}			t_sprite;
+}		t_sprite;
 
 typedef struct s_img
 {
@@ -181,12 +181,34 @@ typedef struct s_engine
 	int		shoot;
 	int		reload;
 	int		half;
+	time_t	last;
 	double	time_shoot;
 	double	time_reload;
 	double	current_time;
 	int		ammo;
 }				t_engine;
 
+typedef struct s_ceiling
+{
+	double	step_x;
+	double	step_y;
+	double	text_x;
+	double	text_y;
+	double	floor_x;
+	double	floor_y;
+	double	row_dist;
+}			t_ceiling;
+
+typedef struct s_floor
+{
+	double	step_x;
+	double	step_y;
+	double	text_x;
+	double	text_y;
+	double	floor_x;
+	double	floor_y;
+	double	row_dist;
+}			t_floor;
 typedef struct s_ray
 {
 	int		hit;
@@ -235,14 +257,16 @@ typedef struct s_cub
 	clock_t		cur;
 	t_keys		keys;
 	t_texture	texture;
-	t_color		ceiling;
-	t_color		floor;
+	t_color		ceiling_col;
+	t_color		floor_col;
 	t_engine	engine;
 	t_ray		ray;
 	t_img		img2d;
 	t_img		img3d;
 	t_img		weapon;
 	t_sprite	*sprite;
+	t_ceiling	ceiling;
+	t_floor		floor;
 	t_params	params;
 }				t_cub;
 
@@ -276,6 +300,10 @@ int		is_map_line(char *line);
 void	cast_ray(t_cub *game);
 void	ft_caster(t_cub *game);
 void	render_3D(int x, t_cub *game);
+void	sort_sprites(t_cub *game);
+void	calculate_transform(t_cub *game);
+void	calculate_sprite_position(t_cub *game);
+void	draw_sprite_pixel(t_cub *game, t_sprite_params *params);
 void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, int *color, t_cub *game);
 void	draw_ray(t_cub *game, int ray_x, int ray_y);
@@ -287,8 +315,10 @@ void	print_cub(void);
 void	ft_fraps(t_cub *game);
 int		ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
 void	ft_draw_weapon(t_cub *game);
+void	draw_floor(int x, t_cub *game);
+void	draw_ceiling(int x, t_cub *game);
 void	ft_crosshair(t_cub *game);
-void    choose_texture(int x, t_cub *game);
+void	choose_texture(int x, t_cub *game);
 void	draw_texture(int x, void *texture, t_cub *game);
 void	init_sprite(t_cub *game);
 void	render_sprite(t_cub *game);
