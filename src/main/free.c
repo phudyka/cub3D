@@ -6,11 +6,45 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:28:49 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 17:30:24 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 17:38:30 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
+
+void	free_door(t_cub *game)
+{
+	int	i;
+
+	if (game->engine.door)
+	{
+		i = 0;
+		while (i < game->engine.height)
+		{
+			if (game->engine.door[i])
+				free(game->engine.door[i]);
+			i++;
+		}
+		free(game->engine.door);
+		game->engine.door = NULL;
+	}
+}
+
+void	ft_free_map(t_cub *game)
+{
+	int	i;
+
+	i = 0;
+	if (!game->engine.map)
+		return ;
+	while (game->engine.map[i])
+	{
+		free(game->engine.map[i]);
+		i++;
+	}
+	free(game->engine.map);
+	game->engine.map = NULL;
+}
 
 void	ft_error_free(char *msg, t_cub *game)
 {

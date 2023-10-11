@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 14:01:39 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 17:42:15 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_caster(t_cub *game)
 		else if (game->engine.map[game->ray.mapy][game->ray.mapx] == 'D')
 		{
 			if (game->engine.door[game->ray.mapy][game->ray.mapx] == '1')
-				continue;
+				continue ;
 			else
 				game->ray.hit = 2;
 		}
@@ -113,7 +113,7 @@ void	draw(t_cub *game)
 
 int	ft_render(t_cub *game)
 {
-	char *ammo;
+	char	*ammo;
 
 	game->engine.total_moves += ft_move(game);
 	draw(game);

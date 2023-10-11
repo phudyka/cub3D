@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:18:12 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 17:21:44 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 17:36:33 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 void	initialize_door(t_cub *game)
 {
 	int	i;
-	int j;
+	int	j;
 
 	game->engine.door = malloc(sizeof(char *) * game->engine.height);
 	i = 0;
 	while (i < game->engine.height)
 	{
-		game->engine.door[i] = ft_substr(game->engine.map[i], 0, ft_strlen(game->engine.map[i]));
+		game->engine.door[i] = ft_substr(game->engine.map[i],
+				0, ft_strlen(game->engine.map[i]));
 		j = 0;
 		while (game->engine.door[i][j])
 		{
@@ -35,7 +36,7 @@ void	initialize_door(t_cub *game)
 	}
 }
 
-void ft_doors(t_cub *game)
+void	ft_doors(t_cub *game)
 {
 	door_state(game->ray.player_x + 1, game->ray.player_y, game);
 	door_state(game->ray.player_x - 1, game->ray.player_y, game);

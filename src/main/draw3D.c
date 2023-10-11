@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 16:37:59 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 17:43:02 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_texture_weapon(int x, int wx, int wy, void *texture, t_cub *game)
 	}
 }
 
-void render_3D(int x, t_cub *game)
+void	render_3D(int x, t_cub *game)
 {
 	if (game->ray.side == 0)
 		game->ray.distance = (game->ray.dist_x - game->ray.delta_x);
@@ -79,9 +79,11 @@ void render_3D(int x, t_cub *game)
 	if (game->ray.draw_end >= HEIGHT)
 		game->ray.draw_end = HEIGHT - 1;
 	if (game->ray.side == 0)
-		game->ray.wall_x = game->ray.player_y + game->ray.distance * game->ray.ray_y;
+		game->ray.wall_x = game->ray.player_y 
+			+ game->ray.distance * game->ray.ray_y;
 	else
-		game->ray.wall_x = game->ray.player_x + game->ray.distance * game->ray.ray_x;
+		game->ray.wall_x = game->ray.player_x 
+			+ game->ray.distance * game->ray.ray_x;
 	game->ray.wall_x -= floor(game->ray.wall_x);
 	game->ray.z_buffer[x] = game->ray.distance;
 	choose_texture(x, game);

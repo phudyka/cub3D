@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:52:30 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 04:34:07 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 17:38:26 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,40 +58,6 @@ void	ft_fraps(t_cub *game)
 	}
 	else
 		count++;
-}
-
-void	free_door(t_cub *game)
-{
-	int	i;
-
-	if (game->engine.door)
-	{
-		i = 0;
-		while (i < game->engine.height)
-		{
-			if (game->engine.door[i])
-				free(game->engine.door[i]);
-			i++;
-		}
-		free(game->engine.door);
-		game->engine.door = NULL;
-	}
-}
-
-void	ft_free_map(t_cub *game)
-{
-	int	i;
-
-	i = 0;
-	if (!game->engine.map)
-		return ;
-	while (game->engine.map[i])
-	{
-		free(game->engine.map[i]);
-		i++;
-	}
-	free(game->engine.map);
-	game->engine.map = NULL;
 }
 
 void	free_array(char **array)
