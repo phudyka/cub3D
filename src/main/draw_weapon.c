@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/11 02:32:06 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:15:50 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,35 @@ static void	draw_or_replace_pixel(t_cub *game, int x, int y, int color, char *re
 	}
 }
 
-void		ft_draw_weapon(t_cub *game)
+void     ft_draw_weapon(t_cub *game)
 {
-	int		x;
-	int		y;
-	int		color;
-	char	*replace;
+   int      x;
+   int      y;
+   int      color;
+   char  *replace;
 
-	y = 0;
-	replace = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
-			&game->img3d.size_line, &game->img3d.endian);
-	while (y < 456)
-	{
-		x = 0;
-		while (x < 500)
-		{
-			if (game->engine.shoot == 0)
-				color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
-			else
-				color = ft_colorpix_ceifloo(x, y, game->texture.shoot, game);
-			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-				draw_or_replace_pixel(game, x, y, color, replace);
-			x++;
-		}
-		y++;
-	}
+   y = 0;
+   replace = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
+         &game->img3d.size_line, &game->img3d.endian);
+   while (y < 456)
+   {
+      x = 0;
+      while (x < 500)
+      {
+         if (game->engine.shoot == 0 && game->engine.reload != 1)
+            color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
+         else if (game->engine.shoot == 1 && game->engine.reload != 1 && game->engine.ammo != 0)
+            color = ft_colorpix_ceifloo(x, y, game->texture.shoot0, game);
+         else if (game->engine.shoot == 1 && game->engine.reload != 1 && game->engine.ammo == 0)
+            color = ft_colorpix_ceifloo(x, y, game->texture.shoot1, game);
+         else if (game->engine.shoot != 1 && game->engine.reload == 1)
+            color = ft_colorpix_ceifloo(x, y, game->texture.reload, game);
+         if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+            draw_or_replace_pixel(game, x, y, color, replace);
+         x++;
+      }
+      y++;
+   }
 }
 
 void	ft_crosshair(t_cub *game)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 04:04:34 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 10:52:18 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ static void	ft_init_engine(t_cub *game)
 	game->engine.width = 0;
 	game->engine.height = 0;
 	game->engine.ammo = 31;
-	game->engine.shooting = false;
-	game->engine.reloading = false;
 	game->engine.shoot = 0;
+	game->engine.reload = 0;
 	game->engine.time_shoot = 0.0;
+	game->engine.time_reload = 0.0;
 	game->engine.door = NULL;
 }
 

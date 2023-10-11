@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 04:35:06 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 10:54:38 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void free_texture(t_cub *game)
         mlx_destroy_image(game->mlx, game->texture.door);
     if (game->texture.weapon1)
         mlx_destroy_image(game->mlx, game->texture.weapon1);
-    if (game->texture.shoot)
-        mlx_destroy_image(game->mlx, game->texture.shoot);
+    if (game->texture.shoot0)
+        mlx_destroy_image(game->mlx, game->texture.shoot0);
+	if (game->texture.shoot1)
+        mlx_destroy_image(game->mlx, game->texture.shoot1);
     if (game->texture.reload)
         mlx_destroy_image(game->mlx, game->texture.reload);
     if (game->texture.target)

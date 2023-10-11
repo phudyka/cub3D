@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 02:28:45 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:11:46 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,7 @@ int	ft_render(t_cub *game)
 		game->weapon_3d, WIDTH - 500, HEIGHT - 456);
 	ft_fraps(game);
 	ft_shoot(game);
+	ft_empty(game);
+	ft_reload(game);
 	return (0);
 }

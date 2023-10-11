@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 04:35:36 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:11:57 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define WEAPON1 "./sprite/weapons/weapon0.xpm"
 # define RELOAD "./sprite/weapons/reload0.xpm"
 # define SHOOT "./sprite/weapons/shoot0.xpm"
+# define EMPTY "./sprite/weapons/shoot1.xpm"
 # define AMBIENCE_WAV "./audio/ambience.wav"
 # define DOOR_OPEN_WAV "./audio/door_open.wav"
 # define DOOR_CLOSE_WAV "./audio/door_close.wav"
@@ -67,8 +68,8 @@
 # define ESC		65307 // Quit game
 # define Q			113   // Quit game
 # define E			101   // Open Door
-# define R			114		// Reload Weapon
-# define MOUSE_R	3
+# define R			114	  // Reload Weapon
+# define SPACE		32 	  // Shoot
 
 # include <math.h>
 # include <time.h>
@@ -137,7 +138,8 @@ typedef struct s_texture
 	char	*floor;
 	char	*weapon1;
 	char	*reload;
-	char	*shoot;
+	char	*shoot0;
+	char	*shoot1;
 	char	*door;
 	char	*open_door;
 	char	*target;
@@ -175,12 +177,11 @@ typedef struct s_engine
 	int		wall_side;
 	double	angle;
 	int		shoot;
+	int		reload;
 	double	time_shoot;
+	double	time_reload;
 	double	current_time;
 	int		ammo;
-	bool	shooting;
-	bool	reloading;
-	pid_t	audio_pid;
 }				t_engine;
 
 typedef struct s_ray
@@ -293,6 +294,7 @@ bool	should_draw_pixel(int pixel_color, int color_to_ignore);
 int		ft_mouse(int x, int y, t_cub *game);
 void	mouse_pos(int x, int y, t_cub *game);
 void	ft_shoot(t_cub *game);
+void	ft_empty(t_cub *game);
 void	ft_reload(t_cub *game);
 void	ft_doors(t_cub *game);
 void	ft_error_parse(char *msg, t_cub *game);
