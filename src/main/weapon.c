@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:25:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 17:33:40 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 03:52:29 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,17 @@ void	ft_shoot(t_cub *game)
 {
 	double	tmp;
 
-	game->engine.current_time = clock();
 	if (game->engine.shoot == 1 && game->engine.ammo != 0)
 	{
+		game->engine.current_time = clock();
 		check_hit(game, WIDTH / 2, HEIGHT / 2);
-		tmp = (game->engine.current_time - game->engine.time_shoot)
+		tmp = (game->engine.current_time - game->engine.time_shoot) 
 			/ CLOCKS_PER_SEC;
-		if (tmp > 0.08)
+		if (tmp > 0.055)
 		{
 			game->engine.ammo--;
 			game->engine.shoot = 0;
+			game->engine.cooldown = 0;
 		}
 	}
 }
@@ -87,15 +88,16 @@ void	ft_reload(t_cub *game)
 	game->engine.current_time = clock();
 	if (game->engine.reload == 1)
 	{
-		tmp = (game->engine.current_time
-				- game->engine.time_reload) / CLOCKS_PER_SEC;
+		tmp = (game->engine.current_time - game->engine.time_reload)
+				/ CLOCKS_PER_SEC;
 		if (tmp > 0.8)
 			game->engine.half = 1;
 		if (tmp > 1.2)
 		{
 			game->engine.half = 0;
 			game->engine.reload = 0;
+			game->engine.ammo = 31;
+			game->engine.cooldown = 0;
 		}
-		game->engine.ammo = 31;
-	}
+   }
 }

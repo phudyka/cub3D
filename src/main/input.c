@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:07:23 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 15:01:16 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 03:46:46 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,25 @@ static int	ft_action(int key, t_cub *game)
 		game_over(game);
 	if (key == E)
 		ft_doors(game);
-	if (key == R && game->engine.shoot != 1)
+	if (key == R && game->engine.shoot != 1 && game->engine.cooldown == 0)
 	{
 		game->engine.shoot = 0;
 		game->engine.reload = 1;
 		system("aplay -q ./audio/reload0.wav &");
 		game->engine.time_reload = game->engine.current_time;
+		game->engine.cooldown = 1.0;
 	}
-	if (key == SPACE && game->engine.reload != 1)
+	if (key == SPACE && game->engine.reload != 1 && game->engine.cooldown == 0)
 	{
 		game->engine.shoot = 1;
 		game->engine.reload = 0;
+		game->engine.cooldown = 1.0;
 		if (game->engine.ammo > 0)
 			system("aplay -q ./audio/shoot0.wav &");
 		else if (game->engine.ammo == 0)
 			system("aplay -q ./audio/shoot1.wav &");
 		game->engine.time_shoot = game->engine.current_time;
-   }
+	}
 }
 
 static int	key_press(int key, t_cub *game)

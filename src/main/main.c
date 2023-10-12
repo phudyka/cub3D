@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 16:15:24 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 02:24:00 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	ft_init_engine(t_cub *game)
 	game->engine.time_shoot = 0.0;
 	game->engine.time_reload = 0.0;
 	game->engine.door = NULL;
+	game->engine.cooldown = 0.0;
 }
 
 static void	ft_init_game(t_cub *game)
