@@ -3,29 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 17:26:44 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 07:35:08 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
+void coord_target(t_cub *game)
+{
+	int	i;
+	int	j;
+	int	x;
+
+	i = 0;
+	x = 0;
+	while (game->engine.map[i])
+	{
+		j = 0;
+		while (game->engine.map[i][j])
+		{
+			if (game->engine.map[i][j] == 'S')
+			{
+				game->sprite[x].x = j;
+				game->sprite[x].y = i;
+				game->sprite[x].is_alive = 1;
+				game->sprite[x].width = 1260;
+				game->sprite[x].height = 1656;
+				x++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	count_target(t_cub *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->engine.map[i])
+	{
+		j = 0;
+		while (game->engine.map[i][j])
+		{
+			if (game->engine.map[i][j] == 'S')
+				game->num_sprites++;
+			j++;
+		}
+		i++;
+	}
+	return (game->num_sprites);
+}
+
 void	init_sprite(t_cub *game)
 {
-	game->num_sprites = 2;
-	game->sprite = malloc(sizeof(t_sprite) * game->num_sprites);
-	game->sprite[0].x = 10.0;
-	game->sprite[0].y = 10.0;
-	game->sprite[0].is_alive = 1;
-	game->sprite[0].width = 1260;
-	game->sprite[0].height = 1656;
-	game->sprite[1].x = 4.0;
-	game->sprite[1].y = 4.0;
-	game->sprite[1].is_alive = 1;
-	game->sprite[1].width = 1260;
-	game->sprite[1].height = 1656;
+	game->num_sprites = count_target(game);
+	game->sprite = malloc(sizeof(t_sprite) * game->num_sprites + 1);
+	coord_target(game);
 }
 
 static void	ft_texture_index(t_cub *game)

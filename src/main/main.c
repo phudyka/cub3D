@@ -6,7 +6,7 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 02:24:00 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/12 07:24:51 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	ft_init_game(t_cub *game)
 	game->ray.dir_x = 0.0;
 	game->ray.player_x = 2.0;
 	game->ray.player_y = 2.0;
+	game->num_sprites = 0;
 	ft_init_engine(game);
 	ft_init_texture(game);
 	ft_init_keys(game);
