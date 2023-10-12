@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 17:43:02 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:55:35 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,34 +38,7 @@ void	draw_texture(int x, void *texture, t_cub *game)
 	}
 }
 
-void	draw_texture_weapon(int x, int wx, int wy, void *texture, t_cub *game)
-{
-	int		i;
-	int		y;
-	int		color;
-	int		texture_y;
-	double	step;
-	double	tex_pos;
-
-	y = wx;
-	step = (double)HD / game->ray.wall_height;
-	tex_pos = (y - HEIGHT / 2 + game->ray.wall_height / 2) * step;
-	if (game->ray.side == 0)
-		game->ray.tex_x = (int)(game->ray.wall_x * (double)HD);
-	else
-		game->ray.tex_x = HD - (int)(game->ray.wall_x * (double)HD) - 1;
-	while (y < wy)
-	{
-		texture_y = (int)tex_pos & (HD - 1);
-		color = ft_colorpix(game->ray.tex_x, texture_y, texture, game);
-		i = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
-		*(unsigned int *)(game->img3d.pixels + i) = color;
-		tex_pos += step;
-		y++;
-	}
-}
-
-void	render_3D(int x, t_cub *game)
+void	render3d(int x, t_cub *game)
 {
 	if (game->ray.side == 0)
 		game->ray.distance = (game->ray.dist_x - game->ray.delta_x);

@@ -6,35 +6,28 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 10:36:48 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/11 17:20:45 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:28:44 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
 static void	mix_colors(unsigned int *color, float fog_factor,
-		unsigned int fog_color)
+		unsigned int fog_color, t_cub *game)
 {
-	unsigned char	fog_r;
-	unsigned char	fog_g;
-	unsigned char	fog_b;
-	unsigned char	final_r;
-	unsigned char	final_g;
-	unsigned char	final_b;
-	unsigned char	original_r;
-	unsigned char	original_g;
-	unsigned char	original_b;
-
-	original_r = (*color >> 16) & 0xFF;
-	original_g = (*color >> 8) & 0xFF;
-	original_b = *color & 0xFF;
-	fog_r = (fog_color >> 16) & 0xFF;
-	fog_g = (fog_color >> 8) & 0xFF;
-	fog_b = fog_color & 0xFF;
-	final_r = (1 - fog_factor) * original_r + fog_factor * fog_r;
-	final_g = (1 - fog_factor) * original_g + fog_factor * fog_g;
-	final_b = (1 - fog_factor) * original_b + fog_factor * fog_b;
-	*color = (final_r << 16) | (final_g << 8) | final_b;
+	game->mix.og_r = (*color >> 16) & 0xFF;
+	game->mix.og_g = (*color >> 8) & 0xFF;
+	game->mix.og_b = *color & 0xFF;
+	game->mix.fog_r = (fog_color >> 16) & 0xFF;
+	game->mix.fog_g = (fog_color >> 8) & 0xFF;
+	game->mix.fog_b = fog_color & 0xFF;
+	game->mix.new_r = (1 - fog_factor)
+		* game->mix.og_r + fog_factor * game->mix.fog_r;
+	game->mix.new_g = (1 - fog_factor)
+		* game->mix.og_g + fog_factor * game->mix.fog_g;
+	game->mix.new_b = (1 - fog_factor)
+		* game->mix.og_b + fog_factor * game->mix.fog_b;
+	*color = (game->mix.new_r << 16) | (game->mix.new_g << 8) | game->mix.new_b;
 }
 
 int	ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game)
@@ -53,24 +46,20 @@ int	ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game)
 
 int	ft_colorpix(int x, int y, void *texture, t_cub *game)
 {
-	int				i;
-	int				bpp;
-	int				size;
-	unsigned int	color;
-	char			*pix;
-	float			fog;
-
-	pix = mlx_get_data_addr(texture, &bpp, &size, &game->img3d.endian);
-	i = y * size + x * bpp / 8;
-	color = *(unsigned int *)(pix + i);
+	game->colorpix.pix = mlx_get_data_addr(texture, &game->colorpix.bpp,
+			&game->colorpix.size, &game->img3d.endian);
+	game->colorpix.i = y * game->colorpix.size + x
+		* game->colorpix.bpp / 8;
+	game->colorpix.color = *(unsigned int *)(game->colorpix.pix
+			+ game->colorpix.i);
 	if (game->ray.distance < 10)
-		fog = 0;
+		game->colorpix.fog = 0;
 	else if (game->ray.distance < 20)
-		fog = 0.1 + (game->ray.distance - 10) * 0.09;
+		game->colorpix.fog = 0.1 + (game->ray.distance - 10) * 0.09;
 	else
-		fog = 1.0;
-	mix_colors(&color, fog, 0x000000);
-	return (color);
+		game->colorpix.fog = 1.0;
+	mix_colors(&game->colorpix.color, game->colorpix.fog, 0x000000, game);
+	return (game->colorpix.color);
 }
 
 static void	ft_draw_player(t_cub *game)

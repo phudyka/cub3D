@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:07:23 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 10:48:42 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:12:09 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	ft_action(int key, t_cub *game)
 		game_over(game);
 	if (key == E)
 		ft_doors(game);
+	if (key == T)
+		game->texture.repop = 1;
 	if (key == R && game->engine.shoot != 1 && game->engine.cooldown == 0)
 	{
 		game->engine.shoot = 0;

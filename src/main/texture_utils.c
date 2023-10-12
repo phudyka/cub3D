@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:24:31 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 17:27:05 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 13:54:21 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static void	ft_init_sound(t_cub *game)
 		ft_error_free("\nError ! [audio/shoot0.wav]\n", game);
 	if (access(EMPTY_WAV, F_OK) == -1)
 		ft_error_free("\nError ! [audio/shoot1.wav]\n", game);
+	if (access(TARGET_WAV, F_OK) == -1)
+		ft_error_free("\nError ! [audio/target.wav]\n", game);
 }
 
 static void	ft_texture_sprite(t_cub *game)

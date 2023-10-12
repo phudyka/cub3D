@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 07:38:30 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:55:58 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@
 // Y = HEIGHT = ordinate axis
 
 // -- GLOBAL -- //
-# define WIDTH 1024  // Window Width
-# define HEIGHT 576 // Window Height
-# define SPRITE 10  // Sprite Size
-# define MOVESPEED 0.06 // Player Move Speed
-# define ROTSPEED 0.03
+# define WIDTH 1024 		// Window Width
+# define HEIGHT 576 		// Window Height
+# define SPRITE 10 			// Minimap elements Size
+# define MOVESPEED 0.06 	// Player Move Speed
+# define ROTSPEED 0.0123 	// Cam and arrows rotation speed
 # define PI 3.14159265359
-# define HD 256
+# define HD 256 			// Textures Resolution
 # define WRAP 20
 
 // -- TEXTURES -- //
-
 # define N_WALL "./sprite/textures/north_wall.xpm"
 # define S_WALL "./sprite/textures/south_wall.xpm"
 # define E_WALL "./sprite/textures/east_wall.xpm"
@@ -40,13 +39,14 @@
 # define RELOAD1 "./sprite/weapons/reload1.xpm"
 # define SHOOT "./sprite/weapons/shoot0.xpm"
 # define EMPTY "./sprite/weapons/shoot1.xpm"
+# define TARGET "./sprite/textures/cible.xpm"
 # define AMBIENCE_WAV "./audio/ambience.wav"
 # define DOOR_OPEN_WAV "./audio/door_open.wav"
 # define DOOR_CLOSE_WAV "./audio/door_close.wav"
 # define RELOAD_WAV "./audio/reload0.wav"
 # define SHOOT_WAV "./audio/shoot0.wav"
 # define EMPTY_WAV "./audio/shoot1.wav"
-# define TARGET "./sprite/textures/cible.xpm"
+# define TARGET_WAV "./audio/target.wav"
 # define RED 0xFF0000
 # define GREEN_WALL 0x228B22
 # define GREEN 0xADFF2F
@@ -62,15 +62,14 @@
 # define A			97    // [Basic WASD Deplacements]
 # define S			115   //
 # define D			100   //
-# define UP			65362 //  ________________________________
-# define LEFT		65361 // [Can use Directionnals Arrows too]
+# define LEFT		65361 // [Camera Rotation]
 # define RIGHT		65363 //
-# define DOWN		65364 //
 # define ESC		65307 // Quit game
 # define Q			113   // Quit game
 # define E			101   // Open Door
 # define R			114	  // Reload Weapon
-# define SPACE		32 	  // Shoot
+# define T 			116	  // Respawn targets
+# define SPACE		32 	  // Fire Weapon
 
 # include <math.h>
 # include <time.h>
@@ -106,6 +105,19 @@ typedef struct s_params
 	double	inv_det;
 }		t_params;
 
+typedef struct s_mix
+{
+	unsigned char	fog_r;
+	unsigned char	fog_g;
+	unsigned char	fog_b;
+	unsigned char	new_r;
+	unsigned char	new_g;
+	unsigned char	new_b;
+	unsigned char	og_r;
+	unsigned char	og_g;
+	unsigned char	og_b;
+}			t_mix;
+
 typedef struct s_sprite
 {
 	int	x;
@@ -128,8 +140,21 @@ typedef struct s_img
 	int		height;
 }			t_img;
 
+typedef struct s_colorpix
+{
+	int				i;
+	int				bpp;
+	int				size;
+	unsigned int	color;
+	char			*pix;
+	float			fog;
+} 			t_colorpix;
+
+
 typedef struct s_texture
 {
+	int		color;
+	int		repop;
 	int		direction;
 	char	*north;
 	char	*south;
@@ -256,30 +281,32 @@ typedef struct s_ray
 
 typedef struct s_cub
 {
-	void		*mlx;
-	void		*window;
-	void		*img_map2d;
-	void		*img_map3d;
-	void		*weapon_3d;
-	int			mini;
-	int			count_color_c;
-	int			count_color_f;
-	int			num_sprites;
-	clock_t		cur;
-	t_keys		keys;
-	t_texture	texture;
-	t_color		ceiling_col;
-	t_color		floor_col;
-	t_engine	engine;
-	t_ray		ray;
-	t_img		img2d;
-	t_img		img3d;
-	t_img		weapon;
-	t_sprite	*sprite;
-	t_ceiling	ceiling;
-	t_floor		floor;
-	t_hitbox	hitbox;
-	t_params	params;
+	void			*mlx;
+	void			*window;
+	void			*img_map2d;
+	void			*img_map3d;
+	void			*weapon_3d;
+	int				mini;
+	int				count_color_c;
+	int				count_color_f;
+	int				num_sprites;
+	clock_t			cur;
+	t_keys			keys;
+	t_texture		texture;
+	t_color			ceiling_col;
+	t_color			floor_col;\
+	t_engine		engine;
+	t_ray			ray;
+	t_img			img2d;
+	t_img			img3d;
+	t_img			weapon;
+	t_sprite		*sprite;
+	t_ceiling		ceiling;
+	t_floor			floor;
+	t_hitbox		hitbox;
+	t_params		params;
+	t_mix			mix;
+	t_colorpix		colorpix;
 }				t_cub;
 
 void	ft_init_ray(t_cub *game);
@@ -322,7 +349,7 @@ int		is_configuration(char *line);
 int		is_map_line(char *line);
 void	cast_ray(t_cub *game);
 void	ft_caster(t_cub *game);
-void	render_3D(int x, t_cub *game);
+void	render3d(int x, t_cub *game);
 void	sort_sprites(t_cub *game);
 void	calculate_transform(t_cub *game);
 void	calculate_sprite_position(t_cub *game);
@@ -335,6 +362,7 @@ int		ft_colorpix(int x, int y, void *texture, t_cub *game);
 void	ft_init_mlx(t_cub *game);
 void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);
+void	ft_target_repop(t_cub *game);
 void	ft_fraps(t_cub *game);
 int		ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game);
 void	ft_draw_weapon(t_cub *game);

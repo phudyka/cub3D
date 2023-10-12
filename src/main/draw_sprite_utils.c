@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:41:21 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 17:36:50 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:15:59 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,25 @@ void	draw_sprite_pixel(t_cub *game, t_sprite_params *params)
 		dst_index = params->y * game->img3d.size_line + params->x
 			* game->img3d.bpp / 8;
 		*(unsigned int *)(game->img3d.pixels + dst_index) = color;
+	}
+}
+
+void	ft_target_repop(t_cub *game)
+{
+	int	i;
+	int	num;
+
+	i = 0;
+	num = game->num_sprites;
+	if (game->texture.repop == 1)
+	{
+		while (num)
+		{
+			game->sprite[i].is_alive = 1;
+			i++;
+			num--;
+		}
+		system("aplay -q ./audio/target.wav &");
+		game->texture.repop = 0;
 	}
 }
