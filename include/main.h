@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 02:23:25 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:53:26 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,16 @@ typedef struct s_ceiling
 	double	row_dist;
 }			t_ceiling;
 
+typedef struct s_hitbox
+{
+	double	inv_det;
+	double	new_x;
+	double	new_y;
+	double	sprite_x;
+	double	sprite_height;
+	double	hitbox_x;
+	double	hitbox_y;
+}			t_hitbox;
 typedef struct s_floor
 {
 	double	step_x;
@@ -268,6 +278,7 @@ typedef struct s_cub
 	t_sprite	*sprite;
 	t_ceiling	ceiling;
 	t_floor		floor;
+	t_hitbox	hitbox;
 	t_params	params;
 }				t_cub;
 
@@ -285,6 +296,17 @@ int		check_move(double x, double y, t_cub *game);
 int		ft_render(t_cub *game);
 int		ft_cub(t_cub *game);
 int		game_over(t_cub *game);
+void	ft_check_one(int i, int j, t_cub *game);
+void	ft_check_len(size_t j, t_cub *game);
+void	ft_check_close(int i, t_cub *game);
+int		contains_map_char(char *line);
+int		check_all_configurations(t_cub *game);
+int		parse_line(char *line, t_cub *game);
+void	initialize_game_settings(t_cub *game);
+void	parse_all_lines(t_cub *game, char **argv);
+int		process_configuration_lines(char *line, t_cub *game);
+long	get_next_number(char **str, int *count);
+int		process_map_lines(char *line, t_cub *game);
 int		parse_east_texture(char *line, t_cub *game);
 int		parse_west_texture(char *line, t_cub *game);
 int		parse_south_texture(char *line, t_cub *game);

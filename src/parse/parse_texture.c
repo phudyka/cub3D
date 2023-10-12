@@ -6,28 +6,11 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 07:11:54 by kali              #+#    #+#             */
-/*   Updated: 2023/10/11 16:16:04 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:46:12 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
-
-long	get_next_number(char **str, int *count)
-{
-	long	num;
-
-	while (**str && !ft_isdigit(**str) && **str != '-')
-		(*str)++;
-	if (ft_isdigit(**str) || **str == '-')
-	{
-		(*count)++;
-		num = ft_atoi(*str);
-		while (ft_isdigit(**str))
-			(*str)++;
-		return (num);
-	}
-	return (-1);
-}
 
 void	floor_ceiling_color(char *line, t_cub *game)
 {

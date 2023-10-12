@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:07:23 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 10:05:17 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:48:42 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	key_release(int key, t_cub *game)
 	return (0);
 }
 
-void 	ft_input(t_cub *game)
+void	ft_input(t_cub *game)
 {
 	mlx_hook(game->window, 02, (1L << 0), key_press, game);
 	mlx_hook(game->window, 03, (1L << 1), key_release, game);

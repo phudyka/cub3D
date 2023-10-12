@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 02:14:11 by kali              #+#    #+#             */
-/*   Updated: 2023/10/11 16:16:27 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:26:12 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	check_valid_conf(t_cub *game)
 		free_array(game->engine.cub);
 		ft_error_free("Error : Invalid of 'C' and/or 'F' lines.\n", game);
 	}
-	if (check_rgb(game->ceiling_col.r, game->ceiling_col.g, game->ceiling_col.b) == 1)
+	if (check_rgb(game->ceiling_col.r, game->ceiling_col.g,
+			game->ceiling_col.b) == 1)
 	{
 		free_array(game->engine.cub);
 		ft_error_free("Error Invalid value(s) ceiling RGB.\n", game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 08:05:44 by dtassel           #+#    #+#             */
-/*   Updated: 2023/09/21 02:26:41 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:38:12 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,27 @@
 
 int	is_configuration(char *line)
 {
-	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0 || 
-		ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0 ||
-		line[0] == 'F' || line[0] == 'C')
+	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0
+		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0
+		|| line[0] == 'F' || line[0] == 'C')
 		return (1);
 	return (0);
 }
 
-int contains_map_char(char *line)
+int	is_map_line(char *line)
 {
-    while (*line)
-    {
-        if (*line == '0' || *line == '1' || *line == '2' || 
-            *line == 'N' || *line == 'S' || *line == 'E' || *line == 'W')
-            return (1);
-        line++;
-    }
-    return (0);
+	if (!contains_map_char(line))
+		return (0);
+	while (*line)
+	{
+		if (*line != '0' && *line != '1' && *line != '2' && *line != 'N'
+			&& *line != 'S' && *line != 'E' && *line != 'W'
+			&& *line != ' ' && *line != '\t')
+			return (0);
+		line++;
+	}
+	return (1);
 }
-
-int is_map_line(char *line)
-{
-    if (!contains_map_char(line))
-        return (0);
-    
-    while (*line)
-    {
-        if (*line != '0' && *line != '1' && *line != '2' && *line != 'N' && 
-            *line != 'S' && *line != 'E' && *line != 'W' && *line != ' ' && *line != '\t')
-            return (0);
-        line++;
-    }
-    return (1);
-}
-
 
 char	*add_line_to_map(char *map, char *line)
 {
