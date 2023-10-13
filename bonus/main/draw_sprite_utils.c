@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:41:21 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 14:15:59 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:26:32 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_target_repop(t_cub *game)
 			i++;
 			num--;
 		}
-		system("aplay -q ./audio/target.wav &");
+		system("aplay -q ./audio/target.wav &\n");
 		game->texture.repop = 0;
 	}
 }

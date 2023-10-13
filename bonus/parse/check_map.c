@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 05:04:57 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/13 15:26:48 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:30:57 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ void	format_map(t_cub *game)
 		i++;
 	}
 	if (max >= 50)
-		ft_error_free("Error! : [Map width upon max limit]\n", game);
-	if (i > 100)
-		ft_error_free("Error! : [Map height upon max limit]\n", game);
+		ft_error_free("Error!\n[Map width upon max limit]\n", game);
 	game->engine.width = max;
 	add_char_map(game, max);
 }
@@ -93,7 +91,7 @@ void	ft_check(int i, int j, t_cub *game)
 		&& game->engine.map[i][j] != 'E' && game->engine.map[i][j] != '0'
 		&& game->engine.map[i][j] != 'W' && game->engine.map[i][j] != 'S'
 		&& game->engine.map[i][j] != 'D' && game->engine.map[i][j] != 'T')
-		ft_error_parse("Map not valid\n", game);
+		ft_error_parse("Error!\n[Map has unvalid chars]\n", game);
 }
 
 void	check_map(t_cub *game)
@@ -106,7 +104,7 @@ void	check_map(t_cub *game)
 	c = 0;
 	c = replace_spaces(game, c);
 	if (c == 0 || c > 1)
-		ft_error_parse("Map not valid\n", game);
+		ft_error_parse("Error!\n[Map needs 1 player]\n", game);
 	format_map(game);
 	ft_check_close(++i, game);
 	while (game->engine.map[++i])
@@ -119,6 +117,6 @@ void	check_map(t_cub *game)
 		ft_check_one(i, j, game);
 	}
 	if (i == j)
-		ft_error_parse("Map not valid\n", game);
+		ft_error_parse("Error!\n[Map not valid]\n", game);
 	ft_check_close((i - 1), game);
 }

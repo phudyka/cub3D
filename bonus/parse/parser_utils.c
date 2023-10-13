@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:41:04 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 07:53:12 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:31:15 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	initialize_game_settings(t_cub *game)
 	if (check_valid_path(game) == 1)
 	{
 		free_array(game->engine.cub);
-		ft_error_parse("Error: Invalid path for the texture file.\n", game);
+		ft_error_parse("Error!\n[Invalid path for the texture file.]\n", game);
 	}
 }
 

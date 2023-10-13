@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:41:04 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 16:12:59 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:28:33 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	initialize_game_settings(t_cub *game)
 	if (check_valid_path(game) == 1)
 	{
 		free_array(game->engine.cub);
-		ft_error_parse("Error!\n [Invalid path for the texture file.]\n", game);
+		ft_error_parse("Error!\n[Invalid path for the texture file.]\n", game);
 	}
 }
 

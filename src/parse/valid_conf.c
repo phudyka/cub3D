@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 02:14:11 by kali              #+#    #+#             */
-/*   Updated: 2023/10/13 16:14:02 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:33:54 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	validate_path(char *path, t_cub *game)
 	if (fd == -1)
 	{
 		close(fd);
-		ft_error_free("Error!\n [Bad texture]\n", game);
+		ft_error_free("Error!\n[Bad texture path]\n", game);
 	}
 	close(fd);
 	return (0);
@@ -54,17 +54,17 @@ void	check_valid_conf(t_cub *game)
 		|| game->count_color_f > 1 || game->count_color_f == 0)
 	{
 		free_array(game->engine.cub);
-		ft_error_free("Error!\n [Invalid of 'C' and/or 'F' lines]\n", game);
+		ft_error_free("Error!\n[Invalid of 'C' and/or 'F' lines]\n", game);
 	}
 	if (check_rgb(game->ceiling_col.r, game->ceiling_col.g,
 			game->ceiling_col.b) == 1)
 	{
 		free_array(game->engine.cub);
-		ft_error_free("Error!\n [Invalid value(s) ceiling RGB.\n]", game);
+		ft_error_free("Error!\n[Invalid value(s) ceiling RGB.\n]", game);
 	}
 	if (check_rgb(game->floor_col.r, game->floor_col.g, game->floor_col.b) == 1)
 	{
 		free_array(game->engine.cub);
-		ft_error_free("Error!\n [Invalid value(s) floor RGB]\n", game);
+		ft_error_free("Error!\n[Invalid value(s) floor RGB]\n", game);
 	}
 }

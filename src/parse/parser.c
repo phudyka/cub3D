@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:13:22 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 16:14:12 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:28:46 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	process_map_lines(char *line, t_cub *game)
 		if (!check_all_configurations(game))
 		{
 			free_array(game->engine.cub);
-			ft_error_parse("Error!\n: [Missing config before map starts]\n", game);
+			ft_error_parse("Error!\n[Missing config before map starts]\n", game);
 		}
 		is_map_started = 1;
 	}
 	else if (is_map_started)
 	{
 		free_array(game->engine.cub);
-		ft_error_parse("Error!\n [Invalid configs after map started]\n", game);
+		ft_error_parse("Error!\n[Invalid configs after map started]\n", game);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 07:11:54 by kali              #+#    #+#             */
-/*   Updated: 2023/10/13 16:12:53 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:28:25 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	floor_ceiling_color(char *line, t_cub *game)
 	{
 		free(line);
 		free_array(game->engine.cub);
-		ft_error_parse("Error!\n :[Map has bad RGBs values]\n", game);
+		ft_error_parse("Error!\n[Map has bad RGBs values]\n", game);
 	}
 }
 
@@ -50,7 +50,7 @@ int	parse_north_texture(char *line, t_cub *game)
 	j = 0;
 	if (game->texture.path_north)
 	{
-		ft_error("Error!\n :[North texture (NO) is already defined]\n");
+		ft_error("Error!\n[North texture (NO) is already defined]\n");
 		return (1);
 	}
 	while (line[i] && line[i] != '.')
@@ -71,7 +71,7 @@ int	parse_south_texture(char *line, t_cub *game)
 	j = 0;
 	if (game->texture.path_south)
 	{
-		ft_error("Error!\n [Path_south texture (SO) is already defined]\n");
+		ft_error("Error!\n[Path_south texture (SO) is already defined]\n");
 		return (1);
 	}
 	while (line[i] != '.')
@@ -92,7 +92,7 @@ int	parse_west_texture(char *line, t_cub *game)
 	j = 0;
 	if (game->texture.path_west)
 	{
-		ft_error("Error!\n [Path_west texture (WE) is already defined]\n");
+		ft_error("Error!\n[Path_west texture (WE) is already defined]\n");
 		return (1);
 	}
 	while (line[i] != '.')
@@ -113,7 +113,7 @@ int	parse_east_texture(char *line, t_cub *game)
 	j = 0;
 	if (game->texture.path_east)
 	{
-		ft_error("Error!\n [Path_east texture (EA) is already defined]\n");
+		ft_error("Error!\n[Path_east texture (EA) is already defined]\n");
 		return (1);
 	}
 	while (line[i] != '.')

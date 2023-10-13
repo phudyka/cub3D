@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 16:15:53 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:29:21 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ int	main(int argc, char **argv)
 
 	game = malloc(sizeof(t_cub));
 	if (!game)
-		ft_error("Error!\n [Cub3D Malloc Failed]\n");
+		ft_error("Error!\n[Cub3D Malloc Failed]\n");
 	ft_init_game(game);
 	if (master_parser(game, argc, argv))
-		ft_error("Error!\n [Bad arguments]\n");
+		ft_error("Error!\n[Bad arguments]\n");
 	print_cub();
 	ft_init_direction(game);
 	ft_cub(game);

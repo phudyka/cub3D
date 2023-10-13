@@ -1,7 +1,7 @@
-NO textures/simonkraft/soul_sand.xpm
-SO textures/simonkraft/soul_soil_01.xpm
-WE textures/simonkraft/soul_soil.xpm
-EA textures/simonkraft/soul_sand.xpm
+NO ./sprite/textures/south_wall.xpm
+SO ./sprite/textures/south_wall.xpm
+WE ./sprite/textures/south_wall.xpm
+EA ./sprite/textures/south_wall.xpm
 
 C 53,41,34
 F 45,33,27
