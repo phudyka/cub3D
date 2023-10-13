@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 11:49:28 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/11 11:52:00 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ void	ft_error(char *msg)
 int	game_over(t_cub *game)
 {
 	ft_free_map(game);
+	free_door(game);
 	free_texture(game);
 	ft_destroy_img(game);
 	free(game->ray.z_buffer);
+	free(game->sprite);
 	free(game);
 	game = NULL;
+	system("pkill aplay\n");
 	exit(EXIT_SUCCESS);
 }
 

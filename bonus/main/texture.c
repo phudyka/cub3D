@@ -6,11 +6,66 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 13:43:34 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 13:44:19 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
+
+void	coord_target(t_cub *game)
+{
+	int	i;
+	int	j;
+	int	x;
+
+	i = 0;
+	x = 0;
+	while (game->engine.map[i])
+	{
+		j = 0;
+		while (game->engine.map[i][j])
+		{
+			if (game->engine.map[i][j] == 'S')
+			{
+				game->sprite[x].x = j;
+				game->sprite[x].y = i;
+				game->sprite[x].is_alive = 1;
+				game->sprite[x].width = 1260;
+				game->sprite[x].height = 1656;
+				x++;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+int	count_target(t_cub *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->engine.map[i])
+	{
+		j = 0;
+		while (game->engine.map[i][j])
+		{
+			if (game->engine.map[i][j] == 'S')
+				game->num_sprites++;
+			j++;
+		}
+		i++;
+	}
+	return (game->num_sprites);
+}
+
+void	init_sprite(t_cub *game)
+{
+	game->num_sprites = count_target(game);
+	game->sprite = malloc(sizeof(t_sprite) * game->num_sprites + 1);
+	coord_target(game);
+}
 
 static void	ft_texture_index(t_cub *game)
 {
@@ -33,7 +88,12 @@ static void	ft_texture_index(t_cub *game)
 void	choose_texture(int x, t_cub *game)
 {
 	ft_texture_index(game);
-	if (game->texture.direction == 'N')
+	if (game->ray.hit == 2)
+	{
+		if (game->engine.door[game->ray.mapy][game->ray.mapx] == '0')
+			draw_texture(x, game->texture.door, game);
+	}
+	else if (game->texture.direction == 'N')
 		draw_texture(x, game->texture.north, game);
 	else if (game->texture.direction == 'S')
 		draw_texture(x, game->texture.south, game);

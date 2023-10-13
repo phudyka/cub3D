@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 13:43:23 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 11:02:46 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,52 @@ void	cast_ray(t_cub *game)
 	}
 }
 
+void	draw(t_cub *game)
+{
+	int		x;
+	int		y;
+	int		color;
+
+	y = 0;
+	while (game->engine.map[y])
+	{
+		x = 0;
+		while (game->engine.map[y][x])
+		{
+			if (game->engine.map[y][x] == '0')
+				color = BROWN;
+			if (game->engine.map[y][x] == '1')
+				color = GREY;
+			if (game->engine.map[y][x] == 'D')
+				color = BLACK;
+			ft_draw_minimap(x, y, &color, game);
+			x++;
+		}
+		y++;
+	}
+	cast_ray(game);
+}
+
 int	ft_render(t_cub *game)
 {
+	char	*ammo;
+
 	game->engine.total_moves += ft_move(game);
-	cast_ray(game);
+	draw(game);
+	render_sprite(game);
+	ft_crosshair(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map3d, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->img_map2d, 0,
+		HEIGHT - (game->engine.height * SPRITE));
+	ft_draw_weapon(game);
+	mlx_put_image_to_window(game->mlx, game->window,
+		game->weapon_3d, WIDTH - 500, HEIGHT - 456);
 	ft_fraps(game);
+	ft_shoot(game);
+	ft_empty(game);
+	ft_reload(game);
+	ft_target_repop(game);
+	ammo = ft_strjoin(ft_itoa(game->engine.ammo), "/31");
+	mlx_string_put(game->mlx, game->window, 980, 425, RED, ammo);
 	return (0);
 }

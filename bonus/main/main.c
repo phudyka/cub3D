@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:42:03 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 11:52:10 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 07:24:51 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ static void	ft_init_texture(t_cub *game)
 	game->texture.south = NULL;
 	game->texture.east = NULL;
 	game->texture.west = NULL;
+	game->texture.ceiling = NULL;
+	game->texture.floor = NULL;
+	game->texture.door = NULL;
+	game->texture.weapon1 = NULL;
+	game->texture.reload0 = NULL;
+	game->texture.reload1 = NULL;
+	game->texture.shoot0 = NULL;
+	game->texture.shoot1 = NULL;
 }
 
 static void	ft_init_engine(t_cub *game)
@@ -48,6 +56,14 @@ static void	ft_init_engine(t_cub *game)
 	game->engine.coord = 'N';
 	game->engine.width = 0;
 	game->engine.height = 0;
+	game->engine.ammo = 31;
+	game->engine.shoot = 0;
+	game->engine.reload = 0;
+	game->engine.half = 0;
+	game->engine.time_shoot = 0.0;
+	game->engine.time_reload = 0.0;
+	game->engine.door = NULL;
+	game->engine.cooldown = 0.0;
 }
 
 static void	ft_init_game(t_cub *game)
@@ -61,6 +77,7 @@ static void	ft_init_game(t_cub *game)
 	game->ray.dir_x = 0.0;
 	game->ray.player_x = 2.0;
 	game->ray.player_y = 2.0;
+	game->num_sprites = 0;
 	ft_init_engine(game);
 	ft_init_texture(game);
 	ft_init_keys(game);

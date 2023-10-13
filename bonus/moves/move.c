@@ -6,11 +6,28 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 11:47:41 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 11:55:48 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:47:50 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
+
+void	door_state(int x, int y, t_cub *game)
+{
+	if (game->engine.map[y][x] == 'D')
+	{
+		if (game->engine.door[y][x] == '0')
+		{
+			game->engine.door[y][x] = '1';
+			system("aplay -q ./audio/door_open.wav &");
+		}
+		else
+		{
+			game->engine.door[y][x] = '0';
+			system("aplay -q ./audio/door_close.wav &");
+		}
+	}
+}
 
 static int	move_ok(double x, double y, t_cub *game)
 {
