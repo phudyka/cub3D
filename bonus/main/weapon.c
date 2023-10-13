@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:25:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 10:57:09 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 08:25:20 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_shoot(t_cub *game)
 	{
 		game->engine.current_time = clock();
 		check_hit(game, WIDTH / 2, HEIGHT / 2);
-		tmp = (game->engine.current_time - game->engine.time_shoot) 
+		tmp = (game->engine.current_time - game->engine.time_shoot)
 			/ CLOCKS_PER_SEC;
 		if (tmp > 0.06)
 		{

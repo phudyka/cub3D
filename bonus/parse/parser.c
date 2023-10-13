@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:13:22 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 11:21:36 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 07:42:53 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,20 @@ void	get_cub(t_cub *game, char **argv)
 
 int	master_parser(t_cub *game, int argc, char **argv)
 {
+	int	i;
+
+	i = 0;
 	if (argc != 2 || !argv[1])
 		return (1);
-	if (ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
+	i = ft_strlen(argv[1]);
+	i = i - 4;
+	if (argv[1][i] == '.' && argv[1][i + 1] == 'c'
+		&& argv[1][i + 2] == 'u' && argv[1][i + 3] == 'b')
 		get_cub(game, argv);
 	if (!game->engine.cub)
 		return (1);
 	parse_all_lines(game, argv);
 	check_valid_path(game);
 	check_map(game);
-	free(game->texture.north);
-	free(game->texture.east);
-	free(game->texture.west);
-	free(game->texture.south);
 	return (0);
 }

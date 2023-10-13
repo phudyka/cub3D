@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:24:39 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/11 11:52:00 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 08:15:57 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ int	game_over(t_cub *game)
 	ft_destroy_img(game);
 	free(game->ray.z_buffer);
 	free(game->sprite);
+	free(game->texture.path_north);
+	free(game->texture.path_south);
+	free(game->texture.path_west);
+	free(game->texture.path_east);
 	free(game);
 	game = NULL;
 	system("pkill aplay\n");
@@ -42,10 +46,10 @@ void	ft_error_parse(char *msg, t_cub *game)
 {
 	ft_putstr_fd(msg, 2);
 	ft_free_map(game);
-	free(game->texture.north);
-	free(game->texture.east);
-	free(game->texture.west);
-	free(game->texture.south);
+	free(game->texture.path_north);
+	free(game->texture.path_south);
+	free(game->texture.path_west);
+	free(game->texture.path_east);
 	free(game);
 	game = NULL;
 	exit(EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 13:49:32 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 14:59:32 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define HEIGHT 576 		// Window Height
 # define SPRITE 10 			// Minimap elements Size
 # define MOVESPEED 0.06 	// Player Move Speed
-# define ROTSPEED 0.03		// Cam and arrows rotation speed
+# define ROTSPEED 0.03	 	// Cam and arrows rotation speed
 # define PI 3.14159265359
 # define HD 256 			// Textures Resolution
 # define WRAP 20
@@ -159,6 +159,10 @@ typedef struct s_texture
 	char	*south;
 	char	*east;
 	char	*west;
+	char	*path_north;
+	char	*path_south;
+	char	*path_east;
+	char	*path_west;
 	char	*ceiling;
 	char	*floor;
 	char	*weapon1;

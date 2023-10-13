@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:41:04 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 10:46:48 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 07:53:12 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	check_all_configurations(t_cub *game)
 {
 	return (game->count_color_c && game->count_color_f
-		&& game->texture.east && game->texture.north
-		&& game->texture.south && game->texture.west);
+		&& game->texture.path_east && game->texture.path_north
+		&& game->texture.path_south && game->texture.path_west);
 }
 
 int	parse_line(char *line, t_cub *game)

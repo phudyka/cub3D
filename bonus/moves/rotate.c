@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:33:15 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/10 14:57:26 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 15:00:27 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_rotate(double direction, t_cub *game)
 	double	speed;
 
 	move = 0;
-	speed = ROTSPEED * direction;
+	speed = 0.0123 * direction;
 	move += ft_rotation(speed, game);
 	return (move);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 01:54:23 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/12 14:52:31 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 08:24:40 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	draw_or_replace_pixel(t_cub *game, int x, int y, char *replace)
 		draw_pixel(x, y, game->texture.color, game);
 	else
 	{
-		i = (my + y) * game->img3d.size_line 
+		i = (my + y) * game->img3d.size_line
 			+ (mx + x) * game->img3d.bpp / 8;
 		draw_pixel(x, y, *(unsigned int *)(replace + i), game);
 	}

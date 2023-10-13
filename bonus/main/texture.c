@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 15:12:44 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 13:44:19 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 08:25:51 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	coord_target(t_cub *game)
 		j = 0;
 		while (game->engine.map[i][j])
 		{
-			if (game->engine.map[i][j] == 'S')
+			if (game->engine.map[i][j] == 'T')
 			{
 				game->sprite[x].x = j;
 				game->sprite[x].y = i;
@@ -51,7 +51,7 @@ int	count_target(t_cub *game)
 		j = 0;
 		while (game->engine.map[i][j])
 		{
-			if (game->engine.map[i][j] == 'S')
+			if (game->engine.map[i][j] == 'T')
 				game->num_sprites++;
 			j++;
 		}
@@ -73,14 +73,14 @@ static void	ft_texture_index(t_cub *game)
 	{
 		if (game->ray.ray_y < 0)
 			game->texture.direction = 'N';
-		else 
+		else
 			game->texture.direction = 'S';
 	}
 	else
 	{
 		if (game->ray.ray_x < 0)
 			game->texture.direction = 'W';
-		else 
+		else
 			game->texture.direction = 'E';
 	}
 }

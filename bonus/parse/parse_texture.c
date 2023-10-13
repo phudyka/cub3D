@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 07:11:54 by kali              #+#    #+#             */
-/*   Updated: 2023/10/12 10:46:12 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 08:02:48 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ int	parse_north_texture(char *line, t_cub *game)
 
 	i = 0;
 	j = 0;
-	if (game->texture.north)
+	if (game->texture.path_north)
 	{
 		ft_error("Error: North texture (NO) is already defined.\n");
 		return (1);
 	}
 	while (line[i] != '.')
 		i++;
-	game->texture.north = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_north = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
 	while (line[i])
-		game->texture.north[j++] = line[i++];
-	game->texture.north[j] = '\0';
+		game->texture.path_north[j++] = line[i++];
+	game->texture.path_north[j] = '\0';
 	return (0);
 }
 
@@ -69,17 +69,17 @@ int	parse_south_texture(char *line, t_cub *game)
 
 	i = 0;
 	j = 0;
-	if (game->texture.south)
+	if (game->texture.path_south)
 	{
-		ft_error("Error: South texture (SO) is already defined.\n");
+		ft_error("Error: path_south texture (SO) is already defined.\n");
 		return (1);
 	}
 	while (line[i] != '.')
 		i++;
-	game->texture.south = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_south = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
 	while (line[i])
-		game->texture.south[j++] = line[i++];
-	game->texture.south[j] = '\0';
+		game->texture.path_south[j++] = line[i++];
+	game->texture.path_south[j] = '\0';
 	return (0);
 }
 
@@ -90,17 +90,17 @@ int	parse_west_texture(char *line, t_cub *game)
 
 	i = 0;
 	j = 0;
-	if (game->texture.west)
+	if (game->texture.path_west)
 	{
-		ft_error("Error: West texture (WE) is already defined.\n");
+		ft_error("Error: path_west texture (WE) is already defined.\n");
 		return (1);
 	}
 	while (line[i] != '.')
 		i++;
-	game->texture.west = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_west = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
 	while (line[i])
-		game->texture.west[j++] = line[i++];
-	game->texture.west[j] = '\0';
+		game->texture.path_west[j++] = line[i++];
+	game->texture.path_west[j] = '\0';
 	return (0);
 }
 
@@ -111,16 +111,16 @@ int	parse_east_texture(char *line, t_cub *game)
 
 	i = 0;
 	j = 0;
-	if (game->texture.east)
+	if (game->texture.path_east)
 	{
-		ft_error("Error: East texture (EA) is already defined.\n");
+		ft_error("Error: path_east texture (EA) is already defined.\n");
 		return (1);
 	}
 	while (line[i] != '.')
 		i++;
-	game->texture.east = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_east = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
 	while (line[i])
-		game->texture.east[j++] = line[i++];
-	game->texture.east[j] = '\0';
+		game->texture.path_east[j++] = line[i++];
+	game->texture.path_east[j] = '\0';
 	return (0);
 }

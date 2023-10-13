@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 11:02:46 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 08:16:23 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ int	ft_render(t_cub *game)
 	ft_target_repop(game);
 	ammo = ft_strjoin(ft_itoa(game->engine.ammo), "/31");
 	mlx_string_put(game->mlx, game->window, 980, 425, RED, ammo);
+	free(ammo);
 	return (0);
 }

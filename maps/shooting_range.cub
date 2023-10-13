@@ -1,14 +1,14 @@
-NO ./sprite/textures/floor.xpm
-SO ./sprite/textures/floor.xpm
-WE ./sprite/textures/floor.xpm
-EA ./sprite/textures/floor.xpm
+NO ./sprite/textures/north_wall.xpm
+SO ./sprite/textures/south_wall.xpm
+WE ./sprite/textures/west_wall.xpm
+EA ./sprite/textures/north_wall.xpm
 F 220,255,0
 C 225,0,200
 111111111111111111111111
 100000001000000100000001
-10S000S010S00S0100S00S01
+10T000T010T00T0100T00T01
 100000001000000100000001
-100000001000000100000001
+100N00001000000100000001
 100000001000000100000001
 100000001000000100000001
 1000000010000001D1111111

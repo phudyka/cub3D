@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:17:29 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 13:43:23 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 15:05:00 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,6 @@ void	ft_caster(t_cub *game)
 		}
 		if (game->engine.map[game->ray.mapy][game->ray.mapx] == '1')
 			game->ray.hit = 1;
-		else if (game->engine.map[game->ray.mapy][game->ray.mapx] == 'D')
-		{
-			if (game->engine.door[game->ray.mapy][game->ray.mapx] == '1')
-				continue ;
-			else
-				game->ray.hit = 2;
-		}
 	}
 }
 
