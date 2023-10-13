@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:32:21 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 10:38:53 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:15:19 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	ft_check_one(int i, int j, t_cub *game)
 {
 	if (game->engine.map[i][j - 1] != '1')
-		game_over_error("Map not valid\n", game);
+		game_over_error("Error!\n [Map not valid]\n", game);
 	if (game->engine.map[i][0] != '1')
-		game_over_error("Map not valid\n", game);
+		game_over_error("Error!\n [Map not valid]\n", game);
 }
 
 void	ft_check_len(size_t j, t_cub *game)
 {
 	if (j != ft_strlen(game->engine.map[0]))
-		game_over_error("Map not valid\n", game);
+		game_over_error("Error!\n [Map too long]\n", game);
 }
 
 void	ft_check_close(int i, t_cub *game)
@@ -34,7 +34,7 @@ void	ft_check_close(int i, t_cub *game)
 	while (game->engine.map[i][j])
 	{
 		if (game->engine.map[i][j] != '1')
-			game_over_error("Map not valid\n", game);
+			game_over_error("Error!\n [Map do not close]\n", game);
 		j++;
 	}
 }
