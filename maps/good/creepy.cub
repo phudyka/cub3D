@@ -1,9 +1,9 @@
-NO textures/simonkraft/respawn_anchor_side0.xpm
-EA textures/simonkraft/respawn_anchor_side2.xpm
-SO textures/simonkraft/respawn_anchor_side4.xpm
-WE textures/simonkraft/respawn_anchor_side3.xpm
+NO ./sprite/textures/north_wall.xpm
+EA ./sprite/textures/north_wall.xpm
+SO ./sprite/textures/north_wall.xpm
+WE ./sprite/textures/north_wall.xpm
 
-C 35,19,73
+C 5,9,3
 F 15,6,40
 
 111111111111111

@@ -1,7 +1,7 @@
-NO textures/matrix.xpm
-SO textures/matrix.xpm
-WE textures/matrix.xpm
-EA textures/matrix.xpm
+NO ./sprite/textures/north_wall.xpm
+SO ./sprite/textures/north_wall.xpm
+WE ./sprite/textures/north_wall.xpm
+EA ./sprite/textures/north_wall.xpm
 
 F 0,0,0
 C 0,0,0
