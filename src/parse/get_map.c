@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 08:05:44 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/12 10:38:12 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 12:14:07 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*read_and_extract_map(int fd)
 	char	*line;
 	char	*map;
 	int		is_map_started;
+	char	*cpy;
 
 	is_map_started = 0;
 	map = ft_calloc(1, 1);
@@ -60,15 +61,18 @@ char	*read_and_extract_map(int fd)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (is_configuration(line))
+		cpy = ft_strtrim(line, " ", "\t");
+		if (is_configuration(cpy))
 		{
 			free(line);
+			free(cpy);
 			continue ;
 		}
-		if (!is_map_started && is_map_line(line) == 0)
+		if (!is_map_started && is_map_line(cpy) == 0)
 			is_map_started = 1;
 		if (is_map_started)
-			map = add_line_to_map(map, line);
+			map = add_line_to_map(map, cpy);
+		free(cpy);
 		free(line);
 	}
 	return (map);
