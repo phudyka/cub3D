@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 15:20:27 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:19:22 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,8 @@ typedef struct s_color
 	int	r;
 	int	g;
 	int	b;
+	int	c_color;
+	int	f_color;
 }				t_color;
 
 typedef struct s_keys

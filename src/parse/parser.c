@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:13:22 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 16:28:46 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:17:58 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int	process_map_lines(char *line, t_cub *game)
 	return (0);
 }
 
+static void	ft_get_rgb(t_cub *game)
+{
+game->ceiling_col.c_color = (game->ceiling_col.r << 16)
+		| (game->ceiling_col.g << 8) | game->ceiling_col.b;
+	game->floor_col.f_color = (game->floor_col.r << 16)
+		| (game->floor_col.g << 8) | game->floor_col.b;
+}
+
 int	process_configuration_lines(char *line, t_cub *game)
 {
 	char	*tmp;
@@ -50,6 +58,7 @@ int	process_configuration_lines(char *line, t_cub *game)
 	else if (tmp[0] == 'F' || tmp[0] == 'C')
 	{
 		floor_ceiling_color(tmp, game);
+		ft_get_rgb(game);
 		if (tmp[0] == 'F')
 			game->count_color_f++;
 		if (tmp[0] == 'C')
