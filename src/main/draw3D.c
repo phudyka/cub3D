@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 13:47:37 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 14:27:12 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,27 @@ void	draw_texture(int x, void *texture, t_cub *game)
 	}
 }
 
-static void	draw_column(int column, int y_start, int y_end, int color, t_cub *game)
+static void	draw_column(int x, int flag, int color, t_cub *game)
 {
 	int	i;
-	int	y;
+	int	end;
+	int	start;
 
-	y = y_start;
-	while (y < y_end)
+	if (flag)
 	{
-		i = (y * game->img3d.size_line) + (column * game->img3d.bpp / 8);
+		start = game->ray.draw_end;
+		end = HEIGHT;
+	}
+	else
+	{
+		start = 0;
+		end = game->ray.draw_start;
+	}
+	while (start < end)
+	{
+		i = (start * game->img3d.size_line) + (x * game->img3d.bpp / 8);
 		*(unsigned int *)(game->img3d.pixels + i) = color;
-		y++;
+		start++;
 	}
 }
 
@@ -73,7 +83,7 @@ void	render3d(int x, t_cub *game)
 			+ game->ray.distance * game->ray.ray_x;
 	game->ray.wall_x -= floor(game->ray.wall_x);
 	game->ray.z_buffer[x] = game->ray.distance;
-	draw_column(x, 0, game->ray.draw_start, BLUE, game);
+	draw_column(x, 0, BLUE, game);
 	choose_texture(x, game);
-	draw_column(x, game->ray.draw_end, HEIGHT, BROWN, game);
+	draw_column(x, 1, BROWN, game);
 }

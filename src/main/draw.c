@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 10:36:48 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/13 11:49:13 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 14:19:13 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,3 @@ int	ft_colorpix(int x, int y, void *texture, t_cub *game)
 	mix_colors(&game->colorpix.color, game->colorpix.fog, 0x000000, game);
 	return (game->colorpix.color);
 }
-
