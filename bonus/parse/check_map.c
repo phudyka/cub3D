@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 05:04:57 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/13 08:36:06 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/13 15:26:48 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ void	format_map(t_cub *game)
 			max = ft_strlen(game->engine.map[i]);
 		i++;
 	}
+	if (max >= 50)
+		ft_error_free("Error! : [Map width upon max limit]\n", game);
+	if (i > 100)
+		ft_error_free("Error! : [Map height upon max limit]\n", game);
 	game->engine.width = max;
 	add_char_map(game, max);
 }

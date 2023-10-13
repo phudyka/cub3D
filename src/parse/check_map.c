@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 05:04:57 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/13 15:06:02 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 15:40:52 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	format_map(t_cub *game)
 			max = ft_strlen(game->engine.map[i]);
 		i++;
 	}
+	if (max >= 50)
+		ft_error_free("Error! : [Map width upon max limit]\n", game);
 	game->engine.width = max;
 	add_char_map(game, max);
 }
@@ -97,14 +99,14 @@ void	check_map(t_cub *game)
 	unsigned long	j;
 	int				c;
 
-	i = -1;
+	i = 0;
 	c = 0;
 	c = replace_spaces(game, c);
 	if (c == 0 || c > 1)
 		ft_error_parse("Map not valid\n", game);
 	format_map(game);
-	ft_check_close(++i, game);
-	while (game->engine.map[++i])
+	ft_check_close(i, game);
+	while (game->engine.map[i])
 	{
 		j = -1;
 		game->engine.height++;
@@ -112,6 +114,7 @@ void	check_map(t_cub *game)
 			ft_check(i, j, game);
 		ft_check_len(j, game);
 		ft_check_one(i, j, game);
+		i++;
 	}
 	if (i == j)
 		ft_error_parse("Map not valid\n", game);
