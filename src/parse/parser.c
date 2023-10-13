@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:13:22 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 17:17:58 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:51:25 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	process_map_lines(char *line, t_cub *game)
 
 static void	ft_get_rgb(t_cub *game)
 {
-game->ceiling_col.c_color = (game->ceiling_col.r << 16)
+	game->ceiling_col.c_color = (game->ceiling_col.r << 16)
 		| (game->ceiling_col.g << 8) | game->ceiling_col.b;
 	game->floor_col.f_color = (game->floor_col.r << 16)
 		| (game->floor_col.g << 8) | game->floor_col.b;

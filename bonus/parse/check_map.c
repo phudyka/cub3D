@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 05:04:57 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/13 16:30:57 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:49:33 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,5 @@ void	check_map(t_cub *game)
 		ft_check_len(j, game);
 		ft_check_one(i, j, game);
 	}
-	if (i == j)
-		ft_error_parse("Error!\n[Map not valid]\n", game);
 	ft_check_close((i - 1), game);
 }
