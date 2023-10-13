@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 16:13:22 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 10:42:51 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 11:21:36 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	master_parser(t_cub *game, int argc, char **argv)
 {
 	if (argc != 2 || !argv[1])
 		return (1);
-	if (ft_strnstr(argv[1], ".cub", ft_strlen(argv[1]))) // A CHANGER
+	if (ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
 		get_cub(game, argv);
 	if (!game->engine.cub)
 		return (1);

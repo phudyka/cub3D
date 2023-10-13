@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 15:49:16 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/12 14:55:58 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/13 11:23:12 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ typedef struct s_mix
 
 typedef struct s_sprite
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	double	distance;
 	double	relative_x;
 	double	relative_y;
@@ -148,8 +148,7 @@ typedef struct s_colorpix
 	unsigned int	color;
 	char			*pix;
 	float			fog;
-} 			t_colorpix;
-
+}			t_colorpix;
 
 typedef struct s_texture
 {
@@ -294,7 +293,7 @@ typedef struct s_cub
 	t_keys			keys;
 	t_texture		texture;
 	t_color			ceiling_col;
-	t_color			floor_col;\
+	t_color			floor_col;
 	t_engine		engine;
 	t_ray			ray;
 	t_img			img2d;
