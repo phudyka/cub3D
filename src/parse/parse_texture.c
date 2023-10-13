@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 07:11:54 by kali              #+#    #+#             */
-/*   Updated: 2023/10/13 08:02:48 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:02:20 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	parse_north_texture(char *line, t_cub *game)
 		ft_error("Error: North texture (NO) is already defined.\n");
 		return (1);
 	}
-	while (line[i] != '.')
+	while (line[i] && line[i] != '.')
 		i++;
 	game->texture.path_north = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
 	while (line[i])

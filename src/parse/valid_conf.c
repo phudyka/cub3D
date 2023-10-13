@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   valid_conf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 02:14:11 by kali              #+#    #+#             */
-/*   Updated: 2023/10/13 07:54:31 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/13 16:00:17 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
 
-int	validate_path(char *path)
+int	validate_path(char *path, t_cub *game)
 {
 	int	fd;
 
@@ -22,7 +22,7 @@ int	validate_path(char *path)
 	if (fd == -1)
 	{
 		close(fd);
-		return (1);
+		ft_error_free("Error! [Wrong texture]\n", game);
 	}
 	close(fd);
 	return (0);
@@ -30,13 +30,13 @@ int	validate_path(char *path)
 
 int	check_valid_path(t_cub *game)
 {
-	if (validate_path(game->texture.path_north) == 1)
+	if (validate_path(game->texture.path_north, game) == 1)
 		return (1);
-	else if (validate_path(game->texture.path_south) == 1)
+	else if (validate_path(game->texture.path_south, game) == 1)
 		return (1);
-	else if (validate_path(game->texture.path_east) == 1)
+	else if (validate_path(game->texture.path_east, game) == 1)
 		return (1);
-	else if (validate_path(game->texture.path_west) == 1)
+	else if (validate_path(game->texture.path_west, game) == 1)
 		return (1);
 	return (0);
 }
