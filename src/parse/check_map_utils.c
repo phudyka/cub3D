@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:32:21 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/14 05:28:37 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/14 15:09:27 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ int	is_configuration(char *line)
 void	ft_check_one(int i, int j, t_cub *game)
 {
 	if (game->engine.map[i][j - 1] != '1')
-		game_over_error("Error!\n[Map not valid]\n", game);
+		ft_error_parse("Error!\n[Map not valid]\n", game);
 	if (game->engine.map[i][0] != '1')
-		game_over_error("Error!\n[Map not valid]\n", game);
+		ft_error_parse("Error!\n[Map not valid]\n", game);
 }
 
 void	ft_check_len(size_t j, t_cub *game)
 {
 	if (j != ft_strlen(game->engine.map[0]))
-		game_over_error("Error!\n[Map too long]\n", game);
+		ft_error_parse("Error!\n[Map too long]\n", game);
 }
 
 void	ft_check_close(int i, t_cub *game)
@@ -43,7 +43,7 @@ void	ft_check_close(int i, t_cub *game)
 	while (game->engine.map[i][j])
 	{
 		if (game->engine.map[i][j] != '1')
-			game_over_error("Error!\n[Map not closed]\n", game);
+			ft_error_parse("Error!\n[Map not closed]\n", game);
 		j++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 05:04:57 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/13 17:49:33 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/14 15:04:15 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	check_map(t_cub *game)
 	if (c == 0 || c > 1)
 		ft_error_parse("Error!\n[Map needs 1 player]\n", game);
 	format_map(game);
-	ft_check_close(++i, game);
+	ft_check_close(i + 1, game);
 	while (game->engine.map[++i])
 	{
 		j = -1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 08:05:44 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/14 05:29:59 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/14 13:50:23 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	process_line(char *line, char **map, int *is_map_started)
 		*is_map_started = 1;
 	if (*is_map_started)
 		*map = add_line_to_map(*map, line);
-	printf("%s\n", line);
 	free(cpy);
 }
 

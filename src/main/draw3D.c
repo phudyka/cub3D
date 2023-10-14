@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw3D.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
+/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:52:20 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/14 05:46:31 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:26:42 by phudyka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	render3d(int x, t_cub *game)
 	if (game->ray.draw_end >= HEIGHT)
 		game->ray.draw_end = HEIGHT - 1;
 	if (game->ray.side == 0)
-		game->ray.wall_x = game->ray.player_y
+		game->ray.wall_x = game->ray.player_y 
 			+ game->ray.distance * game->ray.ray_y;
 	else
-		game->ray.wall_x = game->ray.player_x
+		game->ray.wall_x = game->ray.player_x 
 			+ game->ray.distance * game->ray.ray_x;
 	game->ray.wall_x -= floor(game->ray.wall_x);
 	game->ray.z_buffer[x] = game->ray.distance;
