@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:07:23 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 11:51:32 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/14 05:46:37 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	key_press(int key, t_cub *game)
 		game->engine.move_x = 1;
 	else if (key == LEFT)
 		game->engine.rotate -= 1;
-	else if (key == RIGHT) 
+	else if (key == RIGHT)
 		game->engine.rotate += 1;
 	return (0);
 }
