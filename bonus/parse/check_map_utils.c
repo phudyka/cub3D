@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phudyka <phudyka@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 10:32:21 by phudyka           #+#    #+#             */
-/*   Updated: 2023/10/13 16:30:45 by phudyka          ###   ########.fr       */
+/*   Updated: 2023/10/14 05:28:46 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
+
+int	is_configuration(char *line)
+{
+	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0
+		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0
+		|| line[0] == 'F' || line[0] == 'C')
+		return (1);
+	return (0);
+}
 
 void	ft_check_one(int i, int j, t_cub *game)
 {

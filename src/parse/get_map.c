@@ -6,20 +6,11 @@
 /*   By: dtassel <dtassel@42.nice.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 08:05:44 by dtassel           #+#    #+#             */
-/*   Updated: 2023/10/13 12:14:07 by dtassel          ###   ########.fr       */
+/*   Updated: 2023/10/14 05:29:59 by dtassel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/main.h"
-
-int	is_configuration(char *line)
-{
-	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0
-		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0
-		|| line[0] == 'F' || line[0] == 'C')
-		return (1);
-	return (0);
-}
 
 int	is_map_line(char *line)
 {
@@ -46,35 +37,40 @@ char	*add_line_to_map(char *map, char *line)
 	return (new_map);
 }
 
+static void	process_line(char *line, char **map, int *is_map_started)
+{
+	char	*cpy;
+
+	cpy = ft_strtrim(line, " ", "\t");
+	if (is_configuration(cpy))
+	{
+		free(cpy);
+		return ;
+	}
+	if (!*is_map_started && is_map_line(line) == 0)
+		*is_map_started = 1;
+	if (*is_map_started)
+		*map = add_line_to_map(*map, line);
+	printf("%s\n", line);
+	free(cpy);
+}
+
 char	*read_and_extract_map(int fd)
 {
 	char	*line;
 	char	*map;
 	int		is_map_started;
-	char	*cpy;
 
 	is_map_started = 0;
 	map = ft_calloc(1, 1);
-	line = "";
+	line = get_next_line(fd);
 	while (line)
 	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		cpy = ft_strtrim(line, " ", "\t");
-		if (is_configuration(cpy))
-		{
-			free(line);
-			free(cpy);
-			continue ;
-		}
-		if (!is_map_started && is_map_line(cpy) == 0)
-			is_map_started = 1;
-		if (is_map_started)
-			map = add_line_to_map(map, cpy);
-		free(cpy);
+		process_line(line, &map, &is_map_started);
 		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
 	return (map);
 }
 
