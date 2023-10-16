@@ -62,7 +62,7 @@ GNL             = get_next_line.c get_next_line_utils.c
 GNL_OBJS        = $(addprefix $(GNL_DIR)/, $(GNL:.c=.o))
 
 # Minilibx
-MLX_DIR         = minilibx-linux
+MLX_DIR         = mlx
 MLX             = libmlx.a
 
 # Flags de linkage
