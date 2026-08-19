@@ -149,6 +149,7 @@ void	draw(t_cub *game)
 		}
 		y++;
 	}
+	ft_draw_player(game);
 	cast_ray(game);
 }
 

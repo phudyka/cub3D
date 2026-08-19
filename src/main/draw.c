@@ -42,56 +42,42 @@ int	ft_colorpix_ceifloo(int x, int y, void *texture, t_cub *game)
 	return (color);
 }
 
-static void	ft_draw_player(t_cub *game)
+void	ft_draw_minimap(int x, int y, int *color, t_cub *game)
 {
-	int	i;
+	int		dx;
+	int		dy;
+
+	x *= SPRITE;
+	y *= SPRITE;
+	dy = -1;
+	while (++dy < SPRITE)
+	{
+		dx = -1;
+		while (++dx < SPRITE)
+			*(unsigned int *)(game->img2d.pixels
+				+ (y + dy) * game->img2d.size_line
+				+ (x + dx) * game->img2d.bpp / 8) = *color;
+	}
+}
+
+void	ft_draw_player(t_cub *game)
+{
 	int	px;
 	int	py;
 	int	dx;
 	int	dy;
 
-	dy = 0;
 	px = game->ray.player_x * SPRITE - (7 / 2);
 	py = game->ray.player_y * SPRITE - (7 / 2);
-	while (dy < 7)
+	dy = -1;
+	while (++dy < 7)
 	{
-		dx = 0;
-		while (dx < 7)
-		{
-			i = (py + dy) * game->img2d.size_line
-				+ (px + dx) * game->img2d.bpp / 8;
-			*(unsigned int *)(game->img2d.pixels + i) = RED;
-			dx++;
-		}
-		dy++;
+		dx = -1;
+		while (++dx < 7)
+			*(unsigned int *)(game->img2d.pixels
+				+ (py + dy) * game->img2d.size_line
+				+ (px + dx) * game->img2d.bpp / 8) = RED;
 	}
-}
-
-void	ft_draw_minimap(int x, int y, int *color, t_cub *game)
-{
-	int		dx;
-	int		dy;
-	char	*dst_pixels;
-	int		dst_index;
-
-	dst_pixels = mlx_get_data_addr(game->img_map2d, &game->img2d.bpp,
-			&game->img2d.size_line, &game->img2d.endian);
-	x *= SPRITE;
-	y *= SPRITE;
-	dy = 0;
-	while (dy < SPRITE)
-	{
-		dx = 0;
-		while (dx < SPRITE)
-		{
-			dst_index = (y + dy) * game->img2d.size_line
-				+ (x + dx) * game->img2d.bpp / 8;
-			*(unsigned int *)(dst_pixels + dst_index) = *color;
-			dx++;
-		}
-		dy++;
-	}
-	ft_draw_player(game);
 }
 
 #endif

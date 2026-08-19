@@ -12,74 +12,58 @@
 
 #include "../../include/main.h"
 
-static void	draw_pixel(int x, int y, int color, t_cub *game)
+/*
+** Which weapon frame to show depends only on the shoot/reload state, so it
+** is picked once per frame rather than once per pixel -- and its pixel
+** address is fetched once too. This loop used to call
+** mlx_get_data_addr 500 * 456 times a frame, for an address that never
+** moves.
+*/
+static void	*weapon_frame(t_cub *game)
 {
-	int	i;
-
-	i = y * game->weapon.size_line + x * game->weapon.bpp / 8;
-	*(unsigned int *)(game->weapon.pixels + i) = color;
-}
-
-static void	draw_or_replace_pixel(t_cub *game, int x, int y, char *replace)
-{
-	int	i;
-	int	mx;
-	int	my;
-
-	mx = WIDTH - 500;
-	my = HEIGHT - 456;
-	if (game->texture.color)
-		draw_pixel(x, y, game->texture.color, game);
-	else
+	if (game->engine.reload == 1)
 	{
-		i = (my + y) * game->img3d.size_line
-			+ (mx + x) * game->img3d.bpp / 8;
-		draw_pixel(x, y, *(unsigned int *)(replace + i), game);
+		if (game->engine.half == 1)
+			return (game->texture.reload0);
+		return (game->texture.reload1);
 	}
-}
-
-static int	ft_sprite_select(int x, int y, t_cub *game)
-{
-	int	color;
-
-	color = 0;
-	if (game->engine.shoot == 0 && game->engine.reload != 1)
-		color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
-	else if (game->engine.shoot == 1
-		&& game->engine.reload != 1 && game->engine.ammo != 0)
-		color = ft_colorpix_ceifloo(x, y, game->texture.shoot0, game);
-	else if (game->engine.shoot == 1
-		&& game->engine.reload != 1 && game->engine.ammo == 0)
-		color = ft_colorpix_ceifloo(x, y, game->texture.shoot1, game);
-	else if (game->engine.shoot != 1
-		&& game->engine.reload == 1 && game->engine.half == 1)
-		color = ft_colorpix_ceifloo(x, y, game->texture.reload0, game);
-	else if (game->engine.shoot != 1
-		&& game->engine.reload == 1 && game->engine.half == 0)
-		color = ft_colorpix_ceifloo(x, y, game->texture.reload1, game);
-	return (color);
+	if (game->engine.shoot == 1)
+	{
+		if (game->engine.ammo != 0)
+			return (game->texture.shoot0);
+		return (game->texture.shoot1);
+	}
+	return (game->texture.weapon1);
 }
 
 void	ft_draw_weapon(t_cub *game)
 {
-	int		x;
-	int		y;
-	char	*replace;
+	char			*scene;
+	char			*tex;
+	int				tbpp;
+	int				tsize;
+	int				tend;
+	unsigned int	color;
+	int				x;
+	int				y;
 
-	y = 0;
-	replace = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
+	scene = mlx_get_data_addr(game->img_map3d, &game->img3d.bpp,
 			&game->img3d.size_line, &game->img3d.endian);
-	while (y < 456)
+	tex = mlx_get_data_addr(weapon_frame(game), &tbpp, &tsize, &tend);
+	y = -1;
+	while (++y < 456)
 	{
-		x = 0;
-		while (x < 500)
+		x = -1;
+		while (++x < 500)
 		{
-			game->texture.color = ft_sprite_select(x, y, game);
-			if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-				draw_or_replace_pixel(game, x, y, replace);
-			x++;
+			color = *(unsigned int *)(tex + y * tsize + x * tbpp / 8);
+			if (color == 0)
+				color = *(unsigned int *)(scene
+						+ (HEIGHT - 456 + y) * game->img3d.size_line
+						+ (WIDTH - 500 + x) * game->img3d.bpp / 8);
+			*(unsigned int *)(game->weapon.pixels + y * game->weapon.size_line
+				+ x * game->weapon.bpp / 8) = color;
 		}
-		y++;
 	}
 }
 

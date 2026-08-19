@@ -327,6 +327,7 @@ void	calculate_sprite_position(t_cub *game);
 void	draw_sprite_pixel(t_cub *game, t_sprite_params *params);
 void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, int *color, t_cub *game);
+void	ft_draw_player(t_cub *game);
 void	ft_input(t_cub *game);
 float	wall_fog(double dist);
 void	ft_init_mlx(t_cub *game);
