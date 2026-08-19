@@ -156,6 +156,7 @@ int	ft_render(t_cub *game)
 {
 	char	ammo[32];
 
+	ft_tick(game);
 	game->engine.total_moves += ft_move(game);
 	draw(game);
 	render_sprite(game);
@@ -180,6 +181,7 @@ int	ft_render(t_cub *game)
 
 int	ft_render(t_cub *game)
 {
+	ft_tick(game);
 	game->engine.total_moves += ft_move(game);
 	cast_ray(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->img_map3d, 0, 0);

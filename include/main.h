@@ -20,10 +20,15 @@
 # define WIDTH 1024 		// Window Width
 # define HEIGHT 576 		// Window Height
 # define SPRITE 10 			// Minimap elements Size
-# define MOVESPEED 0.06 	// Player Move Speed
-# define ROTSPEED 0.03	  	// Cam and arrows rotation speed
+/*
+** Speeds are per SECOND and scaled by the frame time, so they no longer
+** change with the frame rate. Tune these two to taste.
+*/
+# define MOVESPEED 4.5		// Player move speed, units per second
+# define ROTSPEED 2.25		// Arrow-key rotation, radians per second
 # ifdef BONUS
-#  define ARROWROT 0.0123	// Slower arrow rotation (mouse does the looking)
+#  define ARROWROT 0.92		// Slower with the mouse doing the looking
+#  define MOUSEROT 0.0123	// Per mouse-motion event, not per second
 # else
 #  define ARROWROT ROTSPEED
 # endif
@@ -180,6 +185,8 @@ typedef struct s_engine
 	int		width;
 	int		height;
 	double	angle;
+	double	dt;
+	double	now;
 	int		shoot;
 	int		reload;
 	int		half;
@@ -267,7 +274,10 @@ typedef struct s_cub
 	t_params		params;
 }				t_cub;
 
+double	ft_now(void);
+void	ft_tick(t_cub *game);
 void	ft_play(const char *wav);
+void	ft_play_loop(const char *wav);
 void	ft_audio_init(void);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strtrim(const char *s1, const char *set, const char *setb);

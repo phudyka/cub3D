@@ -12,6 +12,32 @@
 
 #include "../../include/main.h"
 
+/* Monotonic seconds. Not clock(), which counts CPU time across every
+** thread and so ran about N times too fast once the renderer threaded. */
+double	ft_now(void)
+{
+	struct timespec	t;
+
+	clock_gettime(CLOCK_MONOTONIC, &t);
+	return (t.tv_sec + t.tv_nsec / 1000000000.0);
+}
+
+/* One frame time for the whole frame. Clamped so a stall (window drag,
+** breakpoint) cannot teleport the player through a wall. */
+void	ft_tick(t_cub *game)
+{
+	double	prev;
+
+	prev = game->engine.now;
+	game->engine.now = ft_now();
+	if (prev == 0.0)
+		game->engine.dt = 1.0 / 60.0;
+	else
+		game->engine.dt = game->engine.now - prev;
+	if (game->engine.dt > 0.05)
+		game->engine.dt = 0.05;
+}
+
 void	ft_init_dda(int x, t_cub *game)
 {
 	game->ray.cam_x = 2 * x / (double)WIDTH - 1;

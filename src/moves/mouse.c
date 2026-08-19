@@ -35,9 +35,9 @@ int	ft_mouse(int x, int y, t_cub *game)
 	if (x == old_x)
 		return (0);
 	else if (x < old_x)
-		game->engine.total_moves += ft_rotate(-1, game);
+		game->engine.total_moves += ft_rotate(-MOUSEROT, game);
 	else if (x > old_x)
-		game->engine.total_moves += ft_rotate(1, game);
+		game->engine.total_moves += ft_rotate(MOUSEROT, game);
 	old_x = x;
 	return (0);
 }

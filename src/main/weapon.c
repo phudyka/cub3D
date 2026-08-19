@@ -53,10 +53,9 @@ void	ft_shoot(t_cub *game)
 
 	if (game->engine.shoot == 1 && game->engine.ammo != 0)
 	{
-		game->engine.current_time = clock();
+		game->engine.current_time = game->engine.now;
 		check_hit(game, WIDTH / 2, HEIGHT / 2);
-		tmp = (game->engine.current_time - game->engine.time_shoot)
-			/ CLOCKS_PER_SEC;
+		tmp = (game->engine.current_time - game->engine.time_shoot);
 		if (tmp > 0.06)
 		{
 			game->engine.shoot = 0;
@@ -70,11 +69,10 @@ void	ft_empty(t_cub *game)
 {
 	double	tmp;
 
-	game->engine.current_time = clock();
+	game->engine.current_time = game->engine.now;
 	if (game->engine.shoot == 1 && game->engine.ammo == 0)
 	{
-		tmp = (game->engine.current_time - game->engine.time_shoot)
-			/ CLOCKS_PER_SEC;
+		tmp = (game->engine.current_time - game->engine.time_shoot);
 		if (tmp > 0.25)
 		{
 			game->engine.shoot = 0;
@@ -87,11 +85,10 @@ void	ft_reload(t_cub *game)
 {
 	double	tmp;
 
-	game->engine.current_time = clock();
+	game->engine.current_time = game->engine.now;
 	if (game->engine.reload == 1)
 	{
-		tmp = (game->engine.current_time - game->engine.time_reload)
-			/ CLOCKS_PER_SEC;
+		tmp = (game->engine.current_time - game->engine.time_reload);
 		if (tmp > 0.8)
 			game->engine.half = 1;
 		if (tmp > 1.2)

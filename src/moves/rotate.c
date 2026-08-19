@@ -30,13 +30,11 @@ static int	ft_rotation(double speed, t_cub *game)
 	return (1);
 }
 
-int	ft_rotate(double direction, t_cub *game)
+/*
+** speed is an angle in radians. Callers decide how much: the keyboard
+** scales by frame time, the mouse uses a fixed step per motion event.
+*/
+int	ft_rotate(double speed, t_cub *game)
 {
-	int		move;
-	double	speed;
-
-	move = 0;
-	speed = ARROWROT * direction;
-	move += ft_rotation(speed, game);
-	return (move);
+	return (ft_rotation(speed, game));
 }

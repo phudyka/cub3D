@@ -37,16 +37,44 @@ void	ft_audio_init(void)
 	signal(SIGCHLD, SIG_IGN);
 }
 
-void	ft_play(const char *wav)
+static void	run_aplay(const char *wav)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid != 0)
-		return ;
 	prctl(PR_SET_PDEATHSIG, SIGKILL);
 	if (getppid() == 1)
 		_exit(0);
 	execlp("aplay", "aplay", "-q", wav, (char *)NULL);
 	_exit(0);
+}
+
+void	ft_play(const char *wav)
+{
+	if (fork() != 0)
+		return ;
+	run_aplay(wav);
+}
+
+/*
+** aplay cannot loop, so a supervisor child restarts it forever. Both the
+** supervisor and each aplay carry PR_SET_PDEATHSIG, so the whole chain
+** dies with the game.
+*/
+void	ft_play_loop(const char *wav)
+{
+	pid_t	child;
+
+	if (fork() != 0)
+		return ;
+	prctl(PR_SET_PDEATHSIG, SIGKILL);
+	if (getppid() == 1)
+		_exit(0);
+	signal(SIGCHLD, SIG_DFL);
+	while (1)
+	{
+		child = fork();
+		if (child == 0)
+			run_aplay(wav);
+		if (child < 0)
+			_exit(1);
+		waitpid(child, NULL, 0);
+	}
 }

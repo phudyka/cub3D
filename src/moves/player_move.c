@@ -19,8 +19,8 @@ static int	ft_forward(t_cub *game)
 	double	new_y;
 
 	move = 0;
-	new_x = game->ray.player_x + game->ray.dir_x * MOVESPEED;
-	new_y = game->ray.player_y + game->ray.dir_y * MOVESPEED;
+	new_x = game->ray.player_x + game->ray.dir_x * MOVESPEED * game->engine.dt;
+	new_y = game->ray.player_y + game->ray.dir_y * MOVESPEED * game->engine.dt;
 	move = check_move(new_x, new_y, game);
 	return (move);
 }
@@ -32,8 +32,8 @@ static int	ft_backward(t_cub *game)
 	double	new_y;
 
 	move = 0;
-	new_x = game->ray.player_x - game->ray.dir_x * MOVESPEED;
-	new_y = game->ray.player_y - game->ray.dir_y * MOVESPEED;
+	new_x = game->ray.player_x - game->ray.dir_x * MOVESPEED * game->engine.dt;
+	new_y = game->ray.player_y - game->ray.dir_y * MOVESPEED * game->engine.dt;
 	move = check_move(new_x, new_y, game);
 	return (move);
 }
@@ -45,8 +45,8 @@ static int	ft_left(t_cub *game)
 	double	new_y;
 
 	move = 0;
-	new_x = game->ray.player_x + game->ray.dir_y * MOVESPEED;
-	new_y = game->ray.player_y - game->ray.dir_x * MOVESPEED;
+	new_x = game->ray.player_x + game->ray.dir_y * MOVESPEED * game->engine.dt;
+	new_y = game->ray.player_y - game->ray.dir_x * MOVESPEED * game->engine.dt;
 	move = check_move(new_x, new_y, game);
 	return (move);
 }
@@ -58,8 +58,8 @@ static int	ft_right(t_cub *game)
 	double	new_y;
 
 	move = 0;
-	new_x = game->ray.player_x - game->ray.dir_y * MOVESPEED;
-	new_y = game->ray.player_y + game->ray.dir_x * MOVESPEED;
+	new_x = game->ray.player_x - game->ray.dir_y * MOVESPEED * game->engine.dt;
+	new_y = game->ray.player_y + game->ray.dir_x * MOVESPEED * game->engine.dt;
 	move = check_move(new_x, new_y, game);
 	return (move);
 }
@@ -78,6 +78,7 @@ int	ft_move(t_cub *game)
 	if (game->engine.move_x == 1)
 		move += ft_right(game);
 	if (game->engine.rotate != 0)
-		move += ft_rotate(game->engine.rotate, game);
+		move += ft_rotate(game->engine.rotate * ARROWROT
+				* game->engine.dt, game);
 	return (move);
 }
