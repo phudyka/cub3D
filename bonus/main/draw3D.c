@@ -12,28 +12,55 @@
 
 #include "../../include/main.h"
 
+static inline unsigned int	darken(unsigned int c, float keep)
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+
+	r = ((c >> 16) & 0xFF) * keep;
+	g = ((c >> 8) & 0xFF) * keep;
+	b = (c & 0xFF) * keep;
+	return ((r << 16) | (g << 8) | b);
+}
+
 void	draw_texture(int x, void *texture, t_cub *game)
 {
-	int		i;
-	int		y;
-	int		color;
-	int		texture_y;
-	double	tex_pos;
+	char			*tpix;
+	int				tbpp;
+	int				tsize;
+	int				tend;
+	double			tex_pos;
+	double			step;
+	float			fog;
+	float			keep;
+	int				y;
+	unsigned int	color;
 
 	y = game->ray.draw_start;
-	tex_pos = (y - HEIGHT / 2 + game->ray.wall_height / 2)
-		* (double)HD / game->ray.wall_height;
+	step = (double)HD / game->ray.wall_height;
+	tex_pos = (y - HEIGHT / 2 + game->ray.wall_height / 2) * step;
 	if (game->ray.side == 0)
 		game->ray.tex_x = (int)(game->ray.wall_x * (double)HD);
 	else
 		game->ray.tex_x = HD - (int)(game->ray.wall_x * (double)HD) - 1;
+	fog = wall_fog(game->ray.distance);
+	keep = 1.0f - fog;
+	tpix = mlx_get_data_addr(texture, &tbpp, &tsize, &tend);
 	while (y < game->ray.draw_end)
 	{
-		texture_y = (int)tex_pos & (HD - 1);
-		color = ft_colorpix(game->ray.tex_x, texture_y, texture, game);
-		i = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
-		*(unsigned int *)(game->img3d.pixels + i) = color;
-		tex_pos += (double)HD / game->ray.wall_height;
+		if (fog >= 1.0f)
+			color = 0;
+		else
+		{
+			color = *(unsigned int *)(tpix + ((int)tex_pos & (HD - 1))
+					* tsize + (int)game->ray.tex_x * tbpp / 8);
+			if (fog > 0.0f)
+				color = darken(color, keep);
+		}
+		*(unsigned int *)(game->img3d.pixels + y * game->img3d.size_line
+			+ x * game->img3d.bpp / 8) = color;
+		tex_pos += step;
 		y++;
 	}
 }

@@ -82,6 +82,7 @@
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <pthread.h>
 # include <X11/keysym.h>
 # include "get_next_line.h"
 # include "../utils/libft/libft.h"
@@ -105,19 +106,6 @@ typedef struct s_params
 	double	inv_det;
 }		t_params;
 
-typedef struct s_mix
-{
-	unsigned char	fog_r;
-	unsigned char	fog_g;
-	unsigned char	fog_b;
-	unsigned char	new_r;
-	unsigned char	new_g;
-	unsigned char	new_b;
-	unsigned char	og_r;
-	unsigned char	og_g;
-	unsigned char	og_b;
-}			t_mix;
-
 typedef struct s_sprite
 {
 	int		x;
@@ -139,16 +127,6 @@ typedef struct s_img
 	int		width;
 	int		height;
 }			t_img;
-
-typedef struct s_colorpix
-{
-	int				i;
-	int				bpp;
-	int				size;
-	unsigned int	color;
-	char			*pix;
-	float			fog;
-}			t_colorpix;
 
 typedef struct s_texture
 {
@@ -295,7 +273,6 @@ typedef struct s_cub
 	int				count_color_c;
 	int				count_color_f;
 	int				num_sprites;
-	clock_t			cur;
 	t_keys			keys;
 	t_texture		texture;
 	t_color			ceiling_col;
@@ -310,8 +287,6 @@ typedef struct s_cub
 	t_floor			floor;
 	t_hitbox		hitbox;
 	t_params		params;
-	t_mix			mix;
-	t_colorpix		colorpix;
 }				t_cub;
 
 void	ft_init_ray(t_cub *game);
@@ -363,7 +338,7 @@ void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, int *color, t_cub *game);
 void	draw_ray(t_cub *game, int ray_x, int ray_y);
 void	ft_input(t_cub *game);
-int		ft_colorpix(int x, int y, void *texture, t_cub *game);
+float	wall_fog(double dist);
 void	ft_init_mlx(t_cub *game);
 void	ft_init_dda(int x, t_cub *game);
 void	print_cub(void);

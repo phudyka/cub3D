@@ -22,10 +22,13 @@ static void	calculate_ceiling(int x, t_cub *game)
 
 void	draw_ceiling(int x, t_cub *game)
 {
-	int		i;
 	int		y;
-	int		color;
+	char	*cpix;
+	int		cbpp;
+	int		csize;
+	int		cend;
 
+	cpix = mlx_get_data_addr(game->texture.ceiling, &cbpp, &csize, &cend);
 	y = -1;
 	while (++y < game->ray.draw_start)
 	{
@@ -41,10 +44,10 @@ void	draw_ceiling(int x, t_cub *game)
 		game->ceiling.floor_y = game->ray.player_y + game->ceiling.row_dist
 			* game->ray.dir_y;
 		calculate_ceiling(x, game);
-		color = ft_colorpix_ceifloo(game->ceiling.text_x,
-				game->ceiling.text_y, game->texture.ceiling, game);
-		i = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
-		*(unsigned int *)(game->img3d.pixels + i) = color;
+		*(unsigned int *)(game->img3d.pixels + y * game->img3d.size_line
+			+ x * game->img3d.bpp / 8) = *(unsigned int *)(cpix
+				+ (int)game->ceiling.text_y * csize
+				+ (int)game->ceiling.text_x * cbpp / 8);
 	}
 }
 
@@ -58,10 +61,13 @@ static void	calculate_floor(int x, t_cub *game)
 
 void	draw_floor(int x, t_cub *game)
 {
-	int	i;
-	int	y;
-	int	color;
+	int		y;
+	char	*fpix;
+	int		fbpp;
+	int		fsize;
+	int		fend;
 
+	fpix = mlx_get_data_addr(game->texture.floor, &fbpp, &fsize, &fend);
 	y = game->ray.draw_end + 1;
 	while (y < HEIGHT)
 	{
@@ -77,10 +83,10 @@ void	draw_floor(int x, t_cub *game)
 		game->floor.floor_y = game->ray.player_y
 			+ game->floor.row_dist * game->ray.dir_y;
 		calculate_floor(x, game);
-		color = ft_colorpix_ceifloo(game->floor.text_x,
-				game->floor.text_y, game->texture.floor, game);
-		i = (y * game->img3d.size_line) + (x * game->img3d.bpp / 8);
-		*(unsigned int *)(game->img3d.pixels + i) = color;
+		*(unsigned int *)(game->img3d.pixels + y * game->img3d.size_line
+			+ x * game->img3d.bpp / 8) = *(unsigned int *)(fpix
+				+ (int)game->floor.text_y * fsize
+				+ (int)game->floor.text_x * fbpp / 8);
 		y++;
 	}
 }

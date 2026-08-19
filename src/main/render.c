@@ -62,19 +62,56 @@ void	ft_caster(t_cub *game)
 	}
 }
 
-void	cast_ray(t_cub *game)
+typedef struct s_band
 {
-	int	x;
+	t_cub	game;
+	int		x0;
+	int		x1;
+}		t_band;
 
-	x = 0;
-	while (x < WIDTH)
+static void	*render_band(void *arg)
+{
+	t_band	*b;
+	int		x;
+
+	b = (t_band *)arg;
+	x = b->x0;
+	while (x < b->x1)
 	{
-		ft_init_dda(x, game);
-		ft_getstep(game);
-		ft_caster(game);
-		render3d(x, game);
+		ft_init_dda(x, &b->game);
+		ft_getstep(&b->game);
+		ft_caster(&b->game);
+		render3d(x, &b->game);
 		x++;
 	}
+	return (NULL);
+}
+
+void	cast_ray(t_cub *game)
+{
+	pthread_t	tid[32];
+	t_band		band[32];
+	int			n;
+	int			i;
+	int			step;
+
+	n = sysconf(_SC_NPROCESSORS_ONLN);
+	if (n < 1)
+		n = 1;
+	if (n > 32)
+		n = 32;
+	step = WIDTH / n;
+	i = -1;
+	while (++i < n)
+	{
+		band[i].game = *game;
+		band[i].x0 = i * step;
+		band[i].x1 = (i == n - 1) * WIDTH + (i != n - 1) * (i + 1) * step;
+		pthread_create(&tid[i], NULL, render_band, &band[i]);
+	}
+	i = -1;
+	while (++i < n)
+		pthread_join(tid[i], NULL);
 }
 
 int	ft_render(t_cub *game)

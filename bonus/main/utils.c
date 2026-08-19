@@ -39,27 +39,29 @@ void	print_cub(void)
 
 void	ft_fraps(t_cub *game)
 {
-	static int		count = 0;
-	static clock_t	last = 0;
-	double			delta;
-	int				fps;
-	char			*display;
+	static struct timespec	last = {0, 0};
+	static int				count = 0;
+	static int				fps = 0;
+	struct timespec			now;
+	double					delta;
+	char					*display;
 
-	game->cur = clock();
-	delta = ((double)(game->cur - last)) / CLOCKS_PER_SEC;
-	if (delta >= 0.1)
+	clock_gettime(CLOCK_MONOTONIC, &now);
+	if (last.tv_sec == 0)
+		last = now;
+	count++;
+	delta = (now.tv_sec - last.tv_sec)
+		+ (now.tv_nsec - last.tv_nsec) / 1000000000.0;
+	if (delta >= 0.25)
 	{
 		fps = count / delta;
-		display = ft_itoa(fps);
-		mlx_string_put(game->mlx, game->window, 10, 10, YELLOW, display);
-		free(display);
 		count = 0;
-		last = game->cur;
+		last = now;
 	}
-	else
-		count++;
+	display = ft_itoa(fps);
+	mlx_string_put(game->mlx, game->window, 10, 10, YELLOW, display);
+	free(display);
 }
-
 void	free_array(char **array)
 {
 	int	i;

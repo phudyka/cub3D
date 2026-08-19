@@ -18,7 +18,7 @@ BONUS_NAME      = cub3D_bonus
 CC              = gcc
 
 # Flags de compilation
-CFLAGS          = -Wall -Wextra -Werror -O2 -Wno-incompatible-pointer-types -Wno-unused-result -I$(MLX_DIR)
+CFLAGS          = -Wall -Wextra -Werror -O3 -march=native -funroll-loops -flto -ffast-math -pthread -Wno-incompatible-pointer-types -Wno-unused-result -I$(MLX_DIR)
 
 # Source files et Object files
 SRC            = src/main/main.c src/parse/parser.c src/main/game.c 	\
