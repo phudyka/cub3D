@@ -1,0 +1,13 @@
+# Build artifacts
+obj/
+*.o
+cub3D
+cub3D_bonus
+
+# MiniLibX build output
+mlx/obj/
+mlx/libmlx.a
+mlx/libmlx_Linux.a
+mlx/Makefile.gen
+mlx/test/Makefile.gen
+*.a

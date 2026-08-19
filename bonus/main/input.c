@@ -39,6 +39,7 @@ static int	ft_action(int key, t_cub *game)
 			system("aplay -q ./audio/shoot1.wav &");
 		game->engine.time_shoot = game->engine.current_time;
 	}
+	return (0);
 }
 
 static int	key_press(int key, t_cub *game)

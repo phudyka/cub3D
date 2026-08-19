@@ -42,6 +42,7 @@ static int	ft_sprite_select(int x, int y, t_cub *game)
 {
 	int	color;
 
+	color = 0;
 	if (game->engine.shoot == 0 && game->engine.reload != 1)
 		color = ft_colorpix_ceifloo(x, y, game->texture.weapon1, game);
 	else if (game->engine.shoot == 1

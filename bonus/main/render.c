@@ -80,8 +80,7 @@ void	cast_ray(t_cub *game)
 		ft_getstep(game);
 		ft_caster(game);
 		render3d(x, game);
-		render3d(x + 1, game);
-		x += 2;
+		x++;
 	}
 }
 

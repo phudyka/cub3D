@@ -12,12 +12,13 @@
 
 # Nom du binaire
 NAME            = cub3D
+BONUS_NAME      = cub3D_bonus
 
 # Compilateur
-CC              = gcc -g -o
+CC              = gcc
 
 # Flags de compilation
-CFLAGS          = -Wall -Wextra -Werror -I./minilibx-linux 
+CFLAGS          = -Wall -Wextra -Werror -O2 -Wno-incompatible-pointer-types -Wno-unused-result -I$(MLX_DIR)
 
 # Source files et Object files
 SRC            = src/main/main.c src/parse/parser.c src/main/game.c 	\
@@ -75,17 +76,15 @@ $(NAME): $(OBJ) $(GNL_OBJS)
 	$(MAKE) -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(GNL_OBJS) $(LIBFT) $(LFLAGS)
 
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_OBJ) $(GNL_OBJS)
+	$(MAKE) -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJ) $(GNL_OBJS) $(LIBFT) $(LFLAGS)
+
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
-
-bonus: $(BONUS_OBJ) $(GNL_OBJS)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(BONUS_OBJ) $(GNL_OBJS) $(LIBFT) $(LFLAGS)
-
-$(OBJ_DIR)/%.o: bonus/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(MAKE) clean -C $(LIBFT_DIR)
@@ -93,7 +92,7 @@ clean:
 
 fclean: clean
 	$(MAKE) fclean -C $(LIBFT_DIR)
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all
 
