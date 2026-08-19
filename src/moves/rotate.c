@@ -36,7 +36,7 @@ int	ft_rotate(double direction, t_cub *game)
 	double	speed;
 
 	move = 0;
-	speed = ROTSPEED * direction;
+	speed = ARROWROT * direction;
 	move += ft_rotation(speed, game);
 	return (move);
 }

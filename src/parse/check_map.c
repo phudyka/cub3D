@@ -89,7 +89,11 @@ void	ft_check(int i, int j, t_cub *game)
 {
 	if (game->engine.map[i][j] != '1' && game->engine.map[i][j] != 'N'
 		&& game->engine.map[i][j] != 'E' && game->engine.map[i][j] != '0'
-		&& game->engine.map[i][j] != 'W' && game->engine.map[i][j] != 'S')
+		&& game->engine.map[i][j] != 'W' && game->engine.map[i][j] != 'S'
+#ifdef BONUS
+		&& game->engine.map[i][j] != 'D' && game->engine.map[i][j] != 'T'
+#endif
+		)
 		ft_error_parse("Error!\n[Map has unvalid chars]\n", game);
 }
 

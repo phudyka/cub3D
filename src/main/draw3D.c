@@ -65,6 +65,8 @@ void	draw_texture(int x, void *texture, t_cub *game)
 	}
 }
 
+#ifndef BONUS
+
 static void	draw_column(int x, int flag, int color, t_cub *game)
 {
 	int	i;
@@ -89,6 +91,8 @@ static void	draw_column(int x, int flag, int color, t_cub *game)
 	}
 }
 
+#endif
+
 void	render3d(int x, t_cub *game)
 {
 	if (game->ray.side == 0)
@@ -110,7 +114,13 @@ void	render3d(int x, t_cub *game)
 			+ game->ray.distance * game->ray.ray_x;
 	game->ray.wall_x -= floor(game->ray.wall_x);
 	game->ray.z_buffer[x] = game->ray.distance;
+#ifdef BONUS
+	choose_texture(x, game);
+	draw_ceiling(x, game);
+	draw_floor(x, game);
+#else
 	draw_column(x, 0, game->ceiling_col.c_color, game);
 	choose_texture(x, game);
 	draw_column(x, 1, game->floor_col.f_color, game);
+#endif
 }

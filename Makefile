@@ -20,38 +20,28 @@ CC              = gcc
 # Flags de compilation
 CFLAGS          = -Wall -Wextra -Werror -O3 -march=native -funroll-loops -flto -ffast-math -pthread -Wno-incompatible-pointer-types -Wno-unused-result -I$(MLX_DIR)
 
-# Source files et Object files
-SRC            = src/main/main.c src/parse/parser.c src/main/game.c 	\
+# Source files (single tree; bonus features behind -D BONUS)
+SRC             = src/main/main.c src/parse/parser.c src/main/game.c 	\
                   src/main/exit.c src/main/render.c 					\
                   src/parse/parse_texture.c src/main/draw3D.c 			\
                   src/parse/valid_conf.c src/moves/move.c 				\
                   src/moves/player_move.c src/moves/directions.c 		\
-                  src/parse/get_map.c  src/parse/check_map.c 			\
+                  src/parse/get_map.c src/parse/check_map.c 			\
                   src/moves/rotate.c src/main/utils.c 					\
                   src/main/draw.c src/main/texture.c 					\
-				  src/main/input.c src/main/free.c 						\
-				  src/main/texture_utils.c 								\
-				  src/parse/check_map_utils.c src/parse/parser_utils.c	\
+                  src/main/input.c src/main/free.c 						\
+                  src/main/texture_utils.c 								\
+                  src/parse/check_map_utils.c src/parse/parser_utils.c
 
-# Bonus files et Object files
-BONUS             = bonus/main/main.c bonus/parse/parser.c bonus/main/game.c 	\
-                  bonus/main/exit.c bonus/main/render.c 						\
-                  bonus/parse/parse_texture.c bonus/main/draw3D.c 				\
-                  bonus/parse/valid_conf.c bonus/moves/move.c 					\
-                  bonus/moves/player_move.c bonus/moves/directions.c 			\
-                  bonus/parse/get_map.c  bonus/parse/check_map.c 				\
-                  bonus/moves/rotate.c bonus/main/utils.c 						\
-                  bonus/main/draw.c bonus/main/texture.c 						\
-				  bonus/main/draw_weapon.c bonus/main/draw_sprite.c 			\
-				  bonus/moves/mouse.c bonus/main/input.c 						\
-				  bonus/main/weapon.c bonus/main/free.c							\
-				  bonus/main/draw3D_utils.c bonus/main/texture_utils.c 			\
-				  bonus/main/draw_sprite_utils.c								\
-				  bonus/parse/check_map_utils.c bonus/parse/parser_utils.c		\
+# Compiled only into the bonus binary
+BONUS_SRC       = src/main/draw_weapon.c src/main/draw_sprite.c 		\
+                  src/main/draw_sprite_utils.c src/main/weapon.c 		\
+                  src/moves/mouse.c src/main/draw3D_utils.c
 
 OBJ_DIR         = obj
-OBJ             = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-BONUS_OBJ       = $(addprefix $(OBJ_DIR)/, $(BONUS:.c=.o))
+OBJ             = $(addprefix $(OBJ_DIR)/std/, $(SRC:.c=.o))
+BONUS_OBJ       = $(addprefix $(OBJ_DIR)/bonus/, $(SRC:.c=.o)) \
+                  $(addprefix $(OBJ_DIR)/bonus/, $(BONUS_SRC:.c=.o))
 
 # Bibliothèque Libft
 LIBFT_DIR       = utils/libft
@@ -82,9 +72,13 @@ $(BONUS_NAME): $(BONUS_OBJ) $(GNL_OBJS)
 	$(MAKE) -C $(LIBFT_DIR)
 	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJ) $(GNL_OBJS) $(LIBFT) $(LFLAGS)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/std/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/bonus/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -D BONUS -c $< -o $@
 
 clean:
 	$(MAKE) clean -C $(LIBFT_DIR)

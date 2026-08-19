@@ -12,6 +12,27 @@
 
 #include "../../include/main.h"
 
+#ifdef BONUS
+
+void	door_state(int x, int y, t_cub *game)
+{
+	if (game->engine.map[y][x] == 'D')
+	{
+		if (game->engine.door[y][x] == '0')
+		{
+			game->engine.door[y][x] = '1';
+			system("aplay -q ./audio/door_open.wav &");
+		}
+		else
+		{
+			game->engine.door[y][x] = '0';
+			system("aplay -q ./audio/door_close.wav &");
+		}
+	}
+}
+
+#endif
+
 static int	move_ok(double x, double y, t_cub *game)
 {
 	double	player_size;

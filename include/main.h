@@ -22,6 +22,11 @@
 # define SPRITE 10 			// Minimap elements Size
 # define MOVESPEED 0.06 	// Player Move Speed
 # define ROTSPEED 0.03	  	// Cam and arrows rotation speed
+# ifdef BONUS
+#  define ARROWROT 0.0123	// Slower arrow rotation (mouse does the looking)
+# else
+#  define ARROWROT ROTSPEED
+# endif
 # define PI 3.14159265359
 # define HD 256 			// Textures Resolution
 # define WRAP 20

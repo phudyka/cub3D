@@ -34,6 +34,8 @@ int	process_map_lines(char *line, t_cub *game)
 	return (0);
 }
 
+#ifndef BONUS
+
 static void	ft_get_rgb(t_cub *game)
 {
 	game->ceiling_col.c_color = (game->ceiling_col.r << 16)
@@ -41,6 +43,8 @@ static void	ft_get_rgb(t_cub *game)
 	game->floor_col.f_color = (game->floor_col.r << 16)
 		| (game->floor_col.g << 8) | game->floor_col.b;
 }
+
+#endif
 
 int	process_configuration_lines(char *line, t_cub *game)
 {
@@ -58,7 +62,9 @@ int	process_configuration_lines(char *line, t_cub *game)
 	else if (tmp[0] == 'F' || tmp[0] == 'C')
 	{
 		floor_ceiling_color(tmp, game);
+#ifndef BONUS
 		ft_get_rgb(game);
+#endif
 		if (tmp[0] == 'F')
 			game->count_color_f++;
 		if (tmp[0] == 'C')

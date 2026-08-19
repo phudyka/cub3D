@@ -21,8 +21,14 @@ void	ft_error(char *msg)
 int	game_over(t_cub *game)
 {
 	ft_free_map(game);
+#ifdef BONUS
+	free_door(game);
+#endif
 	free_texture(game);
 	ft_destroy_img(game);
+#ifdef BONUS
+	free(game->sprite);
+#endif
 	free(game->ray.z_buffer);
 	free(game->texture.path_north);
 	free(game->texture.path_south);
@@ -30,6 +36,9 @@ int	game_over(t_cub *game)
 	free(game->texture.path_east);
 	free(game);
 	game = NULL;
+#ifdef BONUS
+	system("pkill aplay\n");
+#endif
 	exit(EXIT_SUCCESS);
 }
 
