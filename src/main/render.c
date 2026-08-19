@@ -154,7 +154,7 @@ void	draw(t_cub *game)
 
 int	ft_render(t_cub *game)
 {
-	char	*ammo;
+	char	ammo[32];
 
 	game->engine.total_moves += ft_move(game);
 	draw(game);
@@ -171,9 +171,8 @@ int	ft_render(t_cub *game)
 	ft_empty(game);
 	ft_reload(game);
 	ft_target_repop(game);
-	ammo = ft_strjoin(ft_itoa(game->engine.ammo), "/31");
+	snprintf(ammo, sizeof(ammo), "%d/31", game->engine.ammo);
 	mlx_string_put(game->mlx, game->window, 980, 425, RED, ammo);
-	free(ammo);
 	return (0);
 }
 

@@ -85,7 +85,7 @@ void	get_cub(t_cub *game, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return ;
-	map = ft_calloc(1, 1);
+	map = calloc(1, 1);
 	while (line)
 	{
 		line = get_next_line(fd);
@@ -109,7 +109,7 @@ int	master_parser(t_cub *game, int argc, char **argv)
 	i = 0;
 	if (argc != 2 || !argv[1])
 		return (1);
-	i = ft_strlen(argv[1]);
+	i = strlen(argv[1]);
 	i = i - 4;
 	if (argv[1][i] == '.' && argv[1][i + 1] == 'c'
 		&& argv[1][i + 2] == 'u' && argv[1][i + 3] == 'b')

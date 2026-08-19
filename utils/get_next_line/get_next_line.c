@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include "../../include/get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
-#include "../libft/libft.h"
 
 char	*ft_save(char *reader)
 {
@@ -30,7 +29,7 @@ char	*ft_save(char *reader)
 		free (reader);
 		return (NULL);
 	}
-	str = malloc(sizeof(char) * ft_strlen(reader) - i + 1);
+	str = malloc(sizeof(char) * strlen(reader) - i + 1);
 	if (!str)
 		return (NULL);
 	i++;
@@ -51,7 +50,7 @@ char	*ft_line(char *reader)
 	i = 0;
 	if (!reader[i])
 		return (NULL);
-	str = malloc(sizeof(char) * ft_strlen(reader) + 1);
+	str = malloc(sizeof(char) * strlen(reader) + 1);
 	if (!str)
 		return (NULL);
 	while (reader[i] && reader[i] != '\n')
@@ -77,7 +76,7 @@ char	*ft_read(int fd, char *reader)
 	str = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!str)
 		return (NULL);
-	while (!f_strchr(reader, '\n') && i != 0)
+	while ((!reader || !strchr(reader, '\n')) && i != 0)
 	{
 		i = read(fd, str, BUFFER_SIZE);
 		if (i == -1)
@@ -86,7 +85,7 @@ char	*ft_read(int fd, char *reader)
 			return (NULL);
 		}
 		str[i] = '\0';
-		reader = f_strjoin(reader, str);
+		reader = ft_strjoin(reader, str);
 	}
 	free(str);
 	return (reader);

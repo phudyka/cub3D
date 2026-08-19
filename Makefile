@@ -31,7 +31,8 @@ SRC             = src/main/main.c src/parse/parser.c src/main/game.c 	\
                   src/main/draw.c src/main/texture.c 					\
                   src/main/input.c src/main/free.c 						\
                   src/main/texture_utils.c 								\
-                  src/parse/check_map_utils.c src/parse/parser_utils.c
+                  src/parse/check_map_utils.c src/parse/parser_utils.c \
+                  src/utils/str.c
 
 # Compiled only into the bonus binary
 BONUS_SRC       = src/main/draw_weapon.c src/main/draw_sprite.c 		\
@@ -43,13 +44,9 @@ OBJ             = $(addprefix $(OBJ_DIR)/std/, $(SRC:.c=.o))
 BONUS_OBJ       = $(addprefix $(OBJ_DIR)/bonus/, $(SRC:.c=.o)) \
                   $(addprefix $(OBJ_DIR)/bonus/, $(BONUS_SRC:.c=.o))
 
-# Bibliothèque Libft
-LIBFT_DIR       = utils/libft
-LIBFT           = $(LIBFT_DIR)/libft.a
-
 # Get_Next_Line
 GNL_DIR         = utils/get_next_line
-GNL             = get_next_line.c get_next_line_utils.c
+GNL             = get_next_line.c
 GNL_OBJS        = $(addprefix $(GNL_DIR)/, $(GNL:.c=.o))
 
 # Minilibx
@@ -63,14 +60,12 @@ LFLAGS          = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 all: $(NAME)
 
 $(NAME): $(OBJ) $(GNL_OBJS)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(GNL_OBJS) $(LIBFT) $(LFLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(GNL_OBJS) $(LFLAGS)
 
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_OBJ) $(GNL_OBJS)
-	$(MAKE) -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJ) $(GNL_OBJS) $(LIBFT) $(LFLAGS)
+	$(CC) $(CFLAGS) -o $(BONUS_NAME) $(BONUS_OBJ) $(GNL_OBJS) $(LFLAGS)
 
 $(OBJ_DIR)/std/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -81,11 +76,9 @@ $(OBJ_DIR)/bonus/%.o: %.c
 	$(CC) $(CFLAGS) -D BONUS -c $< -o $@
 
 clean:
-	$(MAKE) clean -C $(LIBFT_DIR)
-	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR) $(GNL_OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFT_DIR)
 	rm -f $(NAME) $(BONUS_NAME)
 
 re: fclean all

@@ -73,7 +73,6 @@ static void	ft_init_game(t_cub *game)
 {
 	game->mlx = NULL;
 	game->window = NULL;
-	game->mini = 0;
 	game->count_color_c = 0;
 	game->count_color_f = 0;
 	game->ray.dir_x = 0.0;

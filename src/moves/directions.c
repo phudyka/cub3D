@@ -12,14 +12,6 @@
 
 #include "../../include/main.h"
 
-void	ft_init_ray(t_cub *game)
-{
-	game->ray.ray_x = 0.0;
-	game->ray.ray_y = 0.0;
-	game->ray.cam_x = 0.0;
-	game->ray.cam_y = 0.0;
-}
-
 static void	ft_init_poles(t_cub *game)
 {
 	if (game->engine.coord == 'N')

@@ -14,8 +14,8 @@
 
 int	is_configuration(char *line)
 {
-	if (ft_strncmp(line, "NO", 2) == 0 || ft_strncmp(line, "SO", 2) == 0
-		|| ft_strncmp(line, "WE", 2) == 0 || ft_strncmp(line, "EA", 2) == 0
+	if (strncmp(line, "NO", 2) == 0 || strncmp(line, "SO", 2) == 0
+		|| strncmp(line, "WE", 2) == 0 || strncmp(line, "EA", 2) == 0
 		|| line[0] == 'F' || line[0] == 'C')
 		return (1);
 	return (0);
@@ -31,7 +31,7 @@ void	ft_check_one(int i, int j, t_cub *game)
 
 void	ft_check_len(size_t j, t_cub *game)
 {
-	if (j != ft_strlen(game->engine.map[0]))
+	if (j != strlen(game->engine.map[0]))
 		ft_error_parse("Error!\n[Map too long]\n", game);
 }
 

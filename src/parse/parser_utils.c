@@ -55,13 +55,13 @@ long	get_next_number(char **str, int *count)
 {
 	long	num;
 
-	while (**str && !ft_isdigit(**str) && **str != '-')
+	while (**str && !isdigit(**str) && **str != '-')
 		(*str)++;
-	if (ft_isdigit(**str) || **str == '-')
+	if (isdigit(**str) || **str == '-')
 	{
 		(*count)++;
-		num = ft_atoi(*str);
-		while (ft_isdigit(**str))
+		num = atoi(*str);
+		while (isdigit(**str))
 			(*str)++;
 		return (num);
 	}

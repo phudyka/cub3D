@@ -61,7 +61,7 @@ char	*read_and_extract_map(int fd)
 	int		is_map_started;
 
 	is_map_started = 0;
-	map = ft_calloc(1, 1);
+	map = calloc(1, 1);
 	line = get_next_line(fd);
 	while (line)
 	{

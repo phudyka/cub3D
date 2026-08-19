@@ -27,15 +27,10 @@
 # else
 #  define ARROWROT ROTSPEED
 # endif
-# define PI 3.14159265359
 # define HD 256 			// Textures Resolution
 # define WRAP 20
 
 // -- TEXTURES -- //
-# define N_WALL "./sprite/textures/north_wall.xpm"
-# define S_WALL "./sprite/textures/south_wall.xpm"
-# define E_WALL "./sprite/textures/east_wall.xpm"
-# define W_WALL "./sprite/textures/west_wall.xpm"
 # define CEILING "./sprite/textures/ceiling.xpm"
 # define FLOOR "./sprite/textures/floor.xpm"
 # define DOOR "./sprite/textures/door.xpm"
@@ -53,11 +48,7 @@
 # define EMPTY_WAV "./audio/shoot1.wav"
 # define TARGET_WAV "./audio/target.wav"
 # define RED 0xFF0000
-# define GREEN_WALL 0x228B22
-# define GREEN 0xADFF2F
-# define BLUE 0x282828
 # define YELLOW 0xFFFF00
-# define WHITE 0xFFFFFF
 # define GREY 0x505050
 # define BROWN 0x353535
 # define BLACK 0x000000
@@ -70,7 +61,6 @@
 # define LEFT		65361 // [Camera Rotation]
 # define RIGHT		65363 //
 # define ESC		65307 // Quit game
-# define Q			113   // Quit game
 # define E			101   // Open Door
 # define R			114	  // Reload Weapon
 # define T 			116	  // Respawn targets
@@ -81,6 +71,8 @@
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <ctype.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <errno.h>
@@ -90,7 +82,6 @@
 # include <pthread.h>
 # include <X11/keysym.h>
 # include "get_next_line.h"
-# include "../utils/libft/libft.h"
 # include "../mlx/mlx.h"
 
 typedef struct s_sprite_params
@@ -115,7 +106,6 @@ typedef struct s_sprite
 {
 	int		x;
 	int		y;
-	double	distance;
 	double	relative_x;
 	double	relative_y;
 	int		is_alive;
@@ -154,7 +144,6 @@ typedef struct s_texture
 	char	*shoot0;
 	char	*shoot1;
 	char	*door;
-	char	*open_door;
 	char	*target;
 }			t_texture;
 
@@ -189,12 +178,10 @@ typedef struct s_engine
 	char	**door;
 	int		width;
 	int		height;
-	int		wall_side;
 	double	angle;
 	int		shoot;
 	int		reload;
 	int		half;
-	time_t	last;
 	double	time_shoot;
 	double	time_reload;
 	double	cooldown;
@@ -223,16 +210,6 @@ typedef struct s_hitbox
 	double	hitbox_x;
 	double	hitbox_y;
 }			t_hitbox;
-typedef struct s_floor
-{
-	double	step_x;
-	double	step_y;
-	double	text_x;
-	double	text_y;
-	double	floor_x;
-	double	floor_y;
-	double	row_dist;
-}			t_floor;
 typedef struct s_ray
 {
 	int		hit;
@@ -247,15 +224,11 @@ typedef struct s_ray
 	double	ray_x;
 	double	ray_y;
 	double	cam_x;
-	double	cam_y;	
 	double	dist_x;
 	double	dist_y;
 	double	delta_x;
 	double	delta_y;
 	double	wall_x;
-	double	p_angle;
-	double	angle;
-	double	start;
 	double	distance;
 	int		wall_height;
 	double	tex_x;
@@ -274,7 +247,6 @@ typedef struct s_cub
 	void			*img_map2d;
 	void			*img_map3d;
 	void			*weapon_3d;
-	int				mini;
 	int				count_color_c;
 	int				count_color_f;
 	int				num_sprites;
@@ -289,16 +261,17 @@ typedef struct s_cub
 	t_img			weapon;
 	t_sprite		*sprite;
 	t_ceiling		ceiling;
-	t_floor			floor;
+	t_ceiling		floor;
 	t_hitbox		hitbox;
 	t_params		params;
 }				t_cub;
 
-void	ft_init_ray(t_cub *game);
+char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strtrim(const char *s1, const char *set, const char *setb);
+char	**ft_split(char const *s, char c);
 void	ft_init_direction(t_cub *game);
 void	check_map(t_cub *game);
 int		master_parser(t_cub *cub, int argc, char **argv);
-void	ft_minimap(t_cub *game);
 void	ft_free_map(t_cub *game);
 void	ft_error(char *msg);
 void	ft_error_free(char *msg, t_cub *game);
@@ -341,7 +314,6 @@ void	calculate_sprite_position(t_cub *game);
 void	draw_sprite_pixel(t_cub *game, t_sprite_params *params);
 void	draw_3Dview(t_cub *game);
 void	ft_draw_minimap(int x, int y, int *color, t_cub *game);
-void	draw_ray(t_cub *game, int ray_x, int ray_y);
 void	ft_input(t_cub *game);
 float	wall_fog(double dist);
 void	ft_init_mlx(t_cub *game);
@@ -359,7 +331,6 @@ void	draw_texture(int x, void *texture, t_cub *game);
 void	init_sprite(t_cub *game);
 void	render_sprite(t_cub *game);
 void	door_state(int x, int y, t_cub *game);
-bool	should_draw_pixel(int pixel_color, int color_to_ignore);
 int		ft_mouse(int x, int y, t_cub *game);
 void	mouse_pos(int x, int y, t_cub *game);
 void	ft_shoot(t_cub *game);

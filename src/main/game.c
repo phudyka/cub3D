@@ -23,8 +23,7 @@ void	initialize_door(t_cub *game)
 	i = 0;
 	while (i < game->engine.height)
 	{
-		game->engine.door[i] = ft_substr(game->engine.map[i],
-				0, ft_strlen(game->engine.map[i]));
+		game->engine.door[i] = strdup(game->engine.map[i]);
 		j = 0;
 		while (game->engine.door[i][j])
 		{

@@ -44,13 +44,13 @@ int	game_over(t_cub *game)
 
 void	game_over_error(char *msg, t_cub *game)
 {
-	ft_putstr_fd(msg, 2);
+	fputs(msg, stderr);
 	game_over(game);
 }
 
 void	ft_error_parse(char *msg, t_cub *game)
 {
-	ft_putstr_fd(msg, 2);
+	fputs(msg, stderr);
 	ft_free_map(game);
 	free(game->texture.path_north);
 	free(game->texture.path_south);

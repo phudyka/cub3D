@@ -14,7 +14,6 @@
 
 void	ft_init_dda(int x, t_cub *game)
 {
-	ft_init_ray(game);
 	game->ray.cam_x = 2 * x / (double)WIDTH - 1;
 	game->ray.ray_x = game->ray.dir_x + game->ray.plane_x * game->ray.cam_x;
 	game->ray.ray_y = game->ray.dir_y + game->ray.plane_y * game->ray.cam_x;
@@ -44,7 +43,7 @@ void	ft_fraps(t_cub *game)
 	static int				fps = 0;
 	struct timespec			now;
 	double					delta;
-	char					*display;
+	char					display[16];
 
 	clock_gettime(CLOCK_MONOTONIC, &now);
 	if (last.tv_sec == 0)
@@ -58,9 +57,8 @@ void	ft_fraps(t_cub *game)
 		count = 0;
 		last = now;
 	}
-	display = ft_itoa(fps);
+	snprintf(display, sizeof(display), "%d", fps);
 	mlx_string_put(game->mlx, game->window, 10, 10, YELLOW, display);
-	free(display);
 }
 void	free_array(char **array)
 {

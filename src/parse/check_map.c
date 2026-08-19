@@ -22,7 +22,7 @@ void	add_char_map(t_cub *game, size_t max)
 	i = -1;
 	while (game->engine.map[++i])
 	{
-		if (ft_strlen(game->engine.map[i]) < max)
+		if (strlen(game->engine.map[i]) < max)
 		{
 			tmp = game->engine.map[i];
 			new_line = malloc(sizeof(char) * (max + 1));
@@ -47,8 +47,8 @@ void	format_map(t_cub *game)
 	max = 0;
 	while (game->engine.map[i])
 	{
-		if (max < ft_strlen(game->engine.map[i]))
-			max = ft_strlen(game->engine.map[i]);
+		if (max < strlen(game->engine.map[i]))
+			max = strlen(game->engine.map[i]);
 		i++;
 	}
 	if (max >= 50)

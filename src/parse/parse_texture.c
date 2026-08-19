@@ -31,9 +31,9 @@ void	floor_ceiling_color(char *line, t_cub *game)
 		game->ceiling_col.g = get_next_number(&ptr, &rgb_count);
 		game->ceiling_col.b = get_next_number(&ptr, &rgb_count);
 	}
-	while (*ptr && !ft_isdigit(*ptr))
+	while (*ptr && !isdigit(*ptr))
 		ptr++;
-	if (rgb_count != 3 || ft_isdigit(*ptr))
+	if (rgb_count != 3 || isdigit(*ptr))
 	{
 		free(line);
 		free_array(game->engine.cub);
@@ -55,7 +55,7 @@ int	parse_north_texture(char *line, t_cub *game)
 	}
 	while (line[i] && line[i] != '.')
 		i++;
-	game->texture.path_north = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_north = malloc(sizeof(char) * strlen(&line[i]) + 1);
 	while (line[i])
 		game->texture.path_north[j++] = line[i++];
 	game->texture.path_north[j] = '\0';
@@ -76,7 +76,7 @@ int	parse_south_texture(char *line, t_cub *game)
 	}
 	while (line[i] != '.')
 		i++;
-	game->texture.path_south = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_south = malloc(sizeof(char) * strlen(&line[i]) + 1);
 	while (line[i])
 		game->texture.path_south[j++] = line[i++];
 	game->texture.path_south[j] = '\0';
@@ -97,7 +97,7 @@ int	parse_west_texture(char *line, t_cub *game)
 	}
 	while (line[i] != '.')
 		i++;
-	game->texture.path_west = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_west = malloc(sizeof(char) * strlen(&line[i]) + 1);
 	while (line[i])
 		game->texture.path_west[j++] = line[i++];
 	game->texture.path_west[j] = '\0';
@@ -118,7 +118,7 @@ int	parse_east_texture(char *line, t_cub *game)
 	}
 	while (line[i] != '.')
 		i++;
-	game->texture.path_east = malloc(sizeof(char) * ft_strlen(&line[i]) + 1);
+	game->texture.path_east = malloc(sizeof(char) * strlen(&line[i]) + 1);
 	while (line[i])
 		game->texture.path_east[j++] = line[i++];
 	game->texture.path_east[j] = '\0';
