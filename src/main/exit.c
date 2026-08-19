@@ -36,9 +36,6 @@ int	game_over(t_cub *game)
 	free(game->texture.path_east);
 	free(game);
 	game = NULL;
-#ifdef BONUS
-	system("pkill aplay\n");
-#endif
 	exit(EXIT_SUCCESS);
 }
 

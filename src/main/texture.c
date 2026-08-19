@@ -30,8 +30,8 @@ void	coord_target(t_cub *game)
 				game->sprite[x].x = j;
 				game->sprite[x].y = i;
 				game->sprite[x].is_alive = 1;
-				game->sprite[x].width = 1260;
-				game->sprite[x].height = 1656;
+				game->sprite[x].width = 420;
+				game->sprite[x].height = 552;
 				x++;
 			}
 			j++;

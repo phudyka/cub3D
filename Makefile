@@ -32,7 +32,7 @@ SRC             = src/main/main.c src/parse/parser.c src/main/game.c 	\
                   src/main/input.c src/main/free.c 						\
                   src/main/texture_utils.c 								\
                   src/parse/check_map_utils.c src/parse/parser_utils.c \
-                  src/utils/str.c
+                  src/utils/str.c src/utils/audio.c
 
 # Compiled only into the bonus binary
 BONUS_SRC       = src/main/draw_weapon.c src/main/draw_sprite.c 		\

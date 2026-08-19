@@ -26,7 +26,7 @@ static int	ft_action(int key, t_cub *game)
 	{
 		game->engine.shoot = 0;
 		game->engine.reload = 1;
-		system("aplay -q ./audio/reload0.wav &");
+		ft_play(RELOAD_WAV);
 		game->engine.time_reload = game->engine.current_time;
 		game->engine.cooldown = 1.0;
 	}
@@ -36,9 +36,9 @@ static int	ft_action(int key, t_cub *game)
 		game->engine.reload = 0;
 		game->engine.cooldown = 1.0;
 		if (game->engine.ammo > 0)
-			system("aplay -q ./audio/shoot0.wav &");
+			ft_play(SHOOT_WAV);
 		else if (game->engine.ammo == 0)
-			system("aplay -q ./audio/shoot1.wav &");
+			ft_play(EMPTY_WAV);
 		game->engine.time_shoot = game->engine.current_time;
 	}
 	return (0);

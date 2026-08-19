@@ -72,7 +72,8 @@ int	ft_cub(t_cub *game)
 	mlx_loop_hook(game->mlx, ft_render, game);
 	mlx_do_sync(game->mlx);
 #ifdef BONUS
-	system("aplay -q ./audio/ambience.wav &");
+	ft_audio_init();
+	ft_play(AMBIENCE_WAV);
 #endif
 	mlx_loop(game->mlx);
 	return (0);

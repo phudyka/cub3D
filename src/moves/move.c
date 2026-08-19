@@ -21,12 +21,12 @@ void	door_state(int x, int y, t_cub *game)
 		if (game->engine.door[y][x] == '0')
 		{
 			game->engine.door[y][x] = '1';
-			system("aplay -q ./audio/door_open.wav &");
+			ft_play(DOOR_OPEN_WAV);
 		}
 		else
 		{
 			game->engine.door[y][x] = '0';
-			system("aplay -q ./audio/door_close.wav &");
+			ft_play(DOOR_CLOSE_WAV);
 		}
 	}
 }

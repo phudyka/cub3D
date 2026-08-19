@@ -98,7 +98,7 @@ void	ft_target_repop(t_cub *game)
 			i++;
 			num--;
 		}
-		system("aplay -q ./audio/target.wav &\n");
+		ft_play(TARGET_WAV);
 		game->texture.repop = 0;
 	}
 }

@@ -79,6 +79,7 @@
 # include <stdbool.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <signal.h>
 # include <pthread.h>
 # include <X11/keysym.h>
 # include "get_next_line.h"
@@ -266,6 +267,8 @@ typedef struct s_cub
 	t_params		params;
 }				t_cub;
 
+void	ft_play(const char *wav);
+void	ft_audio_init(void);
 char	*ft_strjoin(const char *s1, const char *s2);
 char	*ft_strtrim(const char *s1, const char *set, const char *setb);
 char	**ft_split(char const *s, char c);
